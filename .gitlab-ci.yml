@@ -6,5 +6,5 @@ stages:
 test-job:
     stage: test-stage
     script:
-        - 'dotnet test --no-restore'
+        - 'dotnet test'
 
