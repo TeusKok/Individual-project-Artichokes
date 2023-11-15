@@ -1,0 +1,10 @@
+image: dotnet:latest
+
+stages:
+    - test-stage
+
+test-job:
+    stage: test-stage
+    script:
+        - 'dotnet test --no-restore'
+
