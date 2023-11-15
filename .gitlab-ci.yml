@@ -1,4 +1,4 @@
-image: dotnet:latest
+image: microsoft/dotnet:latest
 
 stages:
     - test-stage
