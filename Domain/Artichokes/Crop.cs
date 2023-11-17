@@ -17,4 +17,14 @@ public class Crop : ICard
     {
         throw new NotImplementedException();
     }
+
+    public string getCardName()
+    {
+        throw new NotImplementedException();
+    }
+
+    public string getCardDescription()
+    {
+        throw new NotImplementedException();
+    }
 }

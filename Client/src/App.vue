@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+//import HelloWorld from './components/HelloWorld.vue'
+
+//<HelloWorld msg="Vite + Vue" />
+import Play from './components/Play.vue'
 </script>
 
 <template>
@@ -12,7 +15,8 @@ import HelloWorld from './components/HelloWorld.vue'
     </a>
   </div>
   <Suspense>
-    <HelloWorld msg="Vite + Vue" />
+    
+    <Play></Play>
   </Suspense>
 </template>
 

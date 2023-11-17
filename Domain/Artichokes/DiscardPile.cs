@@ -22,4 +22,8 @@ public class DiscardPile : ICardCollection{
     {
         throw new NotImplementedException();
     }
+
+    public List<ICard> getCards(){
+        return this.discardPile;
+    }
 }

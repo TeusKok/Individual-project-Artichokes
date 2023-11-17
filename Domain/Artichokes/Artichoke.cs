@@ -3,9 +3,6 @@ using System;
 namespace Artichokes;
 public class Artichoke : ICard
 {
-    
-
-    public Crops Type {get; private set;} = Crops.Artichoke;
 
     public Artichoke()
     {
@@ -14,8 +11,15 @@ public class Artichoke : ICard
     public void Play()
     {
         throw new NotImplementedException();
-        
     }
 
-    
+    public string getCardName()
+    {
+        return "Artichoke";
+    }
+
+    public string getCardDescription()
+    {
+        return "This is an Artichoke";
+    }
 }
