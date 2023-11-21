@@ -1,3 +1,4 @@
+namespace DTO;
 using Artichokes;
 
 public class HandDTO{

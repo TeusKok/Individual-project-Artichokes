@@ -8,7 +8,7 @@ public class Artichoke : ICard
     {
 
     }
-    public void Play()
+    public void Play(Player player)
     {
         throw new NotImplementedException();
     }

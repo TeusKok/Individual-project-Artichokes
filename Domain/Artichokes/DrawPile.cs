@@ -15,6 +15,7 @@ public class DrawPile : ICardCollection{
         }
     }
 
+    
     public ICard Draw(){
         ICard card = drawPile[0];
         drawPile.RemoveAt(0);

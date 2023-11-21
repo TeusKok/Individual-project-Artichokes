@@ -1,3 +1,4 @@
+namespace DTO;
 public class CardDTO
 {
     public required String CardName {get; set;}

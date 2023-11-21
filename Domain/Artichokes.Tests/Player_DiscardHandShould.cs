@@ -8,25 +8,25 @@ namespace Artichokes.UnitTests.PlayerTests
         {
             Player player1 = new Player();
 
-            int previousHandCount = player1.hand.Count;
+            int previousHandCount = player1.Hand.Count;
 
             player1.DiscardHand();
 
 
             Assert.True(previousHandCount==5);
-            Assert.True(player1.hand.Count==0);
+            Assert.True(player1.Hand.Count==0);
         }
         [Fact]
         public void DiscardPileHasFiveCardsAfterDiscard()
         {
             Player player1 = new Player();
 
-            int previousDiscardCount = player1.discardPile.NumberOfCards();
+            int previousDiscardCount = player1.DiscardPile.NumberOfCards();
 
             player1.DiscardHand();
 
             Assert.True(previousDiscardCount==0);
-            Assert.True(player1.discardPile.NumberOfCards()==5);
+            Assert.True(player1.DiscardPile.NumberOfCards()==5);
             
         }
         [Fact]
@@ -37,8 +37,8 @@ namespace Artichokes.UnitTests.PlayerTests
             player1.DiscardHand();
             player1.DiscardHand();
 
-            Assert.True(player1.hand.Count==0);
-            Assert.True(player1.discardPile.NumberOfCards()==5);
+            Assert.True(player1.Hand.Count==0);
+            Assert.True(player1.DiscardPile.NumberOfCards()==5);
         }
     }
 }

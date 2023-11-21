@@ -13,7 +13,7 @@ public class Crop : ICard
         this.Description = description;
     }
 
-    public void Play()
+    public void Play(Player player)
     {
         throw new NotImplementedException();
     }

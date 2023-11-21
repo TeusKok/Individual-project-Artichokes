@@ -24,4 +24,15 @@ export type DiscardPile = {
 
 export type ArtichokesGame = {
     players: Player[];
+    gardenStock: GardenStock;
+    gardenSupply: GardenSupply;
+    
+}
+
+export type GardenStock = {
+    numberOfCards: number;
+}
+
+export type GardenSupply = {
+    cards: Card[];
 }

@@ -1,3 +1,4 @@
+namespace DTO;
 using Artichokes;
 
 public class PlayerDTO{
@@ -7,9 +8,9 @@ public class PlayerDTO{
     public DiscardPileDTO DiscardPile {get; set;}
     public PlayerDTO(string name, Player player){
         Name = name;
-        Hand = new HandDTO(player.hand);
-        DrawPile = new DrawPileDTO{NumberOfCards = player.drawPile.NumberOfCards()};
-        DiscardPile = new DiscardPileDTO(player.discardPile);
+        Hand = new HandDTO(player.Hand);
+        DrawPile = new DrawPileDTO{NumberOfCards = player.DrawPile.NumberOfCards()};
+        DiscardPile = new DiscardPileDTO(player.DiscardPile);
 
     }
 }
