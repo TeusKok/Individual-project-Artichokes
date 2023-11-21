@@ -1,4 +1,5 @@
 using Artichokes;
+using Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
@@ -9,12 +10,12 @@ namespace API.Controllers;
 [Route("[controller]")]
 public class ArtichokesController : ControllerBase
 {
-    private Repository _repository;
+    private IRepository _repository;
      //required using Microsoft.AspNetCore.Http;  
          //required using System.Security.Claims;  
     
 
-    public ArtichokesController(Repository repository)
+    public ArtichokesController(IRepository repository)
     {
         _repository = repository;
     }
@@ -22,15 +23,15 @@ public class ArtichokesController : ControllerBase
     [Consumes("application/json")]
     public IActionResult Post(Dictionary<string,string> names)
     {
-       ArtichokeGame game = new ArtichokeGame(names["name1"],names["name2"],names["name3"],names["name4"]);
+       IArtichokeGame game = new ArtichokeGame(names["name1"],names["name2"],names["name3"],names["name4"]);
        ArtichokeGameDTO gameDTO= new ArtichokeGameDTO(game);
-       _repository.save("test",game);
+       _repository.Save("test",game);
        return Ok(gameDTO);
     }
     [HttpPost("endturn")]
     public IActionResult PostEndTurn(Dictionary<string,string> body)
     {
-        ArtichokeGame game = _repository.Get("test"); 
+        IArtichokeGame game = _repository.Get("test"); 
         int playerNumber = game.getPlayerNumberByName(body.First().Value);
         game.discardHand(playerNumber);
         game.refillHand(playerNumber);

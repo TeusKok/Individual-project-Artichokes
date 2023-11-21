@@ -19,4 +19,8 @@ public interface IArtichokeGame{
     int getNumberOfCardsInDrawPile(int numberOfPlayer);
 
     int getNumberOfCardsInDiscardPile(int numberOfPlayer);
+
+    public Player getPlayerByNumber(int numberOfPlayer);
+
+    public int getPlayerNumberByName(string name);
 }

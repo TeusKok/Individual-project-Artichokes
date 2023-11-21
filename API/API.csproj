@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Artichokes\Artichokes.csproj" />
+    <ProjectReference Include="..\Persistance\Repositories\Repositories.csproj" />
   </ItemGroup>
 
 </Project>

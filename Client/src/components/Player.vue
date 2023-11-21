@@ -53,7 +53,7 @@ const props= defineProps<{player : Player}>()
             const rresult = result as ArtichokesGame;
             console.log(rresult.players);
             console.log(rresult.players.find((x)=> x.name === player.name))
-            let newPlayer = rresult.players.find((x)=> x.name === player.name);
+            let newPlayer = rresult.players.find((x)=> x.name === player.name) as Player;
             player.discardPile = newPlayer.discardPile;
             player.drawPile = newPlayer.drawPile;
             player.hand = newPlayer.hand;
