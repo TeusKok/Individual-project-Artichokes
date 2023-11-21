@@ -63,4 +63,12 @@ public class ArtichokeGame : IArtichokeGame
             default: throw new InvalidOperationException("invalid player number, pick 1, 2, 3, or 4");
         }
     }
+
+    public int getPlayerNumberByName(string name){
+        for (int i = 0; i < 4; i++)
+        {
+            if(playerNames[i].Equals(name) ) return i+1;
+        }
+        return 0;
+    }
 }
