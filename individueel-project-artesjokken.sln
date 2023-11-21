@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artichokes", "Domain\Artich
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artichokes.Tests", "Domain\Artichokes.Tests\Artichokes.Tests.csproj", "{F471E5A6-AC03-4AA2-858C-388093092C2F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistance", "Persistance", "{4E0D8668-1CC1-4422-8255-ED872DB347EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Persistance\Repositories\Repositories.csproj", "{858A5C1F-0036-417D-8607-80D942D7950F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,9 +36,14 @@ Global
 		{F471E5A6-AC03-4AA2-858C-388093092C2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F471E5A6-AC03-4AA2-858C-388093092C2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F471E5A6-AC03-4AA2-858C-388093092C2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{858A5C1F-0036-417D-8607-80D942D7950F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{858A5C1F-0036-417D-8607-80D942D7950F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{858A5C1F-0036-417D-8607-80D942D7950F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{858A5C1F-0036-417D-8607-80D942D7950F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C4DBE7C4-D4B6-4ADC-9A16-2CC6E5957DE0} = {A321E4EE-9D60-4C0B-8AFC-C48E0CBD1D9B}
 		{F471E5A6-AC03-4AA2-858C-388093092C2F} = {A321E4EE-9D60-4C0B-8AFC-C48E0CBD1D9B}
+		{858A5C1F-0036-417D-8607-80D942D7950F} = {4E0D8668-1CC1-4422-8255-ED872DB347EF}
 	EndGlobalSection
 EndGlobal
