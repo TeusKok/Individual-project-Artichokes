@@ -72,8 +72,14 @@ public class ArtichokeGame : IArtichokeGame
         return 0;
     }
 
-    public void endTurn(int playerNumber)
+    public void endTurn(int numberOfPlayer)
     {
-        getPlayerByNumber(playerNumber).EndTurn();
+        getPlayerByNumber(numberOfPlayer).EndTurn();
+    }
+
+    public void playCardFromHand(int numberOfPlayer, int numberOfCard)
+    {
+        Player player = getPlayerByNumber(numberOfPlayer);
+        player.PlayCardFromHandByNumber(numberOfCard);
     }
 }

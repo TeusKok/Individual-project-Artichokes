@@ -50,7 +50,8 @@ public class Player{
                         break;
                     }
                 }
-                Hand.Add(DrawPile.Draw());
+                Hand.Add(DrawPile.GetTopCard());
+                DrawPile.RemoveTopCard();
             }
         }
     }
@@ -71,6 +72,21 @@ public class Player{
             isActivePlayer = !isActivePlayer;
             PlayerToRight.isActivePlayer = !PlayerToRight.isActivePlayer;
         }
+    }
+
+    public void PlayCardFromHandByNumber(int numberOfCard){
+        if(numberOfCard>0 && numberOfCard<=Hand.Count && isActivePlayer){
+            Hand[numberOfCard-1].Play(this);
+            Hand.RemoveAt(numberOfCard-1);
+        }
+    }
+
+    public void HarvestCardFromGardenSupply(int numberOfCard){
+        if(numberOfCard>0 && numberOfCard<=5 && SharedGardenSupply.GetNumberOfCards()==5){
+            Hand.Add(SharedGardenSupply.GetCardByNumber(numberOfCard));
+            SharedGardenSupply.RemoveCardByNumber(numberOfCard);
+        }
+
     }
 
 
