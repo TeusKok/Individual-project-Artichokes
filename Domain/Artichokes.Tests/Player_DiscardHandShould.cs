@@ -40,5 +40,14 @@ namespace Artichokes.UnitTests.PlayerTests
             Assert.True(player1.Hand.Count==0);
             Assert.True(player1.DiscardPile.NumberOfCards()==5);
         }
+        [Fact]
+        public void DiscardHandDoesNothingIfPlayerNotActive()
+        {
+            Player player1 = new Player();
+            Player player2 = player1.PlayerToRight;
+            player2.DiscardHand();
+            Assert.True(player2.Hand.Count==5);
+            
+        }
     }
 }

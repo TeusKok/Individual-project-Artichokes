@@ -85,5 +85,20 @@ namespace Artichokes.UnitTests.PlayerTests
             Assert.True(player1.SharedGardenSupply == player1.PlayerToRight.SharedGardenSupply);
 
         }
+
+        [Fact]
+        public void FirstPlayerStartsAsActive()
+        {
+            Player player1 = new Player();
+            Assert.True(player1.isActivePlayer);
+        }
+        [Fact]
+        public void OtherPlayersStartAsInactive()
+        {
+            Player player1 = new Player();
+            Assert.False(player1.PlayerToRight.isActivePlayer);
+            Assert.False(player1.PlayerToRight.PlayerToRight.isActivePlayer);
+            Assert.False(player1.PlayerToRight.PlayerToRight.PlayerToRight.isActivePlayer);
+        }
     }
 }

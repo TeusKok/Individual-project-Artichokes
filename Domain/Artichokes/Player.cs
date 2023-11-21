@@ -9,6 +9,8 @@ public class Player{
     public DrawPile DrawPile {get; private set;} = new DrawPile();
     public DiscardPile DiscardPile {get; private set;} = new DiscardPile();
     public Player PlayerToRight {get; private set;}
+
+    public Boolean isActivePlayer {get; private set;}
     
     public Player() : this(4){}
 
@@ -16,7 +18,7 @@ public class Player{
         if(numberOfPlayers<2||numberOfPlayers>4){
             throw new InvalidOperationException("invalid number of Players, must be 2,3 or 4");
         }
-
+        isActivePlayer =true;
         SharedGardenSupply = new GardenSupply();
         FillHand();
         this.PlayerToRight = new Player(this,2,numberOfPlayers,SharedGardenSupply);
@@ -25,7 +27,9 @@ public class Player{
 
     private Player(Player firstPlayer, int count, int numberOfPlayers, GardenSupply gardenSupply){
         SharedGardenSupply = gardenSupply;
+        isActivePlayer =true;
         FillHand();
+        isActivePlayer =false;
         if(count<numberOfPlayers){
             this.PlayerToRight = new Player(firstPlayer,count+1,numberOfPlayers,gardenSupply);
         }
@@ -36,26 +40,37 @@ public class Player{
 
     public void FillHand()
     {
-        while(Hand.Count<5){
-            if (DrawPile.NumberOfCards() == 0){
-                if(DiscardPile.NumberOfCards()!=0){
-                    DrawPile.AddToPile(DiscardPile.EmptyDiscardPile());
+        if(isActivePlayer){
+            while(Hand.Count<5){
+                if (DrawPile.NumberOfCards() == 0){
+                    if(DiscardPile.NumberOfCards()!=0){
+                        DrawPile.AddToPile(DiscardPile.EmptyDiscardPile());
+                    }
+                    else{
+                        break;
+                    }
                 }
-                else{
-                    break;
-                }
+                Hand.Add(DrawPile.Draw());
             }
-            Hand.Add(DrawPile.Draw());
         }
     }
 
     public void DiscardHand(){
-        foreach (ICard card in Hand)
-        {
-            DiscardPile.Add(card);
+        if(isActivePlayer){
+            foreach (ICard card in Hand)
+            {
+                DiscardPile.Add(card);
+            }
+            Hand.Clear();
         }
-        Hand.Clear();
         
+    }
+
+    public void EndTurn(){
+        if(isActivePlayer){
+            isActivePlayer = !isActivePlayer;
+            PlayerToRight.isActivePlayer = !PlayerToRight.isActivePlayer;
+        }
     }
 
 

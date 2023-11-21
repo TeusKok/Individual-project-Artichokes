@@ -36,6 +36,7 @@ public class ArtichokesController : ControllerBase
         int playerNumber = game.getPlayerNumberByName(body.First().Value);
         game.discardHand(playerNumber);
         game.refillHand(playerNumber);
+        game.endTurn(playerNumber);
         ArtichokeGameDTO gameDTO= new ArtichokeGameDTO(game);
         
         return Ok(gameDTO);
