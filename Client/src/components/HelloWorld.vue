@@ -1,7 +1,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-const response = (await fetch("http://localhost:5173/api/weatherforecast"))
+const response = (await fetch("http://localhost:5173/api/weathereforecast"))
 const report = await response.json();
 
 
@@ -44,6 +44,6 @@ const wreport = ref(report)
 
 <style scoped>
 .read-the-docs {
-  color: #888;
+  color: #3228c5;
 }
 </style>

@@ -24,6 +24,10 @@ public interface ICard
     
     void Play();
 
+    String getCardName();
+
+    String getCardDescription();
+
     
 
     
