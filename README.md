@@ -9,7 +9,7 @@ Het doel van dit project om een implementatie te maken van het kaartspelletje Ar
 
 ## Software stack
 
-De domein logica zal worden geschreven in C#, de Api server zal ASP.NET Core zijn en de client zal vite/veu zijn. 
+De domein logica zal worden geschreven in C#, de Api server zal ASP.NET Core zijn en de client zal vite/vue zijn. 
 
 ## Technische Doelen
 
