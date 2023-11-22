@@ -1,9 +1,12 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { ArtichokesGame } from '../types';
+ 
 
-  import Player from './Player.vue';
+  import PlayerComponent from './PlayerComponent.vue';
   import Garden from './Garden.vue';
+  import { endTurn, harvestCard, playCard } from '../services/api';
+
   const response = await fetch("http://localhost:5173/api/artichokes",{
       method: 'POST',
       headers: {
@@ -19,23 +22,20 @@
     })
 
   const result = await response.json();
-
-
-
-  const rresult = ref(result as ArtichokesGame )
-
-  //const forecast = ref(weatherforecast)
+  const game = ref(result as ArtichokesGame );
 
 </script>
 
 
+
 <template>
   <div class = "container">
-    <Player :player = "rresult.players[0]"  />
-    <Player :player = "rresult.players[1]"  />
-    <Garden class = "wide" :gardenStock ="rresult.gardenStock" :gardenSupply ="rresult.gardenSupply"></Garden>
-    <Player :player = "rresult.players[3]"  />
-    <Player :player = "rresult.players[2]"  />
+    <PlayerComponent :player = "game.players[0]" @endTurn = endTurn(game,0) @playCard="(value:number)=>{playCard(game,value)}" />
+    <PlayerComponent :player = "game.players[1]" @endTurn = endTurn(game,1) @playCard="(value:number)=>{playCard(game,value)}"/>
+    <Garden class = "wide" :gardenStock ="game.gardenStock" :gardenSupply ="game.gardenSupply" 
+        @harvest ="(value:number)=>{harvestCard(game,value)}"></Garden>
+    <PlayerComponent :player = "game.players[3]" @endTurn = endTurn(game,3) @playCard="(value:number)=>{playCard(game,value)}"/>
+    <PlayerComponent :player = "game.players[2]" @endTurn = endTurn(game,2) @playCard="(value:number)=>{playCard(game,value)}"/>
   </div>
 </template>
 

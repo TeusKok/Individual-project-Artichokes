@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import GardenSupplyComponent from './GardenSupplyComponent.vue' ;
 import { GardenStock,GardenSupply } from '../types';
-const props= defineProps<{gardenStock : GardenStock, gardenSupply : GardenSupply}>()   
-
+const props= defineProps<{gardenStock : GardenStock, gardenSupply : GardenSupply,}>()  ;
+const emit = defineEmits(['harvest']) ;
+const handleHarvest = (value:number) => {
+  emit('harvest',value)
+};
 
 
     
@@ -10,8 +13,8 @@ const props= defineProps<{gardenStock : GardenStock, gardenSupply : GardenSupply
 
 <template>
     <div>
-        <GardenSupplyComponent :cards = "props.gardenSupply.cards"></GardenSupplyComponent>
-        There are {{gardenStock.numberOfCards}} cards in the gardenStock
+        <GardenSupplyComponent :cards = "props.gardenSupply.cards" :cardHarvestingAllowed ="props.gardenSupply.cardHarvestingAllowed" @harvest ="handleHarvest" ></GardenSupplyComponent>
+        There are {{gardenStock.numberOfCards}} cards in the gardenStock{{ props.gardenSupply.cardHarvestingAllowed }}
     </div>
 </template>
 

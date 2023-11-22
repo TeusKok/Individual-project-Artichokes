@@ -82,4 +82,21 @@ public class ArtichokeGame : IArtichokeGame
         Player player = getPlayerByNumber(numberOfPlayer);
         player.PlayCardFromHandByNumber(numberOfCard);
     }
+
+    public void HarvestCardFromGardenSupply(int numberOfPlayer, int numberOfCard)
+    {
+        Player player = getPlayerByNumber(numberOfPlayer);
+        player.HarvestCardFromGardenSupply(numberOfCard);
+    }
+
+    public Player getActivePlayer(){
+        Player player = getPlayerByNumber(1);
+        while(!player.isActivePlayer){
+            player = player.PlayerToRight;
+            if(player == getPlayerByNumber(1)){
+                throw new Exception("There is no active player");
+            }
+        }
+        return player;
+    }
 }

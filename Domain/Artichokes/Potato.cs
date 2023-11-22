@@ -14,11 +14,14 @@ public class Potato : ICard
 
     public void Play(Player player)
     {
-        ICard card = player.DrawPile.GetTopCard();
-        player.DrawPile.RemoveTopCard();
-        if(card.GetType() != typeof(Artichoke)){
-            player.DiscardPile.Add(card);
+        player.refillDrawPileIfNeeded();
+        if(player.DrawPile.NumberOfCards()>0){
+            ICard card = player.DrawPile.GetTopCard();
+            player.DrawPile.RemoveTopCard();
+            if(card.GetType() != typeof(Artichoke)){
+                player.DiscardPile.Add(card);
+            }
+            player.DiscardPile.Add(this);
         }
-        player.DiscardPile.Add(this);
     }
 }

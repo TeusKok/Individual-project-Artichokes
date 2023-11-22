@@ -11,6 +11,8 @@ public class Player{
     public Player PlayerToRight {get; private set;}
 
     public Boolean isActivePlayer {get; private set;}
+
+    public Boolean HarvestedCard {get; private set;}
     
     public Player() : this(4){}
 
@@ -18,7 +20,7 @@ public class Player{
         if(numberOfPlayers<2||numberOfPlayers>4){
             throw new InvalidOperationException("invalid number of Players, must be 2,3 or 4");
         }
-        isActivePlayer =true;
+        this.isActivePlayer =true;
         SharedGardenSupply = new GardenSupply();
         FillHand();
         this.PlayerToRight = new Player(this,2,numberOfPlayers,SharedGardenSupply);
@@ -27,9 +29,9 @@ public class Player{
 
     private Player(Player firstPlayer, int count, int numberOfPlayers, GardenSupply gardenSupply){
         SharedGardenSupply = gardenSupply;
-        isActivePlayer =true;
+        this.isActivePlayer =true;
         FillHand();
-        isActivePlayer =false;
+        this.isActivePlayer =false;
         if(count<numberOfPlayers){
             this.PlayerToRight = new Player(firstPlayer,count+1,numberOfPlayers,gardenSupply);
         }
@@ -71,6 +73,7 @@ public class Player{
         if(isActivePlayer){
             isActivePlayer = !isActivePlayer;
             PlayerToRight.isActivePlayer = !PlayerToRight.isActivePlayer;
+            this.HarvestedCard = false;
         }
     }
 
@@ -81,10 +84,18 @@ public class Player{
         }
     }
 
+    public void refillDrawPileIfNeeded(){
+        if(this.DrawPile.NumberOfCards()==0&&this.DiscardPile.NumberOfCards()>0){
+            this.DrawPile.AddToPile(this.DiscardPile.getCards());
+            this.DiscardPile.EmptyDiscardPile();
+        }
+    }
+
     public void HarvestCardFromGardenSupply(int numberOfCard){
-        if(numberOfCard>0 && numberOfCard<=5 && SharedGardenSupply.GetNumberOfCards()==5){
+        if(numberOfCard>0 && numberOfCard<=5 && !this.HarvestedCard &&this.isActivePlayer){
             Hand.Add(SharedGardenSupply.GetCardByNumber(numberOfCard));
             SharedGardenSupply.RemoveCardByNumber(numberOfCard);
+            this.HarvestedCard = true;
         }
 
     }

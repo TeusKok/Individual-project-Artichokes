@@ -28,4 +28,13 @@ public class Player_EndTurnShould{
         Assert.False(player2.PlayerToRight.isActivePlayer);
         Assert.False(player2.PlayerToRight.PlayerToRight.isActivePlayer);
     }
+    [Fact]
+    public void SetPlayerHarvestedToTrue()
+    {
+        Player player1 = new Player(); 
+        player1.HarvestCardFromGardenSupply(1);
+        player1.EndTurn();
+
+        Assert.False(player1.HarvestedCard);   
+    }
 }

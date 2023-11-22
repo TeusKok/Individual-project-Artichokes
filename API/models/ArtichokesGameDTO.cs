@@ -12,7 +12,8 @@ public class ArtichokeGameDTO{
             Players[i] = new PlayerDTO(game.getNameOfPlayer(i+1),game.getPlayerByNumber(i+1));
         }
         GardenStock = new GardenStockDTO(game.getPlayerByNumber(1).SharedGardenSupply.gardenStock);
-        GardenSupply = new GardenSupplyDTO(game.getPlayerByNumber(1).SharedGardenSupply);
+        Boolean activePlayerHasHarvested = game.getActivePlayer().HarvestedCard;
+        GardenSupply = new GardenSupplyDTO(game.getPlayerByNumber(1).SharedGardenSupply,!activePlayerHasHarvested);
 
 
     }

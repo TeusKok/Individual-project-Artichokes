@@ -5,6 +5,8 @@ export type Card = {
 
 export type Player = {
     name: string;
+    hasTurn: Boolean;
+    harvestedCard: Boolean;
     hand: Hand;
     drawPile: DrawPile;
     discardPile: DiscardPile;
@@ -35,4 +37,5 @@ export type GardenStock = {
 
 export type GardenSupply = {
     cards: Card[];
+    cardHarvestingAllowed: boolean;
 }

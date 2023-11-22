@@ -25,4 +25,6 @@ public interface IArtichokeGame{
     public int getPlayerNumberByName(string name);
     void endTurn(int numberOfPlayer);
     public void playCardFromHand(int numberOfPlayer, int numberOfCard);
+
+    public Player getActivePlayer();
 }
