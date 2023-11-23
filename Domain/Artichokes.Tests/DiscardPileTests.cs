@@ -8,11 +8,11 @@ namespace Artichokes.UnitTests.DiscardPile
             Player player1 = new Player();
 
             player1.DiscardHand();
-            int numberOfCards  = player1.discardPile.NumberOfCards();
-            player1.discardPile.EmptyDiscardPile();
+            int numberOfCards  = player1.DiscardPile.NumberOfCards();
+            player1.DiscardPile.EmptyDiscardPile();
 
             Assert.True(numberOfCards == 5);
-            Assert.True(player1.discardPile.NumberOfCards() == 0);
+            Assert.True(player1.DiscardPile.NumberOfCards() == 0);
 
         }
     }

@@ -12,15 +12,19 @@ public interface IArtichokeGame{
 
     void refillHand(int numberOfPlayer);
 
-    String getNameFromCardFromHand(int numberOfPlayer, int numberOfCard);
+    public String getNameFromCardFromHand(int numberOfPlayer, int numberOfCard);
     
-    String getDescriptionFromCardFromHand(int numberOfPlayer, int numberOfCard);
+    public String getDescriptionFromCardFromHand(int numberOfPlayer, int numberOfCard);
 
-    int getNumberOfCardsInDrawPile(int numberOfPlayer);
+    public int getNumberOfCardsInDrawPile(int numberOfPlayer);
 
-    int getNumberOfCardsInDiscardPile(int numberOfPlayer);
+    public int getNumberOfCardsInDiscardPile(int numberOfPlayer);
 
     public Player getPlayerByNumber(int numberOfPlayer);
 
     public int getPlayerNumberByName(string name);
+    void endTurn(int numberOfPlayer);
+    public void playCardFromHand(int numberOfPlayer, int numberOfCard);
+
+    public Player getActivePlayer();
 }

@@ -8,18 +8,23 @@ public class Artichoke : ICard
     {
 
     }
-    public void Play()
+    public void Play(Player player)
     {
         throw new NotImplementedException();
     }
 
-    public string getCardName()
+    public string GetCardName()
     {
         return "Artichoke";
     }
 
-    public string getCardDescription()
+    public string GetCardDescription()
     {
         return "This is an Artichoke";
+    }
+
+    public bool MayBePlayed(Player player)
+    {
+        return false;
     }
 }

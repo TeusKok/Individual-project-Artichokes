@@ -20,12 +20,12 @@ public class ArtichokeGame : IArtichokeGame
 
     public string getDescriptionFromCardFromHand(int numberOfPlayer, int numberOfCard)
     {
-        return getPlayerByNumber(numberOfPlayer).hand[numberOfCard-1].getCardDescription();
+        return getPlayerByNumber(numberOfPlayer).Hand[numberOfCard-1].GetCardDescription();
     }
 
     public string getNameFromCardFromHand(int numberOfPlayer, int numberOfCard)
     {
-        return getPlayerByNumber(numberOfPlayer).hand[numberOfCard-1].getCardName();
+        return getPlayerByNumber(numberOfPlayer).Hand[numberOfCard-1].GetCardName();
     }
 
     public string getNameOfPlayer(int numberOfPlayer)
@@ -35,17 +35,17 @@ public class ArtichokeGame : IArtichokeGame
 
     public int getNumberOfCardsInDiscardPile(int numberOfPlayer)
     {
-        return getPlayerByNumber(numberOfPlayer).discardPile.NumberOfCards();
+        return getPlayerByNumber(numberOfPlayer).DiscardPile.NumberOfCards();
     }
 
     public int getNumberOfCardsInDrawPile(int numberOfPlayer)
     {
-        return getPlayerByNumber(numberOfPlayer).drawPile.NumberOfCards();
+        return getPlayerByNumber(numberOfPlayer).DrawPile.NumberOfCards();
     }
 
     public int getNumberOfCardsInHand(int numberOfPlayer)
     {
-        return getPlayerByNumber(numberOfPlayer).hand.Count;
+        return getPlayerByNumber(numberOfPlayer).Hand.Count;
     }
 
     public void refillHand(int numberOfPlayer)
@@ -57,9 +57,9 @@ public class ArtichokeGame : IArtichokeGame
         switch (numberOfPlayer)
         {
             case 1: return player1;
-            case 2: return player1.playerToRight;
-            case 3: return player1.playerToRight.playerToRight;
-            case 4: return player1.playerToRight.playerToRight.playerToRight;
+            case 2: return player1.PlayerToRight;
+            case 3: return player1.PlayerToRight.PlayerToRight;
+            case 4: return player1.PlayerToRight.PlayerToRight.PlayerToRight;
             default: throw new InvalidOperationException("invalid player number, pick 1, 2, 3, or 4");
         }
     }
@@ -70,5 +70,33 @@ public class ArtichokeGame : IArtichokeGame
             if(playerNames[i].Equals(name) ) return i+1;
         }
         return 0;
+    }
+
+    public void endTurn(int numberOfPlayer)
+    {
+        getPlayerByNumber(numberOfPlayer).EndTurn();
+    }
+
+    public void playCardFromHand(int numberOfPlayer, int numberOfCard)
+    {
+        Player player = getPlayerByNumber(numberOfPlayer);
+        player.PlayCardFromHandByNumber(numberOfCard);
+    }
+
+    public void HarvestCardFromGardenSupply(int numberOfPlayer, int numberOfCard)
+    {
+        Player player = getPlayerByNumber(numberOfPlayer);
+        player.HarvestCardFromGardenSupply(numberOfCard);
+    }
+
+    public Player getActivePlayer(){
+        Player player = getPlayerByNumber(1);
+        while(!player.isActivePlayer){
+            player = player.PlayerToRight;
+            if(player == getPlayerByNumber(1)){
+                throw new Exception("There is no active player");
+            }
+        }
+        return player;
     }
 }

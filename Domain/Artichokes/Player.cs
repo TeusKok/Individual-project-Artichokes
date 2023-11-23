@@ -3,10 +3,16 @@ using System.Data;
 namespace Artichokes;
 
 public class Player{
-    public List<ICard> hand {get; private set;} = new List<ICard>();
-    public DrawPile drawPile {get; private set;} = new DrawPile();
-    public DiscardPile discardPile {get; private set;} = new DiscardPile();
-    public Player playerToRight {get; private set;}
+    public GardenSupply SharedGardenSupply {get; private set;}
+
+    public List<ICard> Hand {get; private set;} = new List<ICard>();
+    public DrawPile DrawPile {get; private set;} = new DrawPile();
+    public DiscardPile DiscardPile {get; private set;} = new DiscardPile();
+    public Player PlayerToRight {get; private set;}
+
+    public Boolean isActivePlayer {get; private set;}
+
+    public Boolean HarvestedCard {get; private set;}
     
     public Player() : this(4){}
 
@@ -14,45 +20,88 @@ public class Player{
         if(numberOfPlayers<2||numberOfPlayers>4){
             throw new InvalidOperationException("invalid number of Players, must be 2,3 or 4");
         }
-        
+        this.isActivePlayer =true;
+        SharedGardenSupply = new GardenSupply();
         FillHand();
-        this.playerToRight = new Player(this,2,numberOfPlayers);
+        this.PlayerToRight = new Player(this,2,numberOfPlayers,SharedGardenSupply);
         
     }
 
-    private Player(Player firstPlayer, int count, int numberOfPlayers){
-        
+    private Player(Player firstPlayer, int count, int numberOfPlayers, GardenSupply gardenSupply){
+        SharedGardenSupply = gardenSupply;
+        this.isActivePlayer =true;
         FillHand();
+        this.isActivePlayer =false;
         if(count<numberOfPlayers){
-            this.playerToRight = new Player(firstPlayer,count+1,numberOfPlayers);
+            this.PlayerToRight = new Player(firstPlayer,count+1,numberOfPlayers,gardenSupply);
         }
         else{
-            this.playerToRight = firstPlayer;
+            this.PlayerToRight = firstPlayer;
         }
     }
 
     public void FillHand()
     {
-        while(hand.Count<5){
-            if (drawPile.NumberOfCards() == 0){
-                if(discardPile.NumberOfCards()!=0){
-                    drawPile.AddToPile(discardPile.EmptyDiscardPile());
+        if(isActivePlayer){
+            while(Hand.Count<5){
+                if (DrawPile.NumberOfCards() == 0){
+                    if(DiscardPile.NumberOfCards()!=0){
+                        DrawPile.AddToPile(DiscardPile.EmptyDiscardPile());
+                    }
+                    else{
+                        break;
+                    }
                 }
-                else{
-                    break;
-                }
+                Hand.Add(DrawPile.GetTopCard());
+                DrawPile.RemoveTopCard();
             }
-            hand.Add(drawPile.Draw());
         }
     }
 
     public void DiscardHand(){
-        foreach (ICard card in hand)
-        {
-            discardPile.Add(card);
+        if(isActivePlayer){
+            foreach (ICard card in Hand)
+            {
+                DiscardPile.Add(card);
+            }
+            Hand.Clear();
         }
-        hand.Clear();
         
+    }
+
+    public void EndTurn(){
+        if(isActivePlayer){
+            isActivePlayer = !isActivePlayer;
+            PlayerToRight.isActivePlayer = !PlayerToRight.isActivePlayer;
+            this.HarvestedCard = false;
+        }
+    }
+
+    public void PlayCardFromHandByNumber(int numberOfCard){
+        if(numberOfCard>0 && numberOfCard<=Hand.Count && isActivePlayer){
+            if(Hand[numberOfCard-1].MayBePlayed(this)){
+                Hand[numberOfCard-1].Play(this);
+
+                Hand.RemoveAt(numberOfCard-1);
+            }
+
+        }
+    }
+
+    public void RefillDrawPileIfNeededAndPossible(){
+        if(this.DrawPile.NumberOfCards()==0&&this.DiscardPile.NumberOfCards()>0){
+            this.DrawPile.AddToPile(this.DiscardPile.getCards());
+            this.DiscardPile.EmptyDiscardPile();
+        }
+    }
+
+    public void HarvestCardFromGardenSupply(int numberOfCard){
+        if(numberOfCard>0 && numberOfCard<=5 && !this.HarvestedCard &&this.isActivePlayer){
+            Hand.Add(SharedGardenSupply.GetCardByNumber(numberOfCard));
+            SharedGardenSupply.RemoveCardByNumber(numberOfCard);
+            this.HarvestedCard = true;
+        }
+
     }
 
 

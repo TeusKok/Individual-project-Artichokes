@@ -22,11 +22,13 @@ public enum Crops{
 public interface ICard
 {
     
-    void Play();
+    void Play(Player player);
 
-    String getCardName();
+    String GetCardName();
 
-    String getCardDescription();
+    String GetCardDescription();
+
+    Boolean MayBePlayed(Player player);
 
     
 

@@ -15,10 +15,13 @@ public class DrawPile : ICardCollection{
         }
     }
 
-    public ICard Draw(){
-        ICard card = drawPile[0];
+    
+    public ICard GetTopCard(){
+        return drawPile[0];
+    }
+
+    public void RemoveTopCard(){
         drawPile.RemoveAt(0);
-        return card;
     }
 
     public void AddToPile(List<ICard> cards){

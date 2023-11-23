@@ -9,16 +9,16 @@ namespace Artichokes.UnitTests.PlayerTests
             Player player1 = new Player();
             player1.DiscardHand();
             player1.FillHand();
-            Assert.True(player1.hand.Count==5);
+            Assert.True(player1.Hand.Count==5);
         }
         [Fact]
         public void ReduceDrawPileByNumberOfDrawnCards()
         {
             Player player1 = new Player();
-            int startingNumberOfDrawPileCards = player1.drawPile.NumberOfCards();
+            int startingNumberOfDrawPileCards = player1.DrawPile.NumberOfCards();
             player1.DiscardHand();
             player1.FillHand();
-            Assert.True(player1.drawPile.NumberOfCards()==0);
+            Assert.True(player1.DrawPile.NumberOfCards()==0);
             Assert.True(startingNumberOfDrawPileCards == 5);
         }
         [Fact]
@@ -31,8 +31,22 @@ namespace Artichokes.UnitTests.PlayerTests
             player1.DiscardHand();
             player1.FillHand();
 
-            Assert.True(player1.drawPile.NumberOfCards()==5);
-            Assert.True(player1.hand.Count==5);
+            Assert.True(player1.DrawPile.NumberOfCards()==5);
+            Assert.True(player1.Hand.Count==5);
+        }
+        [Fact]
+        public void FillHandDoesNothingIfPlayerNotActive()
+        {
+            Player player1 = new Player();
+
+            player1.DiscardHand();
+            player1.EndTurn();
+            player1.FillHand();
+            
+            Assert.True(player1.Hand.Count==0);
+
+             
+
         }
     }
 }

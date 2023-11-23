@@ -1,10 +1,13 @@
 export type Card = {
     cardName: string;
     cardDescription: string;
+    mayBePlayed: boolean;
 }
 
 export type Player = {
     name: string;
+    hasTurn: Boolean;
+    harvestedCard: Boolean;
     hand: Hand;
     drawPile: DrawPile;
     discardPile: DiscardPile;
@@ -24,4 +27,16 @@ export type DiscardPile = {
 
 export type ArtichokesGame = {
     players: Player[];
+    gardenStock: GardenStock;
+    gardenSupply: GardenSupply;
+    
+}
+
+export type GardenStock = {
+    numberOfCards: number;
+}
+
+export type GardenSupply = {
+    cards: Card[];
+    cardHarvestingAllowed: boolean;
 }

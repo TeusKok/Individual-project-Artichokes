@@ -1,8 +1,12 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { ArtichokesGame } from '../types';
+ 
 
-  import Player from './Player.vue';
+  import PlayerComponent from './PlayerComponent.vue';
+  import Garden from './Garden.vue';
+  import { endTurn, harvestCard, playCard } from '../services/api';
+
   const response = await fetch("http://localhost:5173/api/artichokes",{
       method: 'POST',
       headers: {
@@ -18,22 +22,20 @@
     })
 
   const result = await response.json();
-
-
-
-  const rresult = ref(result as ArtichokesGame )
-
-  //const forecast = ref(weatherforecast)
+  const game = ref(result as ArtichokesGame );
 
 </script>
 
 
+
 <template>
-  <div class = "container">
-    <Player
-      v-for = "player in rresult.players"
-      :player = "player"  
-    />
+  <div class = "gamecontainer">
+    <PlayerComponent :player = "game.players[0]" @endTurn = endTurn(game,0) @playCard="(value:number)=>{playCard(game,value)}" />
+    <PlayerComponent :player = "game.players[1]" @endTurn = endTurn(game,1) @playCard="(value:number)=>{playCard(game,value)}"/>
+    <Garden class = "wide" :gardenStock ="game.gardenStock" :gardenSupply ="game.gardenSupply" 
+        @harvest ="(value:number)=>{harvestCard(game,value)}"></Garden>
+    <PlayerComponent :player = "game.players[3]" @endTurn = endTurn(game,3) @playCard="(value:number)=>{playCard(game,value)}"/>
+    <PlayerComponent :player = "game.players[2]" @endTurn = endTurn(game,2) @playCard="(value:number)=>{playCard(game,value)}"/>
   </div>
 </template>
 
@@ -41,12 +43,16 @@
 .read-the-docs {
   color: #3228c5;
 }
-.container{
+.gamecontainer{
     display: grid;
-    grid-template-columns: auto auto  ;
-    grid-template-rows: auto auto ;
+    grid-template-columns: 50% 50%  ;
+    grid-template-rows: auto 12rem auto ;
     gap: 20px 20px;
-    height:inherit
+    height:inherit;
+    justify-items: center;
+}
+.wide{
+  grid-column: 1/span 2 ;
 }
 </style> 
 
