@@ -20,19 +20,20 @@
 <template>
     <div class="container">
         
-        <button v-for="n in props.cards.length"  :disabled="!playerHasTurn" class = "card" @click ="emit('playCard', n)" >{{ props.cards[n-1].cardName }} </button>
+        <button v-for="n in props.cards.length"  :disabled="!playerHasTurn" class = "playercard" @click ="emit('playCard', n)" >{{ props.cards[n-1].cardName }}</button>
     </div>
 </template>
 
 <style scoped>
 .container{
     display: grid;
-    grid-template-columns: auto auto auto auto auto auto ;
-    grid-template-rows: auto;
+    grid-template-rows: 8rem;
     gap: 5px 5px;
 }
-.card{
-    grid-row: 1 ;
+.playercard{
+    grid-row: 1 /-1;
     font-size: small;
+    width:6rem;
+    text-align:center;
 }
 </style>

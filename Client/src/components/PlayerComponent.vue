@@ -20,15 +20,20 @@ const handlePlayCard = (value:number) => {
     <div class="player">
         <div :class= "{active: props.player.hasTurn}"> {{props.player.name}}   </div>
         <Hand :cards = "props.player.hand.cards" :playerHasTurn ="props.player.hasTurn" @playCard = "handlePlayCard" ></Hand>
+        <div class = "piles">
         <DrawPile :player = "props.player"  @endTurn = "emit('endTurn')" ></DrawPile>
         <DiscardPile :player = "props.player"></DiscardPile>
+        </div>
     </div>
 </template>
 
 <style scoped>
 .player {
-    width: 1/2;
-    height: 1/2;
+    width: 50%;
+    height: 50%;
+    display:grid;
+    justify-content: center;
+    gap: 4px;
 }
 .active{
     color: green;
@@ -36,5 +41,10 @@ const handlePlayCard = (value:number) => {
     
 
 
+}
+.piles{
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: auto auto;
 }
 </style>

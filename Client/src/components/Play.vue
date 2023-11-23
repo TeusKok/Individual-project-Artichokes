@@ -29,7 +29,7 @@
 
 
 <template>
-  <div class = "container">
+  <div class = "gamecontainer">
     <PlayerComponent :player = "game.players[0]" @endTurn = endTurn(game,0) @playCard="(value:number)=>{playCard(game,value)}" />
     <PlayerComponent :player = "game.players[1]" @endTurn = endTurn(game,1) @playCard="(value:number)=>{playCard(game,value)}"/>
     <Garden class = "wide" :gardenStock ="game.gardenStock" :gardenSupply ="game.gardenSupply" 
@@ -43,12 +43,13 @@
 .read-the-docs {
   color: #3228c5;
 }
-.container{
+.gamecontainer{
     display: grid;
-    grid-template-columns: auto auto  ;
-    grid-template-rows: auto auto auto ;
+    grid-template-columns: 50% 50%  ;
+    grid-template-rows: auto 12rem auto ;
     gap: 20px 20px;
-    height:inherit
+    height:inherit;
+    justify-items: center;
 }
 .wide{
   grid-column: 1/span 2 ;

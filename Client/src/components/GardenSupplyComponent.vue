@@ -17,11 +17,14 @@
 <style scoped>
 .container{
     display: grid;
-    grid-template-columns: auto auto auto auto auto ;
+    width: min-content;
+    
+    grid-template-rows: auto;
     gap: 5px 5px;
 }
 .card{
-    
+    grid-row: 1/-1;
     font-size: small;
+    width: 6rem;
 }
 </style>
