@@ -1,6 +1,7 @@
 export type Card = {
     cardName: string;
     cardDescription: string;
+    mayBePlayed: boolean;
 }
 
 export type Player = {

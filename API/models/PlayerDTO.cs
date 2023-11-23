@@ -12,7 +12,7 @@ public class PlayerDTO{
         Name = name;
         HasTurn = player.isActivePlayer;
         HarvestedCard = player.HarvestedCard;
-        Hand = new HandDTO(player.Hand);
+        Hand = new HandDTO(player);
         DrawPile = new DrawPileDTO{NumberOfCards = player.DrawPile.NumberOfCards()};
         DiscardPile = new DiscardPileDTO(player.DiscardPile);
 

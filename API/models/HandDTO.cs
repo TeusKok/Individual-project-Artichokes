@@ -4,13 +4,15 @@ using Artichokes;
 public class HandDTO{
     public CardDTO[] Cards {get;} 
 
-    public HandDTO(List<ICard> cards){
-        Cards = new CardDTO[cards.Count];
-        for (int i = 0; i < cards.Count; i++)
+    public HandDTO(Player player){
+        
+        Cards = new CardDTO[player.Hand.Count];
+        for (int i = 0; i < player.Hand.Count; i++)
         {
             Cards[i] = new CardDTO{
-                CardName = cards[i].getCardName(),
-                CardDescription = cards[i].getCardDescription()
+                CardName = player.Hand[i].GetCardName(),
+                CardDescription = player.Hand[i].GetCardDescription(),
+                MayBePlayed = player.Hand[i].MayBePlayed(player),
             };
         }
         

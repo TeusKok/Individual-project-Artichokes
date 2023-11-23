@@ -24,9 +24,11 @@ public interface ICard
     
     void Play(Player player);
 
-    String getCardName();
+    String GetCardName();
 
-    String getCardDescription();
+    String GetCardDescription();
+
+    Boolean MayBePlayed(Player player);
 
     
 

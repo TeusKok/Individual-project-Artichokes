@@ -13,8 +13,9 @@ public class GardenSupplyDTO
         {
             ICard card = gardenSupply.GetCardByNumber(i+1);
             Cards[i] = new CardDTO{
-                CardName = card.getCardName(),
-                CardDescription = card.getCardDescription()
+                CardName = card.GetCardName(),
+                CardDescription = card.GetCardDescription(),
+                MayBePlayed =false,
             };
         }
     }

@@ -20,7 +20,7 @@
 <template>
     <div class="container">
         
-        <button v-for="n in props.cards.length"  :disabled="!playerHasTurn" class = "playercard" @click ="emit('playCard', n)" >{{ props.cards[n-1].cardName }}</button>
+        <button v-for="n in props.cards.length"  :disabled="!playerHasTurn||!props.cards[n-1].mayBePlayed" class = "playercard" @click ="emit('playCard', n)" >{{ props.cards[n-1].cardName }}</button>
     </div>
 </template>
 

@@ -14,7 +14,7 @@ const emit = defineEmits(['endTurn']);
 
 <template>
     <div class = "container">
-        <button class = "drawPile" @click="emit('endTurn') " :disabled="!player.hasTurn" >{{ props.player.drawPile.numberOfCards }} cards in Drawpile</button>
+        <button class = "drawPile" @click="emit('endTurn') " :disabled="!player.hasTurn" >Drawpile: {{ props.player.drawPile.numberOfCards }} cards Click to End Turn</button>
     </div>
 </template>
 

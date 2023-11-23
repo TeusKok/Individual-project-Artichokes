@@ -1,10 +1,6 @@
 <script setup lang="ts">
 
 import { Player } from '../types';
-
-
-    
-  
     const props= defineProps<{player : Player}>()
 </script>
 

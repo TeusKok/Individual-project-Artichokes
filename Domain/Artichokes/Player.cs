@@ -79,12 +79,16 @@ public class Player{
 
     public void PlayCardFromHandByNumber(int numberOfCard){
         if(numberOfCard>0 && numberOfCard<=Hand.Count && isActivePlayer){
-            Hand[numberOfCard-1].Play(this);
-            Hand.RemoveAt(numberOfCard-1);
+            if(Hand[numberOfCard-1].MayBePlayed(this)){
+                Hand[numberOfCard-1].Play(this);
+
+                Hand.RemoveAt(numberOfCard-1);
+            }
+
         }
     }
 
-    public void refillDrawPileIfNeeded(){
+    public void RefillDrawPileIfNeededAndPossible(){
         if(this.DrawPile.NumberOfCards()==0&&this.DiscardPile.NumberOfCards()>0){
             this.DrawPile.AddToPile(this.DiscardPile.getCards());
             this.DiscardPile.EmptyDiscardPile();
