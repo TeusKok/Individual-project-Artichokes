@@ -11,6 +11,22 @@ public class PotatoTests{
 
     }
     [Fact]
+    public void IfPotatoIsPlayedAndTopCardIsNotArtichokeTopCardIsAddedToDiscardPile()
+    {
+        Player player1 = new Player();
+        player1.Hand.Add(new Potato());
+        player1.DiscardHand();
+        player1.FillHand();
+        player1.DiscardHand();
+        player1.FillHand();
+        player1.Hand.Add(new Potato());
+        player1.PlayCardFromHandByNumber(6);
+        Assert.True(player1.DiscardPile.NumberOfCards()==2);
+        Assert.True(player1.Hand.Count==5);
+        Assert.True(player1.DrawPile.NumberOfCards()==5);
+    }
+
+    [Fact]   
     public void IfPotatoIsPlayedThatPotatoGoesToDiscardPile()
     {
         Player player1 = new Player();

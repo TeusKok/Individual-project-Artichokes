@@ -52,4 +52,6 @@ export async function playCard (oldGame: ArtichokesGame, cardNumber:number){
     const result = await response.json();
     const newGame = result as ArtichokesGame;
     oldGame.players = newGame.players;
+    oldGame.gardenStock = newGame.gardenStock;
+    oldGame.gardenSupply = newGame.gardenSupply;
 }

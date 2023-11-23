@@ -35,9 +35,10 @@ public class GardenSupplyTests{
     public void refillGardenSupplyReducesGardenStockByANumberOfCards()
     {
         GardenSupply gardenSupply = new GardenSupply();
+        int numberOfCardsInGardenSupply = gardenSupply.gardenStock.GetNumberOfCards();
         gardenSupply.RemoveCardByNumber(3);
         gardenSupply.refillGardenSupply();
-        Assert.True(gardenSupply.gardenStock.GetNumberOfCards()==0);
+        
+        Assert.True(gardenSupply.gardenStock.GetNumberOfCards()==numberOfCardsInGardenSupply-1);
     }
-   
 }

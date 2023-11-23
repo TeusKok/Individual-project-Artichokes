@@ -79,10 +79,11 @@ public class Player{
 
     public void PlayCardFromHandByNumber(int numberOfCard){
         if(numberOfCard>0 && numberOfCard<=Hand.Count && isActivePlayer){
-            if(Hand[numberOfCard-1].MayBePlayed(this)){
-                Hand[numberOfCard-1].Play(this);
+            ICard card = Hand[numberOfCard-1];
+            if(card.MayBePlayed(this)){
+                card.Play(this);
 
-                Hand.RemoveAt(numberOfCard-1);
+                Hand.Remove(card);
             }
 
         }
