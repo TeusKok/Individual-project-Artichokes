@@ -14,7 +14,14 @@ const emit = defineEmits(['endTurn']);
 
 <template>
     <div class = "container">
-        <button class = "drawPile" @click="emit('endTurn') " :disabled="!player.hasTurn" >Drawpile: {{ props.player.drawPile.numberOfCards }} cards Click to End Turn</button>
+        <button class = "drawPile" 
+            @click="emit('endTurn')"
+            v-b-tooltip.hover 
+            title="Click to end your turn"
+            :disabled="!player.hasTurn" 
+        >
+            Drawpile: {{ props.player.drawPile.numberOfCards }} cards
+        </button>
     </div>
 </template>
 
@@ -22,5 +29,7 @@ const emit = defineEmits(['endTurn']);
     .drawPile{
         width:6rem;
         height:8rem;
+        text-align:center;
+        font-size: small;
     }
 </style>
