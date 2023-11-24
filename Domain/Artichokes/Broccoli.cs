@@ -18,7 +18,7 @@ public class Broccoli : ICard
         {
             if(player.Hand[i].GetType()==typeof(Artichoke)){
                 count++;
-                if(count>3) return true;
+                if(count>=3) return true;
             }
             
         }

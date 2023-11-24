@@ -10,7 +10,15 @@
 
 <template>
     <div class="container">
-        <button v-for="n in props.cards.length" :disabled="!props.cardHarvestingAllowed " class = "card" @click ="emit('harvest', n)" >{{ props.cards[n-1].cardName }} </button>
+        <button v-for="n in props.cards.length"
+            v-b-tooltip.hover 
+            :title="props.cards[n-1].cardDescription" 
+            :disabled="!props.cardHarvestingAllowed" 
+            class = "card" 
+            @click ="emit('harvest', n)" 
+        >
+            {{ props.cards[n-1].cardName }} 
+        </button>
     </div>
 </template>
 
@@ -26,5 +34,6 @@
     grid-row: 1/-1;
     font-size: small;
     width: 6rem;
+    text-align:center;
 }
 </style>

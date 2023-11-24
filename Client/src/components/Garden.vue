@@ -14,7 +14,7 @@ const handleHarvest = (value:number) => {
 <template>
     <div class="container1">
         <GardenSupplyComponent :cards = "props.gardenSupply.cards" :cardHarvestingAllowed ="props.gardenSupply.cardHarvestingAllowed" @harvest ="handleHarvest" ></GardenSupplyComponent>
-        There are {{gardenStock.numberOfCards}} cards in the gardenStock{{ props.gardenSupply.cardHarvestingAllowed }}
+        There are {{gardenStock.numberOfCards}} cards in the gardenStock
     </div>
 </template>
 

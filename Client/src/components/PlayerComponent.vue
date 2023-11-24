@@ -19,7 +19,7 @@ const handlePlayCard = (value:number) => {
 <template>
     <div class="player">
         <div :class= "{active: props.player.hasTurn}"> {{props.player.name}}   </div>
-        <Hand :cards = "props.player.hand.cards" :playerHasTurn ="props.player.hasTurn" @playCard = "handlePlayCard" ></Hand>
+        <Hand :cards = "props.player.hand.cards" :playerHasTurn ="props.player.hasTurn" :playerHasHarvested="props.player.harvestedCard" @playCard = "handlePlayCard" ></Hand>
         <div class = "piles">
         <DrawPile :player = "props.player"  @endTurn = "emit('endTurn')" ></DrawPile>
         <DiscardPile :player = "props.player"></DiscardPile>

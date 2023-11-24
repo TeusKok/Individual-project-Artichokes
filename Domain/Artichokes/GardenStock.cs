@@ -9,6 +9,8 @@ public class GardenStock{
         {
             Cards.Add(new Potato());
             Cards.Add(new Broccoli());
+            Cards.Add(new Carrot());
+
         }
     }
 

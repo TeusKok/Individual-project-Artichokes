@@ -2,7 +2,15 @@ namespace Artichokes.UnitTests.Crops;
 
 public class BroccoliTests{
     [Fact]
-    public void MayBePlayedShoudlReturnTrueIfThereAreThreeOrMoreArtichokesInHand()
+    public void MayBePlayedShoudlReturnTrueIfThereAreThreeArtichokesInHand()
+    {
+        Player player1 = new Player();
+        player1.Hand.RemoveRange(0,2);
+        player1.Hand.Add(new Broccoli());
+        Assert.True(player1.Hand[3].MayBePlayed(player1));
+    }
+    [Fact]
+    public void MayBePlayedShoudlReturnTrueIfThereAreMoreThanThreeArtichokesInHand()
     {
         Player player1 = new Player();
         player1.Hand.Add(new Broccoli());
