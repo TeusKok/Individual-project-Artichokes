@@ -56,7 +56,9 @@ public class Player
                 {
                     if (DiscardPile.NumberOfCards() != 0)
                     {
-                        DrawPile.AddToPile(DiscardPile.EmptyDiscardPile());
+                        DiscardPile.Shuffle();
+                        DrawPile.AddToPile(DiscardPile.GetCards());
+                        DiscardPile.EmptyDiscardPile();
                     }
                     else
                     {
@@ -89,7 +91,7 @@ public class Player
             this.HarvestedCard = false;
             this.DiscardHand();
             this.FillHand();
-            this.SharedGardenSupply.refillGardenSupply(); 
+            this.SharedGardenSupply.refillGardenSupply();
             isActivePlayer = !isActivePlayer;
             PlayerToRight.isActivePlayer = !PlayerToRight.isActivePlayer;
         }
@@ -117,7 +119,8 @@ public class Player
     {
         if (this.DrawPile.NumberOfCards() == 0 && this.DiscardPile.NumberOfCards() > 0)
         {
-            this.DrawPile.AddToPile(this.DiscardPile.getCards());
+            DiscardPile.Shuffle();
+            this.DrawPile.AddToPile(this.DiscardPile.GetCards());
             this.DiscardPile.EmptyDiscardPile();
         }
     }

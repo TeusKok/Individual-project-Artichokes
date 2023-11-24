@@ -6,7 +6,7 @@ public class DiscardPileDTO
     public CardDTO TopCard { get; set; }
     public DiscardPileDTO(DiscardPile discardPile)
     {
-        List<ICard> cards = discardPile.getCards();
+        List<ICard> cards = discardPile.GetCards();
         if (cards.Count > 0)
         {
             ICard topCard = cards[cards.Count - 1];
