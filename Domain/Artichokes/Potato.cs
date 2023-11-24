@@ -26,7 +26,6 @@ public class Potato : ICard
             if(card.GetType() != typeof(Artichoke)){
                 player.DiscardPile.Add(card);
             }
-            player.DiscardPile.Add(this);
         }
     }
 }

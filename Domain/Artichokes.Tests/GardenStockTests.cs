@@ -1,7 +1,7 @@
 namespace Artichokes.UnitTests.Garden;
 using Artichokes;
 public class GardenStockTests{
-    private int NumberOfCrops = 2;
+    private int NumberOfCrops = 3;
     [Fact]
     public void GardenStockStartsWith6CardsPerType()
     {

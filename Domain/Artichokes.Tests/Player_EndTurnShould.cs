@@ -37,4 +37,21 @@ public class Player_EndTurnShould{
 
         Assert.False(player1.HarvestedCard);   
     }
+    [Fact]
+    public void RefillHand()
+    {
+        Player player1 = new Player();
+        player1.Hand.RemoveAt(4);
+        player1.EndTurn();
+        Assert.True(player1.Hand.Count==5);
+    }
+    [Fact]
+    public void DiscardHandAndThenRefillHand()
+    {
+        Player player1 = new Player();
+        ICard potato = new Potato();
+        player1.Hand.Add(potato);
+        player1.EndTurn();
+        Assert.DoesNotContain(potato, player1.Hand);
+    }
 }

@@ -2,7 +2,7 @@
 
     
     import { Card } from '../types';
-    const props= defineProps<{cards : Card[],playerHasTurn:Boolean,}>();
+    const props= defineProps<{cards : Card[],playerHasTurn:Boolean,playerHasHarvested:Boolean}>();
     const emit = defineEmits<{
         (e: 'playCard', id: number): void
         }>()
@@ -20,7 +20,7 @@
 <template>
     <div class="container">
         
-        <button v-for="n in props.cards.length"  :disabled="!playerHasTurn||!props.cards[n-1].mayBePlayed" class = "playercard" @click ="emit('playCard', n)" >{{ props.cards[n-1].cardName }}</button>
+        <button v-for="n in props.cards.length"  :disabled="!playerHasTurn||!playerHasHarvested||!props.cards[n-1].mayBePlayed" class = "playercard" @click ="emit('playCard', n)" >{{ props.cards[n-1].cardName }}</button>
     </div>
 </template>
 

@@ -39,8 +39,9 @@ namespace Artichokes.UnitTests.PlayerTests
         {
             Player player1 = new Player();
 
-            player1.DiscardHand();
+            
             player1.EndTurn();
+            player1.Hand.RemoveAll((ICard card)=>true);
             player1.FillHand();
             
             Assert.True(player1.Hand.Count==0);
