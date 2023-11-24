@@ -1,8 +1,21 @@
 namespace Artichokes;
 
 public interface IArtichokeGame{
+    public enum GameStatus{
+        GameNotOver,
+        GameOver,
+
+    }
+    public enum Winner{
+        PlayerOne,
+        PlayerTwo,
+        PlayerThree,
+        PlayerFour,
+        NoOneYet,
+
+    }
     // players are numbered like this  1  2
-    //                                 3  4  
+    //                                 4  3  
 
     String getNameOfPlayer(int numberOfPlayer);
 
@@ -27,4 +40,7 @@ public interface IArtichokeGame{
     public void playCardFromHand(int numberOfPlayer, int numberOfCard);
 
     public Player getActivePlayer();
+    public GameStatus GetGameStatus();
+    public Winner GetWinner();
+
 }

@@ -46,6 +46,55 @@ public class Player
         }
     }
 
+    public IArtichokeGame.GameStatus GetGameStatus()
+    {
+        if (!Hand.OfType<Artichoke>().Any() && !isActivePlayer)
+        {
+            return IArtichokeGame.GameStatus.GameOver;
+        }
+        return PlayerToRight.GetGameStatus(this);
+    }
+    public IArtichokeGame.GameStatus GetGameStatus(Player player)
+    {
+        if (this == player)
+        {
+            return IArtichokeGame.GameStatus.GameNotOver;
+        }
+        else if (!Hand.OfType<Artichoke>().Any() && !isActivePlayer)
+        {
+            return IArtichokeGame.GameStatus.GameOver;
+        }
+        else return PlayerToRight.GetGameStatus(player);
+    }
+
+    public Player GetWinner()
+    {
+        if (!Hand.OfType<Artichoke>().Any())
+        {
+            return this;
+        }
+        else
+        {
+            return PlayerToRight.GetWinner(this);
+        }
+    }
+
+    public Player GetWinner(Player player)
+    {
+        if (this == player)
+        {
+            throw new InvalidOperationException("Game is not over so winner could not be found");
+        }
+        else if (!Hand.OfType<Artichoke>().Any())
+        {
+            return this;
+        }
+        else
+        {
+            return PlayerToRight.GetWinner(player);
+        }
+    }
+
     public void FillHand()
     {
         if (isActivePlayer)
