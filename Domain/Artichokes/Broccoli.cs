@@ -13,29 +13,14 @@ public class Broccoli : ICard
 
     public bool MayBePlayed(Player player)
     {
-        int count = 0;
-        for (int i = 0; i < player.Hand.Count; i++)
-        {
-            if(player.Hand[i].GetType()==typeof(Artichoke)){
-                count++;
-                if(count>=3) return true;
-            }
-            
-        }
-        return false;
+        return player.Hand.OfType<Artichoke>().Count() >= 3;
     }
 
     public void Play(Player player)
     {
         if(MayBePlayed(player)){
-            for (int i = 0; i < player.Hand.Count; i++)
-            {
-                if(player.Hand[i].GetType()==typeof(Artichoke)){
-                    player.Hand.RemoveAt(i);
-                    break;
-                }
-                
-            }
+            IEnumerable<Artichoke> artichoke = player.Hand.OfType<Artichoke>().Take(1);
+            player.Hand.RemoveAll((ICard card) => artichoke.Contains(card));
         }
     }
 }
