@@ -105,4 +105,34 @@ public class ArtichokeGame : IArtichokeGame
         }
         return player;
     }
+
+    public IArtichokeGame.Winner GetWinner()
+    {
+        try
+        {
+            Player winner = player1.GetWinner();
+            if (winner == player1)
+            {
+                return IArtichokeGame.Winner.PlayerOne;
+            }
+            else if (winner == player1.PlayerToRight)
+            {
+                return IArtichokeGame.Winner.PlayerTwo;
+            }
+            else if (winner == player1.PlayerToRight.PlayerToRight)
+            {
+                return IArtichokeGame.Winner.PlayerThree;
+            }
+            else if (winner == player1.PlayerToRight.PlayerToRight.PlayerToRight)
+            {
+                return IArtichokeGame.Winner.PlayerFour;
+            }
+            else return IArtichokeGame.Winner.NoOneYet;
+        }
+        catch (System.Exception)
+        {
+            return IArtichokeGame.Winner.NoOneYet;
+        }
+
+    }
 }

@@ -16,6 +16,7 @@ export async function endTurn (oldGame: ArtichokesGame, playerIndex:number) {
     oldGame.players = newGame.players;
     oldGame.gardenStock = newGame.gardenStock;
     oldGame.gardenSupply = newGame.gardenSupply;
+    oldGame.gameStatus = newGame.gameStatus;
     
 }
 export async function harvestCard (oldGame: ArtichokesGame, cardNumber:number){
@@ -54,4 +55,5 @@ export async function playCard (oldGame: ArtichokesGame, cardNumber:number){
     oldGame.players = newGame.players;
     oldGame.gardenStock = newGame.gardenStock;
     oldGame.gardenSupply = newGame.gardenSupply;
+    oldGame.gameStatus = newGame.gameStatus;
 }

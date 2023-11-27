@@ -46,25 +46,46 @@ public class Player
         }
     }
 
+    public Player GetWinner()
+    {
+        return GetWinner(this);
+    }
+
+    private Player GetWinner(Player player)
+    {
+        if (PlayerHasWon())
+        {
+            return this;
+        }
+        else
+        {
+            return PlayerToRight.GetWinnerIfPlayerToRightUnchecked(player);
+        }
+    }
+
+    private bool PlayerHasWon()
+    {
+        return !Hand.OfType<Artichoke>().Any() && !this.isActivePlayer;
+    }
+
+    private Player GetWinnerIfPlayerToRightUnchecked(Player player)
+    {
+        if (this != player)
+        {
+            return GetWinner(player);
+
+        }
+        else throw new InvalidOperationException("Game is not over so winner could not be found");
+    }
+
     public void FillHand()
     {
-        if (isActivePlayer)
+        if (this.isActivePlayer)
         {
-            while (Hand.Count < 5)
+            int cardsInHandAfterRefill = Math.Min(5, DrawPile.NumberOfCards() + DiscardPile.NumberOfCards());
+            while (Hand.Count < cardsInHandAfterRefill)
             {
-                if (DrawPile.NumberOfCards() == 0)
-                {
-                    if (DiscardPile.NumberOfCards() != 0)
-                    {
-                        DiscardPile.Shuffle();
-                        DrawPile.AddToPile(DiscardPile.GetCards());
-                        DiscardPile.EmptyDiscardPile();
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
+                RefillDrawPileIfNeededAndPossible();
                 Hand.Add(DrawPile.GetTopCard());
                 DrawPile.RemoveTopCard();
             }
@@ -73,7 +94,7 @@ public class Player
 
     public void DiscardHand()
     {
-        if (isActivePlayer)
+        if (this.isActivePlayer)
         {
             foreach (ICard card in Hand)
             {
@@ -86,7 +107,7 @@ public class Player
 
     public void EndTurn()
     {
-        if (isActivePlayer)
+        if (this.isActivePlayer)
         {
             this.HarvestedCard = false;
             this.DiscardHand();
@@ -105,13 +126,18 @@ public class Player
             if (card.MayBePlayed(this))
             {
                 card.Play(this);
-                if (Hand.Contains(card))
-                {
-                    DiscardPile.Add(card);
-                    Hand.Remove(card);
-                }
+                MoveCardToDiscardPileIfStillInHand(card);
             }
 
+        }
+    }
+
+    private void MoveCardToDiscardPileIfStillInHand(ICard card)
+    {
+        if (Hand.Contains(card))
+        {
+            DiscardPile.Add(card);
+            Hand.Remove(card);
         }
     }
 
