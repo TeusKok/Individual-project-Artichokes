@@ -14,10 +14,10 @@
               "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name1:"piet",
-        name2:"joop",
-        name3:"jan",
-        name4:"jaap",
+        name1:"Piet",
+        name2:"Joop",
+        name3:"Jan",
+        name4:"Jaap",
       }),
     })
 
@@ -29,7 +29,7 @@
 
 
 <template>
-  <div class = "gamecontainer">
+  <div class = "gamecontainer" v-if="!game.gameStatus.gameOver">
     <PlayerComponent :player = "game.players[0]" @endTurn = endTurn(game,0) @playCard="(value:number)=>{playCard(game,value)}" />
     <PlayerComponent :player = "game.players[1]" @endTurn = endTurn(game,1) @playCard="(value:number)=>{playCard(game,value)}"/>
     <Garden class = "wide" :gardenStock ="game.gardenStock" :gardenSupply ="game.gardenSupply" 
@@ -37,6 +37,7 @@
     <PlayerComponent :player = "game.players[3]" @endTurn = endTurn(game,3) @playCard="(value:number)=>{playCard(game,value)}"/>
     <PlayerComponent :player = "game.players[2]" @endTurn = endTurn(game,2) @playCard="(value:number)=>{playCard(game,value)}"/>
   </div>
+  <div v-if="game.gameStatus.gameOver">Game Over: {{ game.gameStatus.winner }} has won</div>
 </template>
 
 <style scoped>

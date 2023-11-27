@@ -106,11 +106,6 @@ public class ArtichokeGame : IArtichokeGame
         return player;
     }
 
-    public IArtichokeGame.GameStatus GetGameStatus()
-    {
-        return player1.GetGameStatus();
-    }
-
     public IArtichokeGame.Winner GetWinner()
     {
         try

@@ -19,14 +19,11 @@ public class Carrot : ICard
 
     public void Play(Player player)
     {
-        if (MayBePlayed(player))
+        if (this.MayBePlayed(player))
         {
-
             List<ICard> cardsToRemove = new List<ICard>();
-            IEnumerable<Carrot> carrots = player.Hand.OfType<Carrot>().Take(1);
             IEnumerable<Artichoke> artichokes = player.Hand.OfType<Artichoke>().Take(2);
-
-            player.Hand.RemoveAll((ICard card) => carrots.Contains(card));
+            player.Hand.Remove(this);
             player.Hand.RemoveAll((ICard card) => artichokes.Contains(card));
             player.EndTurn();
         }

@@ -29,6 +29,7 @@ export type ArtichokesGame = {
     players: Player[];
     gardenStock: GardenStock;
     gardenSupply: GardenSupply;
+    gameStatus: GameStatus;
     
 }
 
@@ -39,4 +40,9 @@ export type GardenStock = {
 export type GardenSupply = {
     cards: Card[];
     cardHarvestingAllowed: boolean;
+}
+
+export type GameStatus = {
+    gameOver: Boolean;
+    winner: string;
 }

@@ -18,9 +18,10 @@ public class Broccoli : ICard
 
     public void Play(Player player)
     {
-        if(MayBePlayed(player)){
+        if (MayBePlayed(player))
+        {
             IEnumerable<Artichoke> artichoke = player.Hand.OfType<Artichoke>().Take(1);
-            player.Hand.RemoveAll((ICard card) => artichoke.Contains(card));
+            player.Hand.Remove(artichoke.First());
         }
     }
 }

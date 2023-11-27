@@ -1,12 +1,9 @@
 namespace Artichokes;
 
-public interface IArtichokeGame{
-    public enum GameStatus{
-        GameNotOver,
-        GameOver,
-
-    }
-    public enum Winner{
+public interface IArtichokeGame
+{
+    public enum Winner
+    {
         PlayerOne,
         PlayerTwo,
         PlayerThree,
@@ -26,7 +23,7 @@ public interface IArtichokeGame{
     void refillHand(int numberOfPlayer);
 
     public String getNameFromCardFromHand(int numberOfPlayer, int numberOfCard);
-    
+
     public String getDescriptionFromCardFromHand(int numberOfPlayer, int numberOfCard);
 
     public int getNumberOfCardsInDrawPile(int numberOfPlayer);
@@ -40,7 +37,6 @@ public interface IArtichokeGame{
     public void playCardFromHand(int numberOfPlayer, int numberOfCard);
 
     public Player getActivePlayer();
-    public GameStatus GetGameStatus();
     public Winner GetWinner();
 
 }
