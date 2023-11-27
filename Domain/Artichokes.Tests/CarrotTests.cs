@@ -99,6 +99,6 @@ public class CarrotTests
         player1.Hand.Add(new Carrot());
         player1.Hand[5].Play(player1);
 
-        Assert.False(player1.isActivePlayer);
+        Assert.False(player1.IsActivePlayer);
     }
 }

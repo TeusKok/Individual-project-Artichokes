@@ -28,4 +28,9 @@ public class Carrot : ICard
             player.EndTurn();
         }
     }
+
+    public String AsString()
+    {
+        return "c";
+    }
 }

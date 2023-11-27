@@ -24,4 +24,9 @@ public class Broccoli : ICard
             player.Hand.Remove(artichoke.First());
         }
     }
+
+    public String AsString()
+    {
+        return "i";
+    }
 }

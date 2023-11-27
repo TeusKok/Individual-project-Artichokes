@@ -14,6 +14,18 @@ public class ArtichokeGame : IArtichokeGame
         player1 = new Player(4);
     }
 
+    public ArtichokeGame(string gameStateString)
+    {
+        string[] players = gameStateString.Split("|")[0..4];
+
+        playerNames[0] = players[0].Split("/")[0];
+        playerNames[1] = players[1].Split("/")[0];
+        playerNames[2] = players[2].Split("/")[0];
+        playerNames[3] = players[3].Split("/")[0];
+        this.player1 = new Player(gameStateString);
+    }
+
+
     public void discardHand(int numberOfPlayer)
     {
         getPlayerByNumber(numberOfPlayer).DiscardHand();
@@ -95,7 +107,7 @@ public class ArtichokeGame : IArtichokeGame
     public Player getActivePlayer()
     {
         Player player = getPlayerByNumber(1);
-        while (!player.isActivePlayer)
+        while (!player.IsActivePlayer)
         {
             player = player.PlayerToRight;
             if (player == getPlayerByNumber(1))
@@ -134,5 +146,19 @@ public class ArtichokeGame : IArtichokeGame
             return IArtichokeGame.Winner.NoOneYet;
         }
 
+    }
+
+    public string AsString()
+    {
+        string s = "";
+        for (int i = 0; i < playerNames.Length; i++)
+        {
+            Player player = getPlayerByNumber(i + 1);
+            s = s + playerNames[i] + "/" + player.AsString() + "|";
+        }
+        GardenSupply gardenSupply = player1.SharedGardenSupply;
+        s = s + gardenSupply.gardenStock.AsString() + "|" + gardenSupply.AsString();
+
+        return s;
     }
 }

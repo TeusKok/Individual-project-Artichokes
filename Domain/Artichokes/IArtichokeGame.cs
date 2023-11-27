@@ -39,4 +39,6 @@ public interface IArtichokeGame
     public Player getActivePlayer();
     public Winner GetWinner();
 
+    public string AsString();
+
 }

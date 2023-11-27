@@ -27,4 +27,9 @@ public class Artichoke : ICard
     {
         return false;
     }
+
+    public String AsString()
+    {
+        return "a";
+    }
 }
