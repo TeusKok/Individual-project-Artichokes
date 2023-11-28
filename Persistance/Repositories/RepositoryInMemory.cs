@@ -2,20 +2,29 @@
 using Artichokes;
 namespace Repositories;
 
-public class RepositoryInMemory: IRepository{
-    private Dictionary<string,IArtichokeGame> games = new Dictionary<string, IArtichokeGame>();
+public class RepositoryInMemory : IRepository
+{
+    private Dictionary<string, string> GameStrings = new Dictionary<string, string>();
 
-    public void Save(string key, IArtichokeGame game){
-        
-        if(games.ContainsKey(key)){
-            games.Remove(key);
+    public void Save(string key, string artichokeGameString)
+    {
+
+        if (GameStrings.ContainsKey(key))
+        {
+            GameStrings.Remove(key);
         }
-        games.Add(key,game);
+        GameStrings.Add(key, artichokeGameString);
 
-        
+
     }
 
-    public IArtichokeGame Get(string key){
-        return games[key];
+    public IArtichokeGame Get(string key)
+    {
+        return new ArtichokeGame(GameStrings[key]);
+    }
+
+    public bool ContainsKey(string key)
+    {
+        return GameStrings.ContainsKey(key);
     }
 }

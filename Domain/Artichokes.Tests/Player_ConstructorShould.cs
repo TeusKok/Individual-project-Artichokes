@@ -90,15 +90,15 @@ namespace Artichokes.UnitTests.PlayerTests
         public void FirstPlayerStartsAsActive()
         {
             Player player1 = new Player();
-            Assert.True(player1.isActivePlayer);
+            Assert.True(player1.IsActivePlayer);
         }
         [Fact]
         public void OtherPlayersStartAsInactive()
         {
             Player player1 = new Player();
-            Assert.False(player1.PlayerToRight.isActivePlayer);
-            Assert.False(player1.PlayerToRight.PlayerToRight.isActivePlayer);
-            Assert.False(player1.PlayerToRight.PlayerToRight.PlayerToRight.isActivePlayer);
+            Assert.False(player1.PlayerToRight.IsActivePlayer);
+            Assert.False(player1.PlayerToRight.PlayerToRight.IsActivePlayer);
+            Assert.False(player1.PlayerToRight.PlayerToRight.PlayerToRight.IsActivePlayer);
         }
     }
 }

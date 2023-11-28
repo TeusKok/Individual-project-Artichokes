@@ -1,12 +1,13 @@
 namespace Artichokes.UnitTests.PlayerTests;
-public class Player_EndTurnShould{
+public class Player_EndTurnShould
+{
     [Fact]
     public void EndTurnShouldTurnActivePlayerToInactive()
     {
         Player player1 = new Player();
         player1.EndTurn();
 
-        Assert.False(player1.isActivePlayer);
+        Assert.False(player1.IsActivePlayer);
     }
     [Fact]
     public void EndTurnShouldMakePlayerToRightOfActivePlayerActive()
@@ -14,7 +15,7 @@ public class Player_EndTurnShould{
         Player player1 = new Player();
         player1.EndTurn();
 
-        Assert.True(player1.PlayerToRight.isActivePlayer);
+        Assert.True(player1.PlayerToRight.IsActivePlayer);
     }
     [Fact]
     public void EndTurnShouldDoNothingIfPlayerIsNotActive()
@@ -23,19 +24,19 @@ public class Player_EndTurnShould{
         Player player2 = player1.PlayerToRight;
         player2.EndTurn();
 
-        Assert.True(player1.isActivePlayer);
-        Assert.False(player2.isActivePlayer);
-        Assert.False(player2.PlayerToRight.isActivePlayer);
-        Assert.False(player2.PlayerToRight.PlayerToRight.isActivePlayer);
+        Assert.True(player1.IsActivePlayer);
+        Assert.False(player2.IsActivePlayer);
+        Assert.False(player2.PlayerToRight.IsActivePlayer);
+        Assert.False(player2.PlayerToRight.PlayerToRight.IsActivePlayer);
     }
     [Fact]
     public void SetPlayerHarvestedToTrue()
     {
-        Player player1 = new Player(); 
+        Player player1 = new Player();
         player1.HarvestCardFromGardenSupply(1);
         player1.EndTurn();
 
-        Assert.False(player1.HarvestedCard);   
+        Assert.False(player1.HarvestedCard);
     }
     [Fact]
     public void RefillHand()
@@ -43,7 +44,7 @@ public class Player_EndTurnShould{
         Player player1 = new Player();
         player1.Hand.RemoveAt(4);
         player1.EndTurn();
-        Assert.True(player1.Hand.Count==5);
+        Assert.True(player1.Hand.Count == 5);
     }
     [Fact]
     public void DiscardHandAndThenRefillHand()

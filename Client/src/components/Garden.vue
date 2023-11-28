@@ -5,6 +5,7 @@ const props= defineProps<{gardenStock : GardenStock, gardenSupply : GardenSupply
 const emit = defineEmits(['harvest']) ;
 const handleHarvest = (value:number) => {
   emit('harvest',value)
+  
 };
 
 
