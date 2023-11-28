@@ -10,7 +10,7 @@ const props= defineProps<{game: ArtichokesGame, index: number}>();
 
 <template>
     <PlayerComponent :player = "props.game.players[props.index]" 
-    :gardenStockEmpty = "props.game.gardenSupply.cards.length==0" 
+    :gardenSupplyEmpty = "props.game.gardenSupply.cards.length==0" 
     @endTurn = endTurn(props.game,props.index) 
     @playCard="(value:number)=>{playCard(props.game,value)}" />
 </template>
