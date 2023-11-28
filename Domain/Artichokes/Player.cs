@@ -192,6 +192,7 @@ public class Player
         if (this.DrawPile.NumberOfCards() == 0 && this.DiscardPile.NumberOfCards() > 0)
         {
             DiscardPile.Shuffle();
+            DiscardPile.Shuffle();
             this.DrawPile.AddToPile(this.DiscardPile.GetCards());
             this.DiscardPile.EmptyDiscardPile();
         }

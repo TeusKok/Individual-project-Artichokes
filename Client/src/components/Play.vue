@@ -1,11 +1,9 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { ArtichokesGame } from '../types';
- 
-
-  import PlayerComponent from './PlayerComponent.vue';
+  import PlayerConstructor from './PlayerConstructor.vue';
   import Garden from './Garden.vue';
-  import { endTurn, harvestCard, playCard } from '../services/api';
+  import { harvestCard, newGame } from '../services/api';
 
   const response = await fetch("http://localhost:5173/api/artichokes",{
       method: 'POST',
@@ -30,14 +28,26 @@
 
 <template>
   <div class = "gamecontainer" v-if="!game.gameStatus.gameOver">
-    <PlayerComponent :player = "game.players[0]" @endTurn = endTurn(game,0) @playCard="(value:number)=>{playCard(game,value)}" />
-    <PlayerComponent :player = "game.players[1]" @endTurn = endTurn(game,1) @playCard="(value:number)=>{playCard(game,value)}"/>
-    <Garden class = "wide" :gardenStock ="game.gardenStock" :gardenSupply ="game.gardenSupply" 
-        @harvest ="(value:number)=>{harvestCard(game,value)}"></Garden>
-    <PlayerComponent :player = "game.players[3]" @endTurn = endTurn(game,3) @playCard="(value:number)=>{playCard(game,value)}"/>
-    <PlayerComponent :player = "game.players[2]" @endTurn = endTurn(game,2) @playCard="(value:number)=>{playCard(game,value)}"/>
+    <PlayerConstructor :game = "game" :index = "0" ></PlayerConstructor>
+    <PlayerConstructor :game = "game" :index = "1" ></PlayerConstructor>
+
+    <Garden class = "wide" 
+      :gardenStock ="game.gardenStock" 
+      :gardenSupply ="game.gardenSupply" 
+      @harvest ="(value:number)=>{harvestCard(game,value)}"
+    >
+    </Garden>
+
+    <PlayerConstructor :game = "game" :index = "3" ></PlayerConstructor>
+    <PlayerConstructor :game = "game" :index = "2" ></PlayerConstructor>
   </div>
-  <div v-if="game.gameStatus.gameOver">Game Over: {{ game.gameStatus.winner }} has won</div>
+  <div v-if="game.gameStatus.gameOver">
+    Game Over: {{ game.gameStatus.winner }} has won 
+    <button @click="newGame(game)">
+      Click for a new game
+    </button>
+  </div>
+  
 </template>
 
 <style scoped>

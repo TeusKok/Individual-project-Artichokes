@@ -9,5 +9,6 @@ public class ArtichokeGameTests{
         ArtichokeGame gameCopy = new ArtichokeGame(gameAsString);
         string gameCopyString =gameCopy.AsString();
         Assert.Equal(gameAsString,gameCopyString);
+        
     }
 }

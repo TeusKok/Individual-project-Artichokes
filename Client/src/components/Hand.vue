@@ -2,7 +2,7 @@
 
     
     import { Card } from '../types';
-    const props= defineProps<{cards : Card[],playerHasTurn:Boolean,playerHasHarvested:Boolean}>();
+    const props= defineProps<{cards : Card[],playerHasTurn:Boolean,playerHasHarvestedOrGardenSupplyEmpty:Boolean}>();
     const emit = defineEmits<{
         (e: 'playCard', id: number): void
         }>()
@@ -14,7 +14,7 @@
         <button v-for="n in props.cards.length"
             v-b-tooltip.hover  
             :title="props.cards[n-1].cardDescription"  
-            :disabled="!playerHasTurn||!playerHasHarvested||!props.cards[n-1].mayBePlayed" 
+            :disabled="!playerHasTurn||!playerHasHarvestedOrGardenSupplyEmpty||!props.cards[n-1].mayBePlayed" 
             class = "playercard" 
             @click ="emit('playCard', n)" 
         >

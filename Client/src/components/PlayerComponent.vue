@@ -7,7 +7,7 @@ import DiscardPile from './DiscardPile.vue';
 import DrawPile from './DrawPile.vue';
 import Hand from './Hand.vue';
  
-const props= defineProps<{player : Player}>()
+const props= defineProps<{player : Player,gardenStockEmpty: Boolean}>()
 const emit = defineEmits(['endTurn','playCard']);
 const handlePlayCard = (value:number) => {
   emit('playCard',value)
@@ -19,7 +19,7 @@ const handlePlayCard = (value:number) => {
 <template>
     <div class="player">
         <div :class= "{active: props.player.hasTurn}"> {{props.player.name}}   </div>
-        <Hand :cards = "props.player.hand.cards" :playerHasTurn ="props.player.hasTurn" :playerHasHarvested="props.player.harvestedCard" @playCard = "handlePlayCard" ></Hand>
+        <Hand :cards = "props.player.hand.cards" :playerHasTurn ="props.player.hasTurn" :playerHasHarvested="props.player.harvestedCard||gardenStockEmpty" @playCard = "handlePlayCard" ></Hand>
         <div class = "piles">
         <DrawPile :player = "props.player"  @endTurn = "emit('endTurn')" ></DrawPile>
         <DiscardPile :player = "props.player"></DiscardPile>

@@ -22,9 +22,15 @@ public class ArtichokesController : ControllerBase
     [Consumes("application/json")]
     public IActionResult Post(Dictionary<string, string> names)
     {
-        IArtichokeGame game = new ArtichokeGame(names["name1"], names["name2"], names["name3"], names["name4"]);
+        IArtichokeGame game;
+        if(_repository.ContainsKey("test")){
+            game = _repository.Get("test");
+        }
+        else{
+            game = new ArtichokeGame(names["name1"], names["name2"], names["name3"], names["name4"]);
+            _repository.Save("test", game.AsString());
+        }
         ArtichokeGameDTO gameDTO = new ArtichokeGameDTO(game);
-        _repository.Save("test", game);
         return Ok(gameDTO);
     }
     [HttpPost("endturn")]
@@ -34,6 +40,8 @@ public class ArtichokesController : ControllerBase
         IArtichokeGame game = _repository.Get("test");
         int playerNumber = game.getPlayerNumberByName(body.First().Value);
         game.endTurn(playerNumber);
+        
+        _repository.Save("test", game.AsString());
         ArtichokeGameDTO gameDTO = new ArtichokeGameDTO(game);
 
         return Ok(gameDTO);
@@ -45,6 +53,8 @@ public class ArtichokesController : ControllerBase
         IArtichokeGame game = _repository.Get("test");
         Player player = game.getActivePlayer();
         player.HarvestCardFromGardenSupply(Int32.Parse(body.First().Value));
+
+        _repository.Save("test", game.AsString());
         ArtichokeGameDTO gameDTO = new ArtichokeGameDTO(game);
 
         return Ok(gameDTO);
@@ -58,8 +68,22 @@ public class ArtichokesController : ControllerBase
         IArtichokeGame game = _repository.Get("test");
         Player player = game.getActivePlayer();
         player.PlayCardFromHandByNumber(Int32.Parse(body.First().Value));
+
+        _repository.Save("test", game.AsString());
         ArtichokeGameDTO gameDTO = new ArtichokeGameDTO(game);
 
         return Ok(gameDTO);
     }
+
+    [HttpPost("newgame")]
+    [Consumes("application/json")]
+    public IActionResult PostNewGame(Dictionary<string, string> names)
+    {
+        IArtichokeGame game = new ArtichokeGame(names["name1"], names["name2"], names["name3"], names["name4"]);
+            _repository.Save("test", game.AsString());
+        
+        ArtichokeGameDTO gameDTO = new ArtichokeGameDTO(game);
+        return Ok(gameDTO);
+    }
+
 }
