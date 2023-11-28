@@ -15,6 +15,7 @@ public class Player
     public Boolean IsActivePlayer { get; private set; }
 
     public Boolean HarvestedCard { get; private set; }
+    public Boolean PlayedCard {get; private set; }
 
     public Player() : this(4) { }
 
@@ -159,6 +160,7 @@ public class Player
             this.DiscardHand();
             this.FillHand();
             this.SharedGardenSupply.refillGardenSupply();
+            this.PlayedCard = false;
             IsActivePlayer = !IsActivePlayer;
             PlayerToRight.IsActivePlayer = !PlayerToRight.IsActivePlayer;
         }
@@ -173,6 +175,7 @@ public class Player
             {
                 card.Play(this);
                 MoveCardToDiscardPileIfStillInHand(card);
+                this.PlayedCard = true;
             }
 
         }

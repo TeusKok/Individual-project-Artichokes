@@ -13,7 +13,7 @@ public class Carrot : ICard
 
     public bool MayBePlayed(Player player)
     {
-        return player.Hand.OfType<Artichoke>().Count() >= 2 && player.Hand.Count == 6;
+        return player.Hand.OfType<Artichoke>().Count() >= 2 && !player.PlayedCard;
 
     }
 

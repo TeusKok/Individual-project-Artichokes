@@ -22,4 +22,12 @@ public class Player_PlayCardShould{
         Assert.True(player1.Hand.Count==6);
         
     }
+    [Fact]
+    public void turnPlayedCardToTrue()
+    {
+        Player player1 = new Player();
+        player1.Hand.Add(new Potato());
+        player1.PlayCardFromHandByNumber(6);
+        Assert.True(player1.PlayedCard);
+    }
 }
