@@ -55,4 +55,14 @@ public class Player_EndTurnShould
         player1.EndTurn();
         Assert.DoesNotContain(potato, player1.Hand);
     }
+    [Fact]
+    public void SetPlayedCardToFalse()
+    {
+        Player player1 = new Player();
+        player1.Hand.Add(new Potato());
+        player1.PlayCardFromHandByNumber(6);
+        player1.EndTurn();
+        Assert.False(player1.PlayedCard);
+
+    }
 }
