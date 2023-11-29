@@ -9,7 +9,9 @@ public class ArtichokeGameDTO
 
     public GameStatusDTO GameStatus { get; set; }
 
-    public ArtichokeGameDTO(IArtichokeGame game)
+    public string GameId { get; set; }
+
+    public ArtichokeGameDTO(IArtichokeGame game, string id)
     {
         for (int i = 0; i < 4; i++)
         {
@@ -19,6 +21,7 @@ public class ArtichokeGameDTO
         Boolean activePlayerHasHarvested = game.getActivePlayer().HarvestedCard;
         GardenSupply = new GardenSupplyDTO(game.getPlayerByNumber(1).SharedGardenSupply, !activePlayerHasHarvested);
         GameStatus = new GameStatusDTO(game);
+        GameId = id;
 
 
     }

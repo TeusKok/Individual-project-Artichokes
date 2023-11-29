@@ -18,7 +18,7 @@ public class RepositoryInMemory : IRepository
 
     }
 
-    public IArtichokeGame Get(string key)
+    public IArtichokeGame GetGame(string key)
     {
         return new ArtichokeGame(GameStrings[key]);
     }
@@ -26,5 +26,10 @@ public class RepositoryInMemory : IRepository
     public bool ContainsKey(string key)
     {
         return GameStrings.ContainsKey(key);
+    }
+
+    public string GetGameString(string key)
+    {
+        return GameStrings[key];
     }
 }

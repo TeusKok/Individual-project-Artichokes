@@ -30,6 +30,7 @@ export type ArtichokesGame = {
     gardenStock: GardenStock;
     gardenSupply: GardenSupply;
     gameStatus: GameStatus;
+    gameId: string;
     
 }
 
