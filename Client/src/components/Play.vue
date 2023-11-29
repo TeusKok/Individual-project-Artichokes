@@ -5,6 +5,8 @@
   import Garden from './Garden.vue';
   import { harvestCard, newGame } from '../services/api';
 
+  
+  const Id = localStorage.getItem("Id")? localStorage.getItem("Id"):"404";
   const response = await fetch("http://localhost:5173/api/artichokes",{
       method: 'POST',
       headers: {
@@ -16,11 +18,14 @@
         name2:"Joop",
         name3:"Jan",
         name4:"Jaap",
+        Id:Id,
       }),
     })
+    
 
   const result = await response.json();
   const game = ref(result as ArtichokesGame );
+  localStorage.setItem("Id",game.value.gameId);
 
 </script>
 

@@ -1,5 +1,6 @@
 import { ArtichokesGame } from "../types";
 export async function endTurn (oldGame: ArtichokesGame, playerIndex:number) {
+    const Id = localStorage.getItem("Id")? localStorage.getItem("Id"):"404";
     const response = await fetch("http://localhost:5173/api/artichokes/endturn",{
         method: 'POST',
         headers: {
@@ -8,6 +9,7 @@ export async function endTurn (oldGame: ArtichokesGame, playerIndex:number) {
         },
         body: JSON.stringify({
             playerName:oldGame.players[playerIndex].name,
+            Id:Id,
         }),
     })
     
@@ -20,7 +22,8 @@ export async function endTurn (oldGame: ArtichokesGame, playerIndex:number) {
     
 }
 export async function harvestCard (oldGame: ArtichokesGame, cardNumber:number){
-  const response = await fetch("http://localhost:5173/api/artichokes/harvest",{
+    const Id = localStorage.getItem("Id")? localStorage.getItem("Id"):"404";
+    const response = await fetch("http://localhost:5173/api/artichokes/harvest",{
         method: 'POST',
         headers: {
             Accept: "application/json",
@@ -28,6 +31,7 @@ export async function harvestCard (oldGame: ArtichokesGame, cardNumber:number){
         },
         body: JSON.stringify({
             cardToPlay:cardNumber+"",
+            Id:Id,
         }),
     })
     
@@ -37,7 +41,8 @@ export async function harvestCard (oldGame: ArtichokesGame, cardNumber:number){
     oldGame.gardenSupply = newGame.gardenSupply;
 }
 export async function playCard (oldGame: ArtichokesGame, cardNumber:number){
-  const response = await fetch("http://localhost:5173/api/artichokes/playcard",{
+    const Id = localStorage.getItem("Id")? localStorage.getItem("Id"):"404";
+    const response = await fetch("http://localhost:5173/api/artichokes/playcard",{
         method: 'POST',
         headers: {
             Accept: "application/json",
@@ -45,6 +50,7 @@ export async function playCard (oldGame: ArtichokesGame, cardNumber:number){
         },
         body: JSON.stringify({
             cardToPlay:cardNumber+"",
+            Id:Id,
         }),
     })
     
@@ -56,6 +62,7 @@ export async function playCard (oldGame: ArtichokesGame, cardNumber:number){
     oldGame.gameStatus = newGame.gameStatus;
 }
 export async function newGame(oldGame: ArtichokesGame){
+    const Id = localStorage.getItem("Id")? localStorage.getItem("Id"):"404";
     const response = await fetch("http://localhost:5173/api/artichokes/newgame",{
       method: 'POST',
       headers: {
@@ -67,6 +74,7 @@ export async function newGame(oldGame: ArtichokesGame){
         name2:"Joop",
         name3:"Jan",
         name4:"Jaap",
+        Id:Id,
       }),
     })
 

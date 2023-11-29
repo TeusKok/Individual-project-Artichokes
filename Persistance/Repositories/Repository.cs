@@ -17,7 +17,7 @@ public class Repository : IRepository
 
     }
 
-    public IArtichokeGame Get(string key)
+    public IArtichokeGame GetGame(string key)
     {
         var filter = Builders<GameState>.Filter.Eq(r => r.key, key);
         var collection = client.GetDatabase("ArtichokesGames").GetCollection<GameState>("GameStateStrings");
@@ -44,9 +44,15 @@ public class Repository : IRepository
         }
         else
         {
-            collection.InsertOne(new GameState() { key = key, Game = artichokeGameString });
+            collection.InsertOne(new GameState(key, artichokeGameString));
         }
+    }
 
+    public string GetGameString(string key)
+    {
+        var collection = client.GetDatabase("ArtichokesGames").GetCollection<GameState>("GameStateStrings");
+        var filter = Builders<GameState>.Filter.Eq(r => r.key, key);
+        return collection.Find(filter).First().Game;
     }
 }
 
@@ -55,5 +61,10 @@ public class GameState
     public ObjectId Id { get; set; }
     public string key { get; set; }
     public string Game { get; set; }
+    public GameState(string key, string Game)
+    {
+        this.key = key;
+        this.Game = Game;
+    }
 
 }

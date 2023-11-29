@@ -12,6 +12,8 @@ namespace API.Controllers;
 public class ArtichokesController : ControllerBase
 {
     private IRepository _repository;
+    private const string SessionGameState = "_GameState";
+    private const string SessionClientID = "_ClientId";
 
 
     public ArtichokesController(IRepository repository)
@@ -20,70 +22,99 @@ public class ArtichokesController : ControllerBase
     }
     [HttpPost()]
     [Consumes("application/json")]
-    public IActionResult Post(Dictionary<string, string> names)
+    public IActionResult Post(Dictionary<string, string> body)
     {
+        string Id;
         IArtichokeGame game;
-        if(_repository.ContainsKey("test")){
-            game = _repository.Get("test");
+        if ((!body["Id"].Equals("404")) && _repository.ContainsKey(body["Id"]))
+        {
+            Id = body["Id"];
+            HttpContext.Session.SetString(SessionClientID, Id);
+            game = _repository.GetGame(Id);
         }
-        else{
-            game = new ArtichokeGame(names["name1"], names["name2"], names["name3"], names["name4"]);
-            _repository.Save("test", game.AsString());
+        else
+        {
+            Id = Guid.NewGuid().ToString();
+            HttpContext.Session.SetString(SessionClientID, Id);
+            game = new ArtichokeGame(body["name1"], body["name2"], body["name3"], body["name4"]);
         }
-        ArtichokeGameDTO gameDTO = new ArtichokeGameDTO(game);
-        return Ok(gameDTO);
+
+        return SaveGameAndConvertToDTO(Id, game);
     }
     [HttpPost("endturn")]
     [Consumes("application/json")]
     public IActionResult PostEndTurn(Dictionary<string, string> body)
     {
-        IArtichokeGame game = _repository.Get("test");
+        IArtichokeGame game;
+        string Id = body["Id"];
+        game = GetGameFromSessionOrRepository(Id);
+
         int playerNumber = game.getPlayerNumberByName(body.First().Value);
         game.endTurn(playerNumber);
-        
-        _repository.Save("test", game.AsString());
-        ArtichokeGameDTO gameDTO = new ArtichokeGameDTO(game);
 
-        return Ok(gameDTO);
+        return SaveGameAndConvertToDTO(Id, game);
     }
     [HttpPost("harvest")]
     [Consumes("application/json")]
     public IActionResult PostHarvest(Dictionary<string, string> body)
     {
-        IArtichokeGame game = _repository.Get("test");
+        IArtichokeGame game;
+        string Id = body["Id"];
+        game = GetGameFromSessionOrRepository(Id);
+
         Player player = game.getActivePlayer();
         player.HarvestCardFromGardenSupply(Int32.Parse(body.First().Value));
 
-        _repository.Save("test", game.AsString());
-        ArtichokeGameDTO gameDTO = new ArtichokeGameDTO(game);
-
-        return Ok(gameDTO);
-
+        return SaveGameAndConvertToDTO(Id, game);
     }
+
+
 
     [HttpPost("playcard")]
     [Consumes("application/json")]
     public IActionResult PostPlayCard(Dictionary<string, string> body)
     {
-        IArtichokeGame game = _repository.Get("test");
+        IArtichokeGame game;
+        string Id = body["Id"];
+        game = GetGameFromSessionOrRepository(Id);
+
         Player player = game.getActivePlayer();
         player.PlayCardFromHandByNumber(Int32.Parse(body.First().Value));
 
-        _repository.Save("test", game.AsString());
-        ArtichokeGameDTO gameDTO = new ArtichokeGameDTO(game);
-
-        return Ok(gameDTO);
+        return SaveGameAndConvertToDTO(Id, game);
     }
 
     [HttpPost("newgame")]
     [Consumes("application/json")]
-    public IActionResult PostNewGame(Dictionary<string, string> names)
+    public IActionResult PostNewGame(Dictionary<string, string> body)
     {
-        IArtichokeGame game = new ArtichokeGame(names["name1"], names["name2"], names["name3"], names["name4"]);
-            _repository.Save("test", game.AsString());
-        
-        ArtichokeGameDTO gameDTO = new ArtichokeGameDTO(game);
-        return Ok(gameDTO);
+        string Id = body["Id"];
+        IArtichokeGame game = new ArtichokeGame(body["name1"], body["name2"], body["name3"], body["name4"]);
+        return SaveGameAndConvertToDTO(Id, game);
     }
 
+    private IArtichokeGame GetGameFromSessionOrRepository(string Id)
+    {
+        IArtichokeGame game;
+        if (HttpContext.Session.Get(SessionGameState) == null)
+        {
+            game = _repository.GetGame(Id);
+        }
+        else
+        {
+            game = new ArtichokeGame(HttpContext.Session.GetString(SessionGameState) ?? "");
+        }
+        return game;
+    }
+
+    private IActionResult SaveGameAndConvertToDTO(string Id, IArtichokeGame game)
+    {
+        string gameString = game.AsString();
+
+        HttpContext.Session.SetString(SessionGameState, gameString);
+        _repository.Save(Id, gameString);
+
+        ArtichokeGameDTO gameDTO = new ArtichokeGameDTO(game, Id);
+        return Ok(gameDTO);
+    }
 }
