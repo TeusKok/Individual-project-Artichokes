@@ -6,9 +6,9 @@ public class ArtichokeGame : IArtichokeGame
 
     public ArtichokeGame(string name1, string name2, string name3, string name4)
     {
-        string[] playerNames = new string[4]{name1,name2,name3,name4};
-        
-        player1 = new Player(4,playerNames);
+        string[] playerNames = new string[4] { name1, name2, name3, name4 };
+
+        player1 = new Player(4, playerNames);
     }
 
     public ArtichokeGame(string gameStateString)
@@ -73,17 +73,17 @@ public class ArtichokeGame : IArtichokeGame
 
     public int getPlayerNumberByName(string name)
     {
-        Player player =player1;
+        Player player = player1;
         for (int i = 0; i < 4; i++)
         {
             if (player.Name.Equals(name)) return i + 1;
-            player=player.PlayerToRight;
-            
+            player = player.PlayerToRight;
+
         }
         return 0;
     }
 
-    public void endTurn(int numberOfPlayer)
+    public void endTurnOfPlayer(int numberOfPlayer)
     {
         getPlayerByNumber(numberOfPlayer).EndTurn();
     }
@@ -102,11 +102,12 @@ public class ArtichokeGame : IArtichokeGame
 
     public Player getActivePlayer()
     {
-        Player player = getPlayerByNumber(1);
+        Player player1 = getPlayerByNumber(1);
+        Player player = player1;
         while (!player.IsActivePlayer)
         {
             player = player.PlayerToRight;
-            if (player == getPlayerByNumber(1))
+            if (player == player1)
             {
                 throw new Exception("There is no active player");
             }

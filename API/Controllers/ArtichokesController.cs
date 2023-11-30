@@ -51,7 +51,7 @@ public class ArtichokesController : ControllerBase
         game = GetGameFromSessionOrRepository(Id);
 
         int playerNumber = game.getPlayerNumberByName(body.First().Value);
-        game.endTurn(playerNumber);
+        game.endTurnOfPlayer(playerNumber);
 
         return SaveGameAndConvertToDTO(Id, game);
     }
@@ -120,10 +120,11 @@ public class ArtichokesController : ControllerBase
     }
 }
 
-public class PlayCardBody{
-    public int cardToPlay {get; set;}
-    
-    public string Id {get; set;}
-    public string[] selectedOptions {get; set;}
+public class PlayCardBody
+{
+    public int cardToPlay { get; set; }
+
+    public string Id { get; set; }
+    public string[] selectedOptions { get; set; }
 
 }
