@@ -7,7 +7,7 @@ namespace Artichokes.UnitTests.PlayerTests
         [Fact]
         public void PlayerConstructorConstructsADifferentPlayerToTheRight()
         {
-            Player player1 = new Player(4);
+            Player player1 = new Player(4, new string[4] { "Piet", "Jan", "Joop", "Jaap" });
             Player player2 = player1.PlayerToRight;
             bool result = player1 != player2;
 
@@ -99,6 +99,28 @@ namespace Artichokes.UnitTests.PlayerTests
             Assert.False(player1.PlayerToRight.IsActivePlayer);
             Assert.False(player1.PlayerToRight.PlayerToRight.IsActivePlayer);
             Assert.False(player1.PlayerToRight.PlayerToRight.PlayerToRight.IsActivePlayer);
+        }
+        [Fact]
+        public void CreatePlayersWithDefaultNamesIfNoneWereSupplied()
+        {
+            Player player1 = new Player();
+
+            Assert.True(player1.Name.Equals("Piet"));
+            Assert.True(player1.PlayerToRight.Name.Equals("Joop"));
+            Assert.True(player1.PlayerToRight.PlayerToRight.Name.Equals("Jan"));
+            Assert.True(player1.PlayerToRight.PlayerToRight.PlayerToRight.Name.Equals("Jaap"));
+        }
+
+        [Fact]
+        public void CreatePlayerWithNamesThatWereSupplied()
+        {
+            string[] playerNames = new string[4]{ "Jim","Paul","David","Schmebulock"};
+            Player player1 = new Player(4,playerNames);
+
+            Assert.True(player1.Name.Equals(playerNames[0]));
+            Assert.True(player1.PlayerToRight.Name.Equals(playerNames[1]));
+            Assert.True(player1.PlayerToRight.PlayerToRight.Name.Equals(playerNames[2]));
+            Assert.True(player1.PlayerToRight.PlayerToRight.PlayerToRight.Name.Equals(playerNames[3]));
         }
     }
 }
