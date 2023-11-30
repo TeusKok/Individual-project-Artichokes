@@ -3,25 +3,18 @@ namespace Artichokes;
 public class ArtichokeGame : IArtichokeGame
 {
     Player player1;
-    String[] playerNames = new string[4];
 
     public ArtichokeGame(string name1, string name2, string name3, string name4)
     {
-        playerNames[0] = name1;
-        playerNames[1] = name2;
-        playerNames[2] = name3;
-        playerNames[3] = name4;
-        player1 = new Player(4);
+        string[] playerNames = new string[4]{name1,name2,name3,name4};
+        
+        player1 = new Player(4,playerNames);
     }
 
     public ArtichokeGame(string gameStateString)
     {
         string[] players = gameStateString.Split("|")[0..4];
 
-        playerNames[0] = players[0].Split("/")[0];
-        playerNames[1] = players[1].Split("/")[0];
-        playerNames[2] = players[2].Split("/")[0];
-        playerNames[3] = players[3].Split("/")[0];
         this.player1 = new Player(gameStateString);
     }
 
@@ -43,7 +36,7 @@ public class ArtichokeGame : IArtichokeGame
 
     public string getNameOfPlayer(int numberOfPlayer)
     {
-        return playerNames[numberOfPlayer - 1];
+        return getPlayerByNumber(numberOfPlayer).Name;
     }
 
     public int getNumberOfCardsInDiscardPile(int numberOfPlayer)
@@ -74,15 +67,18 @@ public class ArtichokeGame : IArtichokeGame
             case 2: return player1.PlayerToRight;
             case 3: return player1.PlayerToRight.PlayerToRight;
             case 4: return player1.PlayerToRight.PlayerToRight.PlayerToRight;
-            default: throw new InvalidOperationException("invalid player number, pick 1, 2, 3, or 4");
+            default: throw new InvalidOperationException(numberOfPlayer + "invalid player number, pick 1, 2, 3, or 4");
         }
     }
 
     public int getPlayerNumberByName(string name)
     {
+        Player player =player1;
         for (int i = 0; i < 4; i++)
         {
-            if (playerNames[i].Equals(name)) return i + 1;
+            if (player.Name.Equals(name)) return i + 1;
+            player=player.PlayerToRight;
+            
         }
         return 0;
     }
@@ -92,10 +88,10 @@ public class ArtichokeGame : IArtichokeGame
         getPlayerByNumber(numberOfPlayer).EndTurn();
     }
 
-    public void playCardFromHand(int numberOfPlayer, int numberOfCard)
+    public void playCardFromHand(int numberOfPlayer, int numberOfCard, string[] selectedOptions)
     {
         Player player = getPlayerByNumber(numberOfPlayer);
-        player.PlayCardFromHandByNumber(numberOfCard);
+        player.PlayCardFromHandByNumber(numberOfCard, selectedOptions);
     }
 
     public void HarvestCardFromGardenSupply(int numberOfPlayer, int numberOfCard)
@@ -151,10 +147,10 @@ public class ArtichokeGame : IArtichokeGame
     public string AsString()
     {
         string s = "";
-        for (int i = 0; i < playerNames.Length; i++)
+        for (int i = 0; i < 4; i++)
         {
             Player player = getPlayerByNumber(i + 1);
-            s = s + playerNames[i] + "/" + player.AsString() + "|";
+            s = s + player.AsString() + "|";
         }
         GardenSupply gardenSupply = player1.SharedGardenSupply;
         s = s + gardenSupply.gardenStock.AsString() + "|" + gardenSupply.AsString();

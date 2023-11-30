@@ -17,7 +17,12 @@ public class Potato : ICard
         return player.DiscardPile.NumberOfCards() > 0 || player.DrawPile.NumberOfCards() > 0;
     }
 
-    public void Play(Player player)
+    public String AsString()
+    {
+        return "P";
+    }
+
+    public void Play(Player player, string[] selectedOptions)
     {
         player.RefillDrawPileIfNeededAndPossible();
         if (player.DrawPile.NumberOfCards() > 0)
@@ -31,8 +36,8 @@ public class Potato : ICard
         }
     }
 
-    public String AsString()
+    public string[] GetOptions(Player player)
     {
-        return "P";
+        return Array.Empty<string>();
     }
 }

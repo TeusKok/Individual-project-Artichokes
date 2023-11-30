@@ -4,6 +4,7 @@ using DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
+using System.Diagnostics.CodeAnalysis;
 
 namespace API.Controllers;
 
@@ -72,14 +73,14 @@ public class ArtichokesController : ControllerBase
 
     [HttpPost("playcard")]
     [Consumes("application/json")]
-    public IActionResult PostPlayCard(Dictionary<string, string> body)
+    public IActionResult PostPlayCard(PlayCardBody body)
     {
         IArtichokeGame game;
-        string Id = body["Id"];
+        string Id = body.Id;
         game = GetGameFromSessionOrRepository(Id);
 
         Player player = game.getActivePlayer();
-        player.PlayCardFromHandByNumber(Int32.Parse(body.First().Value));
+        player.PlayCardFromHandByNumber(body.cardToPlay, body.selectedOptions);
 
         return SaveGameAndConvertToDTO(Id, game);
     }
@@ -117,4 +118,12 @@ public class ArtichokesController : ControllerBase
         ArtichokeGameDTO gameDTO = new ArtichokeGameDTO(game, Id);
         return Ok(gameDTO);
     }
+}
+
+public class PlayCardBody{
+    public int cardToPlay {get; set;}
+    
+    public string Id {get; set;}
+    public string[] selectedOptions {get; set;}
+
 }

@@ -1,17 +1,40 @@
 <script setup lang="ts">
 
     
-import { Player } from '../types';
-
+import { Player, CardNumberWithAnswer } from '../types';
+import { ref } from 'vue'
 import DiscardPile from './DiscardPile.vue';
 import DrawPile from './DrawPile.vue';
 import Hand from './Hand.vue';
+import Choice from './Choice.vue';
  
 const props= defineProps<{player : Player,gardenSupplyEmpty: Boolean}>()
 const emit = defineEmits(['endTurn','playCard']);
+const choiceNeeded = ref(false);
+const cardNumber = ref(1);
 const handlePlayCard = (value:number) => {
-  emit('playCard',value)
+    if(props.player.hand.cards[value-1].options.length>0){
+        choiceNeeded.value = true;
+        cardNumber.value = value;
+    }
+    else{
+        const response: CardNumberWithAnswer ={
+        cardNumber: value,
+        answer: ""
+        };
+        emit('playCard',response);
+    }
+  
 };
+
+const handlePlayCardWithOptions =(choice:string) =>{
+    choiceNeeded.value = false;
+    const response: CardNumberWithAnswer ={
+        cardNumber: cardNumber.value,
+        answer: choice
+    };
+    emit('playCard', response);
+}
 
 </script>
 
@@ -19,10 +42,19 @@ const handlePlayCard = (value:number) => {
 <template>
     <div class="player">
         <div :class= "{active: props.player.hasTurn}"> {{props.player.name}}   </div>
-        <Hand :cards = "props.player.hand.cards" :playerHasTurn ="props.player.hasTurn" :playerHasHarvestedOrGardenSupplyEmpty="props.player.harvestedCard||props.gardenSupplyEmpty" @playCard = "handlePlayCard" ></Hand>
+        <Hand :cards = "props.player.hand.cards"
+            v-if ="!choiceNeeded" 
+            :playerHasTurn ="props.player.hasTurn" 
+            :playerHasHarvestedOrGardenSupplyEmpty="props.player.harvestedCard||props.gardenSupplyEmpty" 
+            @playCard = "handlePlayCard" 
+        />
+        <Choice v-if ="choiceNeeded" 
+            :card = "props.player.hand.cards[cardNumber-1]"
+            @choice ="handlePlayCardWithOptions"
+        />
         <div class = "piles">
-        <DrawPile :player = "props.player"  @endTurn = "emit('endTurn')" ></DrawPile>
-        <DiscardPile :player = "props.player"></DiscardPile>
+            <DrawPile :player = "props.player"  @endTurn = "emit('endTurn')" />
+            <DiscardPile :player = "props.player"/>
         </div>
     </div>
 </template>

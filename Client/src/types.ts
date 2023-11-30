@@ -2,6 +2,7 @@ export type Card = {
     cardName: string;
     cardDescription: string;
     mayBePlayed: boolean;
+    options: Option[];
 }
 
 export type Player = {
@@ -47,3 +48,15 @@ export type GameStatus = {
     gameOver: Boolean;
     winner: string;
 }
+
+export type Option = {
+    question: string;
+    answers: string[];
+}
+
+export type CardNumberWithAnswer = {
+    cardNumber: number;
+    answer: string;
+}
+
+

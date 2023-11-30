@@ -17,9 +17,11 @@ public class Player
     public Boolean HarvestedCard { get; private set; }
     public Boolean PlayedCard {get; private set; }
 
-    public Player() : this(4) { }
+    public string Name {get; private set;}
 
-    public Player(int numberOfPlayers)
+    public Player() : this(4,new string[4]{ "Piet","Jan","Joop","Jaap"}) {}
+
+    public Player(int numberOfPlayers, string[] playerNames)
     {
         if (numberOfPlayers < 2 || numberOfPlayers > 4)
         {
@@ -29,21 +31,24 @@ public class Player
         this.IsActivePlayer = true;
         this.DrawPile = new DrawPile();
         this.DiscardPile = new DiscardPile();
+        this.Name = playerNames[0];
         FillHand();
-        this.PlayerToRight = new Player(this, 2, numberOfPlayers, SharedGardenSupply);
+        this.PlayerToRight = new Player(this, 2, numberOfPlayers, SharedGardenSupply,playerNames[1..4]);
     }
 
-    private Player(Player firstPlayer, int count, int numberOfPlayers, GardenSupply gardenSupply)
+    private Player(Player firstPlayer, int count, int numberOfPlayers, GardenSupply gardenSupply, string[] playerNames)
     {
         SharedGardenSupply = gardenSupply;
         this.IsActivePlayer = true;
         this.DrawPile = new DrawPile();
         this.DiscardPile = new DiscardPile();
+        this.Name = playerNames[0];
+        int numberOfPlayersLeft = playerNames.Length;
         FillHand();
         this.IsActivePlayer = false;
         if (count < numberOfPlayers)
         {
-            this.PlayerToRight = new Player(firstPlayer, count + 1, numberOfPlayers, gardenSupply);
+            this.PlayerToRight = new Player(firstPlayer, count + 1, numberOfPlayers, gardenSupply,playerNames[1..numberOfPlayersLeft]);
         }
         else
         {
@@ -80,6 +85,7 @@ public class Player
 
     private void SetObjectVariablesBasedOnPlayerStrings(string[] playerStrings)
     {
+        this.Name = playerStrings[0];
         char[] handChars = playerStrings[1].ToCharArray();
         foreach (char character in handChars)
         {
@@ -122,7 +128,7 @@ public class Player
             return GetWinner(player);
 
         }
-        else throw new InvalidOperationException("Game is not over so winner could not be found");
+        else throw new InvalidOperationException("Game is not over, so winner could not be found");
     }
 
     public void FillHand()
@@ -166,14 +172,14 @@ public class Player
         }
     }
 
-    public void PlayCardFromHandByNumber(int numberOfCard)
+    public void PlayCardFromHandByNumber(int numberOfCard, string[] selectedOptions)
     {
         if (numberOfCard > 0 && numberOfCard <= Hand.Count && IsActivePlayer)
         {
             ICard card = Hand[numberOfCard - 1];
             if (card.MayBePlayed(this))
             {
-                card.Play(this);
+                card.Play(this,selectedOptions);
                 MoveCardToDiscardPileIfStillInHand(card);
                 this.PlayedCard = true;
             }
@@ -212,9 +218,26 @@ public class Player
 
     }
 
+    public Player GetPlayerByName(string name){
+        if(this.Name.Equals(name)){
+            return this;
+        }
+        else{
+            return this.PlayerToRight.GetPlayerByName(name,this);
+        }
+    }
+    public Player GetPlayerByName(string name, Player player){
+        if(this.Name.Equals(name)||this.Equals(player)){
+            return this;
+        }
+        else{
+            return this.PlayerToRight.GetPlayerByName(name,player);
+        }
+    }
+
     public string AsString()
     {
-        string s = "";
+        string s = Name+"/";
         if (Hand.Count > 0)
         {
             foreach (ICard card in Hand)
