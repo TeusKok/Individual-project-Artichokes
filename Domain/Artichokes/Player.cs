@@ -1,5 +1,4 @@
-using System.Data;
-using System.Runtime.InteropServices.Marshalling;
+
 
 namespace Artichokes;
 
@@ -8,18 +7,23 @@ public class Player
     public GardenSupply SharedGardenSupply { get; private set; }
 
     public List<ICard> Hand { get; private set; } = new List<ICard>();
-    public DrawPile DrawPile { get; private set; }
-    public DiscardPile DiscardPile { get; private set; }
+    public DrawPile DrawPile { get; private set; } = null!;
+    public DiscardPile DiscardPile { get; private set; } = null!;
     public Player PlayerToRight { get; private set; }
 
     public Boolean IsActivePlayer { get; private set; }
 
     public Boolean HarvestedCard { get; private set; }
-    public Boolean PlayedCard {get; private set; }
+    public Boolean PlayedCard { get; private set; }
 
-    public Player() : this(4) { }
+    public string Name { get; private set; } = null!;
 
-    public Player(int numberOfPlayers)
+    public Player() : this(4, new string[4] { "Piet", "Joop", "Jan", "Jaap" })
+    {
+
+    }
+
+    public Player(int numberOfPlayers, string[] playerNames)
     {
         if (numberOfPlayers < 2 || numberOfPlayers > 4)
         {
@@ -29,21 +33,24 @@ public class Player
         this.IsActivePlayer = true;
         this.DrawPile = new DrawPile();
         this.DiscardPile = new DiscardPile();
+        this.Name = playerNames[0];
         FillHand();
-        this.PlayerToRight = new Player(this, 2, numberOfPlayers, SharedGardenSupply);
+        this.PlayerToRight = new Player(this, 2, numberOfPlayers, SharedGardenSupply, playerNames[1..4]);
     }
 
-    private Player(Player firstPlayer, int count, int numberOfPlayers, GardenSupply gardenSupply)
+    private Player(Player firstPlayer, int count, int numberOfPlayers, GardenSupply gardenSupply, string[] playerNames)
     {
         SharedGardenSupply = gardenSupply;
         this.IsActivePlayer = true;
         this.DrawPile = new DrawPile();
         this.DiscardPile = new DiscardPile();
+        this.Name = playerNames[0];
+        int numberOfPlayersLeft = playerNames.Length;
         FillHand();
         this.IsActivePlayer = false;
         if (count < numberOfPlayers)
         {
-            this.PlayerToRight = new Player(firstPlayer, count + 1, numberOfPlayers, gardenSupply);
+            this.PlayerToRight = new Player(firstPlayer, count + 1, numberOfPlayers, gardenSupply, playerNames[1..numberOfPlayersLeft]);
         }
         else
         {
@@ -57,34 +64,39 @@ public class Player
         string[] playerOneStrings = players[0].Split("/");
 
         this.SharedGardenSupply = new GardenSupply(gameStateString.Split("|")[4..6]);
+
         SetObjectVariablesBasedOnPlayerStrings(playerOneStrings);
 
         this.PlayerToRight = new Player(players[1..4], this.SharedGardenSupply, this);
 
     }
 
-    
+
 
     private Player(string[] stringsOfPlayers, GardenSupply gardenSupply, Player firstPlayer)
     {
         int numberOfPlayersLeft = stringsOfPlayers.Length;
         this.SharedGardenSupply = gardenSupply;
         SetObjectVariablesBasedOnPlayerStrings(stringsOfPlayers[0].Split("/"));
-        if(numberOfPlayersLeft>1){
+        if (numberOfPlayersLeft > 1)
+        {
             this.PlayerToRight = new Player(stringsOfPlayers[1..numberOfPlayersLeft], this.SharedGardenSupply, firstPlayer);
         }
-        else{
+        else
+        {
             this.PlayerToRight = firstPlayer;
         }
     }
 
     private void SetObjectVariablesBasedOnPlayerStrings(string[] playerStrings)
     {
+        this.Name = playerStrings[0];
         char[] handChars = playerStrings[1].ToCharArray();
         foreach (char character in handChars)
         {
-           if(!character.Equals('0')){
-            Hand.Add(Utilities.CardFromCharacter(character));
+            if (!character.Equals('0'))
+            {
+                Hand.Add(Utilities.CardFromCharacter(character));
             }
         }
         DrawPile = new DrawPile(playerStrings[2]);
@@ -122,7 +134,7 @@ public class Player
             return GetWinner(player);
 
         }
-        else throw new InvalidOperationException("Game is not over so winner could not be found");
+        else throw new InvalidOperationException("Game is not over, so winner could not be found");
     }
 
     public void FillHand()
@@ -166,14 +178,14 @@ public class Player
         }
     }
 
-    public void PlayCardFromHandByNumber(int numberOfCard)
+    public void PlayCardFromHandByNumber(int numberOfCard, string[] selectedOptions)
     {
         if (numberOfCard > 0 && numberOfCard <= Hand.Count && IsActivePlayer)
         {
             ICard card = Hand[numberOfCard - 1];
             if (card.MayBePlayed(this))
             {
-                card.Play(this);
+                card.Play(this, selectedOptions);
                 MoveCardToDiscardPileIfStillInHand(card);
                 this.PlayedCard = true;
             }
@@ -212,9 +224,32 @@ public class Player
 
     }
 
+    public Player GetPlayerByName(string name)
+    {
+        if (this.Name.Equals(name))
+        {
+            return this;
+        }
+        else
+        {
+            return this.PlayerToRight.GetPlayerByName(name, this);
+        }
+    }
+    public Player GetPlayerByName(string name, Player player)
+    {
+        if (this.Name.Equals(name) || this.Equals(player))
+        {
+            return this;
+        }
+        else
+        {
+            return this.PlayerToRight.GetPlayerByName(name, player);
+        }
+    }
+
     public string AsString()
     {
-        string s = "";
+        string s = Name + "/";
         if (Hand.Count > 0)
         {
             foreach (ICard card in Hand)

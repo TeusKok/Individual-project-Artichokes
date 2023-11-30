@@ -32,4 +32,14 @@ public class Artichoke : ICard
     {
         return "a";
     }
+
+    public void Play(Player player, string[] selectedOptions)
+    {
+        throw new NotImplementedException();
+    }
+
+    public string[] GetOptions(Player player)
+    {
+        return Array.Empty<string>();
+    }
 }

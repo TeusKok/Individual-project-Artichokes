@@ -15,6 +15,7 @@ public class DiscardPileDTO
                 CardName = topCard.GetCardName(),
                 CardDescription = topCard.GetCardDescription(),
                 MayBePlayed = false,
+                Options = Array.Empty<OptionDTO>(),
             };
         }
         else
@@ -24,6 +25,7 @@ public class DiscardPileDTO
                 CardName = "Empty",
                 CardDescription = "",
                 MayBePlayed = false,
+                Options = Array.Empty<OptionDTO>(),
             };
         }
     }

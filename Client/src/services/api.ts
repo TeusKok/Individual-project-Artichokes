@@ -40,7 +40,7 @@ export async function harvestCard (oldGame: ArtichokesGame, cardNumber:number){
     oldGame.players = newGame.players;
     oldGame.gardenSupply = newGame.gardenSupply;
 }
-export async function playCard (oldGame: ArtichokesGame, cardNumber:number){
+export async function playCard (oldGame: ArtichokesGame, cardNumber:number, selectedOption:string){
     const Id = localStorage.getItem("Id")? localStorage.getItem("Id"):"404";
     const response = await fetch("http://localhost:5173/api/artichokes/playcard",{
         method: 'POST',
@@ -51,6 +51,7 @@ export async function playCard (oldGame: ArtichokesGame, cardNumber:number){
         body: JSON.stringify({
             cardToPlay:cardNumber+"",
             Id:Id,
+            selectedOptions:[selectedOption],
         }),
     })
     

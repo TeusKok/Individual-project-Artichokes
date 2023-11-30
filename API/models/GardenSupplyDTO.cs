@@ -16,6 +16,7 @@ public class GardenSupplyDTO
                 CardName = card.GetCardName(),
                 CardDescription = card.GetCardDescription(),
                 MayBePlayed =false,
+                Options = Array.Empty<OptionDTO>(),
             };
         }
     }

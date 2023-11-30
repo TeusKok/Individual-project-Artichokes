@@ -17,7 +17,17 @@ public class Carrot : ICard
 
     }
 
-    public void Play(Player player)
+    public String AsString()
+    {
+        return "c";
+    }
+
+    public string[] GetOptions(Player player)
+    {
+        return Array.Empty<string>();
+    }
+
+    public void Play(Player player, string[] selectedOptions)
     {
         if (this.MayBePlayed(player))
         {
@@ -27,10 +37,5 @@ public class Carrot : ICard
             player.Hand.RemoveAll((ICard card) => artichokes.Contains(card));
             player.EndTurn();
         }
-    }
-
-    public String AsString()
-    {
-        return "c";
     }
 }

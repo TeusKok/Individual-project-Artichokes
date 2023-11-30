@@ -3,9 +3,12 @@
     
     import { Card } from '../types';
     const props= defineProps<{cards : Card[],playerHasTurn:Boolean,playerHasHarvestedOrGardenSupplyEmpty:Boolean}>();
-    const emit = defineEmits<{
-        (e: 'playCard', id: number): void
-        }>()
+    
+    const emit = defineEmits(['playCard','showOptions']);
+    const handlePlayCard = (value:number) => {
+            emit('playCard',value)
+        
+    };
 </script>
 
 <template>
@@ -16,7 +19,7 @@
             :title="props.cards[n-1].cardDescription"  
             :disabled="!playerHasTurn||!playerHasHarvestedOrGardenSupplyEmpty||!props.cards[n-1].mayBePlayed" 
             class = "playercard" 
-            @click ="emit('playCard', n)" 
+            @click ="handlePlayCard(n)" 
         >
             {{ props.cards[n-1].cardName }}
         </button>

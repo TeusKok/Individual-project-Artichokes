@@ -60,7 +60,7 @@ public class Player_EndTurnShould
     {
         Player player1 = new Player();
         player1.Hand.Add(new Potato());
-        player1.PlayCardFromHandByNumber(6);
+        player1.PlayCardFromHandByNumber(6,Array.Empty<string>());
         player1.EndTurn();
         Assert.False(player1.PlayedCard);
 

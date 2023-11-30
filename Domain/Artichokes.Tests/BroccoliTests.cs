@@ -30,7 +30,7 @@ public class BroccoliTests{
     {
         Player player1 = new Player();
         player1.Hand.Add(new Broccoli());
-        player1.Hand[5].Play(player1);
+        player1.Hand[5].Play(player1,Array.Empty<string>());
         Assert.True(player1.Hand.Count == 5);
         Assert.True(player1.Hand[4].GetType()==typeof(Broccoli));
     }

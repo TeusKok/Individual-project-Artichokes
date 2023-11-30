@@ -24,7 +24,7 @@ public enum Crops
 public interface ICard
 {
 
-    void Play(Player player);
+    void Play(Player player, String[] selectedOptions);
 
     String GetCardName();
 
@@ -33,6 +33,8 @@ public interface ICard
     Boolean MayBePlayed(Player player);
 
     String AsString();
+
+    String[] GetOptions(Player player);
 
 
 

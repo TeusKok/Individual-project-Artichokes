@@ -8,6 +8,7 @@ public class Utilities{
             'c' => new Carrot(),
             'P' => new Potato(),
             'i' => new Broccoli(),
+            'o' => new Onion(),
             _ => throw new InvalidOperationException(character + " is not a known character"),
         };
     }
