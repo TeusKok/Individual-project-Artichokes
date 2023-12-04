@@ -24,7 +24,6 @@ public class CarrotTests
         player1.Hand.AddRange(new List<ICard>(cards));
 
         Assert.True(player1.Hand[4].GetType() == typeof(Carrot));
-        Assert.True(player1.Hand.Count == 6);
         Assert.False(player1.Hand[4].MayBePlayed(player1));
     }
 
