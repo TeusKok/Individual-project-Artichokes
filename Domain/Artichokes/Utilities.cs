@@ -1,6 +1,8 @@
 namespace Artichokes;
-public class Utilities{
-    public static ICard CardFromCharacter(char character){
+public class Utilities
+{
+    public static ICard CardFromCharacter(char character)
+    {
 
         return character switch
         {
@@ -10,6 +12,7 @@ public class Utilities{
             'i' => new Broccoli(),
             'o' => new Onion(),
             't' => new Beet(),
+            'r' => new Rubarb(),
             _ => throw new InvalidOperationException(character + " is not a known character"),
         };
     }

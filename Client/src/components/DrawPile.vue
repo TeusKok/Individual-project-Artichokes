@@ -3,7 +3,7 @@
 
 import { Player } from '../types';
 
-const props= defineProps<{player : Player}>();
+const props= defineProps<{player : Player, choiceNeeded: boolean}>();
 const emit = defineEmits(['endTurn']);
  
 
@@ -18,7 +18,7 @@ const emit = defineEmits(['endTurn']);
             @click="emit('endTurn')"
             v-b-tooltip.hover 
             title="Click to end your turn"
-            :disabled="!player.hasTurn" 
+            :disabled="!player.hasTurn||choiceNeeded" 
         >
             Drawpile: {{ props.player.drawPile.numberOfCards }} cards
         </button>

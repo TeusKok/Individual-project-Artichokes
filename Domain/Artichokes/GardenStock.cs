@@ -16,6 +16,7 @@ public class GardenStock
             Cards.Add(new Carrot());
             Cards.Add(new Onion());
             Cards.Add(new Beet());
+            Cards.Add(new Rubarb());
             Shuffle();
         }
     }
@@ -25,8 +26,9 @@ public class GardenStock
         char[] cardChars = gardenStockString.ToCharArray();
         foreach (char cardChar in cardChars)
         {
-            if(!cardChar.Equals('0')){
-            this.Cards.Add(Utilities.CardFromCharacter(cardChar));
+            if (!cardChar.Equals('0'))
+            {
+                this.Cards.Add(Utilities.CardFromCharacter(cardChar));
             }
         }
     }

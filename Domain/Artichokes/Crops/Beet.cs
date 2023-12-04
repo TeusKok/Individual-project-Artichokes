@@ -31,14 +31,14 @@ public class Beet : ICard
     {
         if (selectedOptions.Length > 0)
         {
-
             player.Hand.Remove(this);
             player.DiscardPile.Add(this);
             Player targetPlayer = player.GetPlayerByName(selectedOptions[0]);
             Random rng = new Random();
             ICard playerCard = player.Hand[rng.Next(player.Hand.Count)];
             ICard targetCard = targetPlayer.Hand[rng.Next(targetPlayer.Hand.Count)];
-            if (playerCard.GetType() != typeof(Artichoke)|| targetCard.GetType() != typeof(Artichoke)){
+            if (playerCard.GetType() != typeof(Artichoke) || targetCard.GetType() != typeof(Artichoke))
+            {
                 player.Hand.Add(targetCard);
                 targetPlayer.Hand.Add(playerCard);
             }

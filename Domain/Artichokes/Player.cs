@@ -247,6 +247,10 @@ public class Player
         }
     }
 
+    public void SetHarvestedCardToFalse(){
+        this.HarvestedCard = false;
+    }
+
     public string AsString()
     {
         string s = Name + "/";

@@ -53,7 +53,7 @@ const handlePlayCardWithOptions =(choice:string) =>{
             @choice ="handlePlayCardWithOptions"
         />
         <div class = "piles">
-            <DrawPile :player = "props.player"  @endTurn = "emit('endTurn')" />
+            <DrawPile :player = "props.player" :choiceNeeded ="choiceNeeded" @endTurn = "emit('endTurn')" />
             <DiscardPile :player = "props.player"/>
         </div>
     </div>
