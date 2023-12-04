@@ -8,7 +8,7 @@ Het doel van dit project is om een implementatie te maken van het kaartspelletje
 
 De domein logica zal worden geschreven in C#, de Api server zal ASP.NET Core zijn en de client zal vite/vue zijn. 
 
-![Alt text](20231127_101332.jpg)
+![Alt text](20231204_092458.jpg)
 
 ## Technische Doelen
 
@@ -20,6 +20,7 @@ Mijn persoonlijke doel waar ik aan ga werken is om dingen niet tot het laatste m
 
 ## Back End
 De back-end server kan gestart worden door in een terminal naar de /API folder te navigeren en daar de volgende command in te typen.
+(Dotnet version 7.0)
 ```bash
 dotnet run
 ```
@@ -29,6 +30,7 @@ De back-end server luistert op http://localhost:5042/
 
 ## Front End
 De Front-end server kan worden gestart door in een terminal naar de /Client folder te navigeren en daar de volgende commandos uit te voeren.
+(Npm version 9.8.1)
 ```bash
 # Install the dependecies
 npm install
