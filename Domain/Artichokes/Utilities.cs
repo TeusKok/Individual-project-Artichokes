@@ -13,6 +13,7 @@ public class Utilities
             'o' => new Onion(),
             't' => new Beet(),
             'r' => new Rubarb(),
+            'C' => new Corn(),
             _ => throw new InvalidOperationException(character + " is not a known character"),
         };
     }
