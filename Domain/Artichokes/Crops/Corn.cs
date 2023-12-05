@@ -34,7 +34,7 @@ public class Corn : ICard
 
     public bool MayBePlayed(Player player)
     {
-        return player.Hand.OfType<Artichoke>().Count() >= 1;
+        return player.Hand.OfType<Artichoke>().Any();
     }
 
     public void Play(Player player, string[] selectedOptions)
@@ -42,6 +42,13 @@ public class Corn : ICard
         ICard artichoke = player.Hand.OfType<Artichoke>().First();
         player.Hand.Remove(artichoke);
         player.DiscardPile.Add(artichoke);
+        Int32 selectedCardNumber = Int32.Parse(selectedOptions[0].Split(":")[0]);
+        ICard selectedCard = player.SharedGardenSupply.GetCardByNumber(selectedCardNumber);
+        
+        player.DrawPile.AddCardOnTop(selectedCard);
+        player.SharedGardenSupply.RemoveCardByNumber(selectedCardNumber);
+        
+        
 
     }
 }

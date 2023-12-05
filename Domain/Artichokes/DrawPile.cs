@@ -4,7 +4,7 @@ namespace Artichokes;
 
 public class DrawPile
 {
-    private readonly List<ICard> Cards = new List<ICard>();
+    private List<ICard> Cards = new List<ICard>();
 
     public int NumberOfCards()
     {
@@ -49,7 +49,7 @@ public class DrawPile
 
     public void AddCardOnTop(ICard card)
     {
-        Cards.Prepend(card);
+        Cards = Cards.Prepend(card).ToList<ICard>();
     }
 
     public string AsString()
