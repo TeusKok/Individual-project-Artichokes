@@ -17,6 +17,7 @@ public class Utilities
             'B' => new Bellpepper(),
             'b' => new BroadBean(),
             'l' => new Leek(),
+            'e' => new Eggplant(),
 
             _ => throw new InvalidOperationException(character + " is not a known character"),
         };
