@@ -33,10 +33,11 @@ public class BroadBeanTests
         string[] Answers = options[0].Split("|")[1].Split("/");
         player1.Hand[5].Play(player1,new string[]{Answers[0]});
 
-        Assert.Equal(1,player1.DiscardPile.GetNumberOfCards());
+        Assert.Equal(2,player1.DiscardPile.GetNumberOfCards());
         Assert.Equal(1,player1.PlayerToRight.DiscardPile.GetNumberOfCards());
 
-        Assert.Equal(typeof(Corn),player1.DiscardPile.GetCards()[0].GetType());
+        Assert.Equal(typeof(BroadBean),player1.DiscardPile.GetCards()[0].GetType());
+        Assert.Equal(typeof(Corn),player1.DiscardPile.GetCards()[1].GetType());
         Assert.Equal(typeof(Potato),player1.PlayerToRight.DiscardPile.GetCards()[0].GetType());
     }
     [Fact]

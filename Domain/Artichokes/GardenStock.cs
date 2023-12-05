@@ -20,6 +20,7 @@ public class GardenStock
             Cards.Add(new Corn());
             Cards.Add(new Bellpepper());
             Cards.Add(new BroadBean());
+            Cards.Add(new Leek());
             Shuffle();
         }
     }
