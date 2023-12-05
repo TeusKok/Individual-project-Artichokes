@@ -193,7 +193,7 @@ public class Player
         }
     }
 
-    private void MoveCardToDiscardPileIfStillInHand(ICard card)
+    public void MoveCardToDiscardPileIfStillInHand(ICard card)
     {
         if (Hand.Contains(card))
         {
