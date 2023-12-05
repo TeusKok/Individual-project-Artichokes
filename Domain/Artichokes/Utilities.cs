@@ -8,12 +8,14 @@ public class Utilities
         {
             'a' => new Artichoke(),
             'c' => new Carrot(),
-            'P' => new Potato(),
+            'p' => new Potato(),
             'i' => new Broccoli(),
             'o' => new Onion(),
             't' => new Beet(),
             'r' => new Rubarb(),
             'C' => new Corn(),
+            'B' => new Bellpepper(),
+
             _ => throw new InvalidOperationException(character + " is not a known character"),
         };
     }

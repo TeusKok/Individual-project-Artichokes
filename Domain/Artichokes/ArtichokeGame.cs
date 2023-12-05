@@ -41,12 +41,12 @@ public class ArtichokeGame : IArtichokeGame
 
     public int getNumberOfCardsInDiscardPile(int numberOfPlayer)
     {
-        return getPlayerByNumber(numberOfPlayer).DiscardPile.NumberOfCards();
+        return getPlayerByNumber(numberOfPlayer).DiscardPile.GetNumberOfCards();
     }
 
     public int getNumberOfCardsInDrawPile(int numberOfPlayer)
     {
-        return getPlayerByNumber(numberOfPlayer).DrawPile.NumberOfCards();
+        return getPlayerByNumber(numberOfPlayer).DrawPile.GetNumberOfCards();
     }
 
     public int getNumberOfCardsInHand(int numberOfPlayer)

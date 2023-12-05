@@ -13,21 +13,21 @@ namespace Artichokes.UnitTests.PlayerTests
             player1.DiscardHand();
 
 
-            Assert.True(previousHandCount==5);
-            Assert.True(player1.Hand.Count==0);
+            Assert.True(previousHandCount == 5);
+            Assert.True(player1.Hand.Count == 0);
         }
         [Fact]
         public void DiscardPileHasFiveCardsAfterDiscard()
         {
             Player player1 = new Player();
 
-            int previousDiscardCount = player1.DiscardPile.NumberOfCards();
+            int previousDiscardCount = player1.DiscardPile.GetNumberOfCards();
 
             player1.DiscardHand();
 
-            Assert.True(previousDiscardCount==0);
-            Assert.True(player1.DiscardPile.NumberOfCards()==5);
-            
+            Assert.True(previousDiscardCount == 0);
+            Assert.True(player1.DiscardPile.GetNumberOfCards() == 5);
+
         }
         [Fact]
         public void DiscardingEmptyHandChangesNothing()
@@ -37,8 +37,8 @@ namespace Artichokes.UnitTests.PlayerTests
             player1.DiscardHand();
             player1.DiscardHand();
 
-            Assert.True(player1.Hand.Count==0);
-            Assert.True(player1.DiscardPile.NumberOfCards()==5);
+            Assert.True(player1.Hand.Count == 0);
+            Assert.True(player1.DiscardPile.GetNumberOfCards() == 5);
         }
         [Fact]
         public void DiscardHandDoesNothingIfPlayerNotActive()
@@ -46,8 +46,8 @@ namespace Artichokes.UnitTests.PlayerTests
             Player player1 = new Player();
             Player player2 = player1.PlayerToRight;
             player2.DiscardHand();
-            Assert.True(player2.Hand.Count==5);
-            
+            Assert.True(player2.Hand.Count == 5);
+
         }
     }
 }

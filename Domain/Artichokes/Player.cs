@@ -141,7 +141,7 @@ public class Player
     {
         if (this.IsActivePlayer)
         {
-            int cardsInHandAfterRefill = Math.Min(5, DrawPile.NumberOfCards() + DiscardPile.NumberOfCards());
+            int cardsInHandAfterRefill = Math.Min(5, DrawPile.GetNumberOfCards() + DiscardPile.GetNumberOfCards());
             while (Hand.Count < cardsInHandAfterRefill)
             {
                 RefillDrawPileIfNeededAndPossible();
@@ -204,7 +204,7 @@ public class Player
 
     public void RefillDrawPileIfNeededAndPossible()
     {
-        if (this.DrawPile.NumberOfCards() == 0 && this.DiscardPile.NumberOfCards() > 0)
+        if (this.DrawPile.GetNumberOfCards() == 0 && this.DiscardPile.GetNumberOfCards() > 0)
         {
             DiscardPile.Shuffle();
             DiscardPile.Shuffle();
@@ -247,7 +247,8 @@ public class Player
         }
     }
 
-    public void SetHarvestedCardToFalse(){
+    public void SetHarvestedCardToFalse()
+    {
         this.HarvestedCard = false;
     }
 

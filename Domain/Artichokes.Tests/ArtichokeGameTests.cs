@@ -75,7 +75,7 @@ public class ArtichokeGameTests
     [Fact]
     public void GetWinnerReturnsCorrectPlayerIfThatPlayerHasWon()
     {
-        ArtichokeGame game = new ArtichokeGame("Piet/aaaaa/0/0/0/1|Joop/PPPPP/0/0/0/0|Jan/aaaaa/0/0/0/0|Jaap/aaaaa/0/0/0/0|0|0");
+        ArtichokeGame game = new ArtichokeGame("Piet/aaaaa/0/0/0/1|Joop/ppppp/0/0/0/0|Jan/aaaaa/0/0/0/0|Jaap/aaaaa/0/0/0/0|0|0");
 
         Assert.Equal(IArtichokeGame.Winner.PlayerTwo,game.GetWinner());
     }

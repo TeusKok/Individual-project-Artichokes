@@ -29,7 +29,7 @@ public class Beet : ICard
 
     public void Play(Player player, string[] selectedOptions)
     {
-        if (selectedOptions.Length > 0)
+        if (selectedOptions.Length == 1)
         {
             player.Hand.Remove(this);
             player.DiscardPile.Add(this);

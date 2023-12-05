@@ -6,7 +6,7 @@ public class DrawPile
 {
     private List<ICard> Cards = new List<ICard>();
 
-    public int NumberOfCards()
+    public int GetNumberOfCards()
     {
         return Cards.Count;
     }

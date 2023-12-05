@@ -15,7 +15,7 @@ public class PlayerDTO
         HasTurn = player.IsActivePlayer;
         HarvestedCard = player.HarvestedCard;
         Hand = new HandDTO(player);
-        DrawPile = new DrawPileDTO { NumberOfCards = player.DrawPile.NumberOfCards() };
+        DrawPile = new DrawPileDTO { NumberOfCards = player.DrawPile.GetNumberOfCards() };
         DiscardPile = new DiscardPileDTO(player.DiscardPile);
 
     }

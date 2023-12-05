@@ -18,6 +18,7 @@ public class GardenStock
             Cards.Add(new Beet());
             Cards.Add(new Rubarb());
             Cards.Add(new Corn());
+            Cards.Add(new Bellpepper());
             Shuffle();
         }
     }

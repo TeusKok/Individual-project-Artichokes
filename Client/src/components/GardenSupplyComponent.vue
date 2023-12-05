@@ -17,7 +17,7 @@
             class = "card" 
             @click ="emit('harvest', n)" 
         >
-            {{ props.cards[n-1].cardName }} 
+            {{ props.cards[n-1].cardName }}
         </button>
     </div>
 </template>
@@ -27,7 +27,7 @@
     display: grid;
     width: min-content;
     
-    grid-template-rows: auto;
+    grid-template-rows: 8rem;
     gap: 5px 5px;
 }
 .card{
@@ -35,5 +35,6 @@
     font-size: small;
     width: 6rem;
     text-align:center;
+    
 }
 </style>
