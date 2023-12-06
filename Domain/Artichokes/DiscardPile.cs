@@ -5,7 +5,8 @@ public class DiscardPile
     private List<ICard> Cards { get; set; } = new List<ICard>();
     private static readonly Random Rng = new Random();
 
-    public DiscardPile(){
+    public DiscardPile()
+    {
 
     }
 
@@ -14,8 +15,9 @@ public class DiscardPile
         char[] cardChars = discardPileString.ToCharArray();
         foreach (char cardChar in cardChars)
         {
-            if(!cardChar.Equals('0')){
-            this.Cards.Add(Utilities.CardFromCharacter(cardChar));
+            if (!cardChar.Equals('0'))
+            {
+                this.Cards.Add(Utilities.CardFromCharacter(cardChar));
             }
         }
     }
@@ -25,7 +27,7 @@ public class DiscardPile
         Cards.Add(card);
     }
 
-    public int NumberOfCards()
+    public int GetNumberOfCards()
     {
         return Cards.Count;
     }

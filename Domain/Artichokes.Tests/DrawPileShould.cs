@@ -6,13 +6,13 @@ namespace Artichokes.UnitTests.Drawpile
         public void RemoveTopCardShouldReduceDrawPileByOne()
         {
             DrawPile drawPile = new DrawPile();
-            int drawPileStartingNumber = drawPile.NumberOfCards();
+            int drawPileStartingNumber = drawPile.GetNumberOfCards();
             drawPile.GetTopCard();
             drawPile.RemoveTopCard();
 
-            Assert.True(drawPile.NumberOfCards() == drawPileStartingNumber-1);
+            Assert.True(drawPile.GetNumberOfCards() == drawPileStartingNumber - 1);
 
         }
-        
+
     }
 }

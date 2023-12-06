@@ -14,18 +14,18 @@ public class Potato : ICard
 
     public bool MayBePlayed(Player player)
     {
-        return player.DiscardPile.NumberOfCards() > 0 || player.DrawPile.NumberOfCards() > 0;
+        return player.DiscardPile.GetNumberOfCards() > 0 || player.DrawPile.GetNumberOfCards() > 0;
     }
 
     public String AsString()
     {
-        return "P";
+        return "p";
     }
 
     public void Play(Player player, string[] selectedOptions)
     {
         player.RefillDrawPileIfNeededAndPossible();
-        if (player.DrawPile.NumberOfCards() > 0)
+        if (player.DrawPile.GetNumberOfCards() > 0)
         {
             ICard card = player.DrawPile.GetTopCard();
             player.DrawPile.RemoveTopCard();

@@ -12,12 +12,14 @@ public class GardenSupply
 
     }
 
-    public GardenSupply(string[] gardenStrings){
+    public GardenSupply(string[] gardenStrings)
+    {
         char[] cardChars = gardenStrings[1].ToCharArray();
         foreach (char cardChar in cardChars)
         {
-            if(!cardChar.Equals('0')){
-            this.Cards.Add(Utilities.CardFromCharacter(cardChar));
+            if (!cardChar.Equals('0'))
+            {
+                this.Cards.Add(Utilities.CardFromCharacter(cardChar));
             }
         }
         gardenStock = new GardenStock(gardenStrings[0]);
@@ -61,8 +63,8 @@ public class GardenSupply
             {
                 break;
             }
-            Cards.Add(gardenStock.getTopCard());
-            gardenStock.removeTopCard();
+            Cards.Add(gardenStock.GetTopCard());
+            gardenStock.RemoveTopCard();
         }
     }
 

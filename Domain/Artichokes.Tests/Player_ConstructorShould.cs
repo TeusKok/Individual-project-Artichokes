@@ -47,7 +47,7 @@ namespace Artichokes.UnitTests.PlayerTests
         {
             Player player1 = new Player();
 
-            Assert.True(player1.DrawPile.NumberOfCards() == 5);
+            Assert.True(player1.DrawPile.GetNumberOfCards() == 5);
         }
 
         [Fact]
@@ -55,7 +55,7 @@ namespace Artichokes.UnitTests.PlayerTests
         {
             Player player1 = new Player();
 
-            Assert.True(player1.DiscardPile.NumberOfCards() == 0);
+            Assert.True(player1.DiscardPile.GetNumberOfCards() == 0);
         }
 
         [Fact]
@@ -114,8 +114,8 @@ namespace Artichokes.UnitTests.PlayerTests
         [Fact]
         public void CreatePlayerWithNamesThatWereSupplied()
         {
-            string[] playerNames = new string[4]{ "Jim","Paul","David","Schmebulock"};
-            Player player1 = new Player(4,playerNames);
+            string[] playerNames = new string[4] { "Jim", "Paul", "David", "Schmebulock" };
+            Player player1 = new Player(4, playerNames);
 
             Assert.True(player1.Name.Equals(playerNames[0]));
             Assert.True(player1.PlayerToRight.Name.Equals(playerNames[1]));
