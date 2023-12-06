@@ -34,6 +34,7 @@ public class Eggplant : ICard
             ICard artichoke = player.Hand.OfType<Artichoke>().First();
             player.Hand.Remove(artichoke);
             player.Hand.Remove(this);
+            player.MakeAllPlayersGiveTwoCardsToTheLeft();
         }
     }
 }

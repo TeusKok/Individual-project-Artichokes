@@ -18,6 +18,8 @@ public class Player
 
     public string Name { get; private set; } = null!;
 
+    private Random rng = new Random();
+
     public Player() : this(4, new string[4] { "Piet", "Joop", "Jan", "Jaap" })
     {
 
@@ -250,6 +252,26 @@ public class Player
     public void SetHarvestedCardToFalse()
     {
         this.HarvestedCard = false;
+    }
+
+    public void MakeAllPlayersGiveTwoCardsToTheLeft(){
+        int numberOfCards = Math.Min(Hand.Count,2);
+        
+        List<ICard> cardsToSend = Hand.OrderBy(x => rng.Next()).Take(numberOfCards).ToList();
+        this.Hand.RemoveAll(card =>cardsToSend.Contains(card));
+
+        this.PlayerToRight.PlayerToRight.PlayerToRight.GiveTwoCardsToTheLeft(cardsToSend,1);
+    }
+    public void GiveTwoCardsToTheLeft(List<ICard> cards, int counter){
+        int numberOfCards = Math.Min(Hand.Count,2);
+        
+        
+        if(counter<4){
+            List<ICard> cardsToSend = Hand.OrderBy(x => rng.Next()).Take(numberOfCards).ToList();
+            this.Hand.RemoveAll(card =>cardsToSend.Contains(card));
+            this.PlayerToRight.PlayerToRight.PlayerToRight.GiveTwoCardsToTheLeft(cardsToSend,counter+1);
+        }
+        Hand.AddRange(cards);
     }
 
     public string AsString()
