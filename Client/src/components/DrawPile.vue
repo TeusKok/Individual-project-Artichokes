@@ -7,9 +7,6 @@ const props= defineProps<{player : Player, choiceNeeded: boolean}>();
 const emit = defineEmits(['endTurn']);
  
 
-
-
-    
 </script>
 
 <template>
@@ -18,7 +15,7 @@ const emit = defineEmits(['endTurn']);
             @click="emit('endTurn')"
             v-b-tooltip.hover 
             title="Click to end your turn"
-            :disabled="!player.hasTurn||choiceNeeded" 
+            :disabled="!player.hasTurn||!player.harvestedCard||choiceNeeded" 
         >
             Drawpile: {{ props.player.drawPile.numberOfCards }} cards
         </button>
