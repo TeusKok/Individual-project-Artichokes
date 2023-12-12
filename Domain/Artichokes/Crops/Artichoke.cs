@@ -17,7 +17,7 @@ public class Artichoke : ICard
 
     public string CardDescription => "This is an Artichoke";
 
-    public bool MayBePlayed(Player player)
+    public bool MayBePlayedBy(Player player)
     {
         return false;
     }
@@ -27,13 +27,13 @@ public class Artichoke : ICard
         return "a";
     }
 
-    public void Play(Player player, string[] selectedOptions)
+    public void Play(Player player, string selectedOption)
     {
-        throw new NotImplementedException();
+        throw new InvalidCardPlayedException("An artichoke can not be played");
     }
 
-    public string[] GetOptions(Player player)
+    public string GetOption(Player player)
     {
-        return Array.Empty<string>();
+        return string.Empty;
     }
 }

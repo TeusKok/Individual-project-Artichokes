@@ -6,27 +6,27 @@ public class Rubarb : ICard
         return "r";
     }
 
-    public string CardDescription => "refreshes the Garden Supply, you may then harvest a card from the new Supply";
+    public string CardDescription => "refreshes the Garden Supply, " +
+        "you may then harvest a card from the new Supply";
 
     public string CardName => "Rubarb";
 
-    public string[] GetOptions(Player player)
+    public string GetOption(Player player)
     {
-        return Array.Empty<string>();
+        return string.Empty;
     }
 
-    public bool MayBePlayed(Player player)
+    public bool MayBePlayedBy(Player player)
     {
         return true;
     }
 
-    public void Play(Player player, string[] selectedOptions)
+    public void Play(Player player, string selectedOption)
     {
         while (player.SharedGardenSupply.GetNumberOfCards() > 0)
         {
-            player.SharedGardenSupply.RemoveCardByNumber(player.SharedGardenSupply.GetNumberOfCards());
+            player.SharedGardenSupply.RemoveCardByNumber(1);
         }
-
         player.SharedGardenSupply.refillGardenSupply();
         player.SetHarvestedCardToFalse();
     }

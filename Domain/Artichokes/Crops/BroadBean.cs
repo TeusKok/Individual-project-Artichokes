@@ -14,7 +14,7 @@ public class BroadBean : ICard
 
     public string CardName => "Broad Bean";
 
-    public string[] GetOptions(Player player)
+    public string GetOption(Player player)
     {
         string[] playerNames = new string[]{
             player.PlayerToRight.Name
@@ -23,28 +23,29 @@ public class BroadBean : ICard
         string[] cardNames = new string[]{
             player.SharedGardenSupply.gardenStock.GetTopCard().            CardName
             ,player.SharedGardenSupply.gardenStock.GetSecondCard().CardName};
-        string s = "Pick One of these cards, it will be placed on the discard pile of the specified player. The other card gets placed on your discard pile|";
+        string s = "Pick One of these cards, it will be placed on the discard pile of the specified player. " 
+            + "The other card gets placed on your discard pile|";
         
-        s=s+cardNames[0]+" > "+playerNames[0]+"/"+cardNames[0]+" > "+playerNames[1]+"/"+cardNames[0]+" > "+playerNames[2]+"/"
-            +cardNames[1]+" > "+playerNames[0]+"/"+cardNames[1]+" > "+playerNames[1]+"/"+cardNames[1]+" > "+playerNames[2];
+        s= $"{s}{cardNames[0]} > {playerNames[0]}/{cardNames[0]} > {playerNames[1]}/{cardNames[0]} > {playerNames[2]}" +
+            $"/{cardNames[1]} > {playerNames[0]}/{cardNames[1]} > {playerNames[1]}/{cardNames[1]} > {playerNames[2]}";
     
         
-        return new string[1] { s };
+        return s;
 
     }
 
-    public bool MayBePlayed(Player player)
+    public bool MayBePlayedBy(Player player)
     {
         return true;
     }
 
-    public void Play(Player player, string[] selectedOptions)
+    public void Play(Player player, string selectedOption)
     {
-        if (MayBePlayed(player) && selectedOptions.Length == 1)
+        if (MayBePlayedBy(player) && selectedOption.Length > 0)
         {
             player.MoveCardToDiscardPileIfStillInHand(this);
-            string selectedCardName = selectedOptions[0].Split(">")[0].Trim();
-            string selectedPlayerName = selectedOptions[0].Split(">")[1].Trim();
+            string selectedCardName = selectedOption.Split(">")[0].Trim();
+            string selectedPlayerName = selectedOption.Split(">")[1].Trim();
             Player targetPlayer = player.GetPlayerByName(selectedPlayerName);
             
             ICard topCard = player.SharedGardenSupply.gardenStock.GetTopCard();

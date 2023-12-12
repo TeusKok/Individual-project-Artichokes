@@ -63,8 +63,9 @@ public class ArtichokesController : ControllerBase
         string Id = body["Id"];
         game = GetGameFromSessionOrRepository(Id);
 
-        Player player = game.getActivePlayer();
-        player.HarvestCardFromGardenSupply(Int32.Parse(body.First().Value));
+        int playerNumber = game.getNumberOfActivePlayer();
+        int numberOfCard = Int32.Parse(body.First().Value);
+        game.HarvestCardFromGardenSupply(playerNumber, numberOfCard);
 
         return SaveGameAndConvertToDTO(Id, game);
     }
@@ -79,8 +80,8 @@ public class ArtichokesController : ControllerBase
         string Id = body.Id;
         game = GetGameFromSessionOrRepository(Id);
 
-        Player player = game.getActivePlayer();
-        player.PlayCardFromHandByNumber(body.cardToPlay, body.selectedOptions);
+        int playerNumber = game.getNumberOfActivePlayer();
+        game.playCardFromHand(playerNumber, body.cardToPlay, body.selectedOption);
 
         return SaveGameAndConvertToDTO(Id, game);
     }
@@ -125,6 +126,6 @@ public class PlayCardBody
     public int cardToPlay { get; set; }
 
     public string Id { get; set; }
-    public string[] selectedOptions { get; set; }
+    public string selectedOption { get; set; }
 
 }

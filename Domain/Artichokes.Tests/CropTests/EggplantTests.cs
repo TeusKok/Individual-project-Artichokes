@@ -8,7 +8,7 @@ public class EggplantTests
         Player player1 = new Player();
         player1.Hand.Clear();
         player1.Hand.Add(new Eggplant());
-        Assert.False(player1.Hand[0].MayBePlayed(player1));
+        Assert.False(player1.Hand[0].MayBePlayedBy(player1));
     }
     [Fact]
     public void MayBePlayedShouldReturnTrueIfThereIsOneArtichokesInHand()
@@ -16,14 +16,14 @@ public class EggplantTests
         Player player1 = new Player();
         player1.Hand.RemoveRange(0, 4);
         player1.Hand.Add(new Eggplant());
-        Assert.True(player1.Hand[1].MayBePlayed(player1));
+        Assert.True(player1.Hand[1].MayBePlayedBy(player1));
     }
     [Fact]
     public void PlayShouldRemoveTheEggplantAndOneArtichoke()
     {
         Player player1 = new Player();
         player1.Hand.Add(new Eggplant());
-        player1.Hand[5].Play(player1, Array.Empty<string>());
+        player1.Hand[5].Play(player1, string.Empty);
         Assert.Equal(4,player1.Hand.Count);
     }
     [Fact]
@@ -31,7 +31,7 @@ public class EggplantTests
     {
         Player player1 = new Player("Piet/a/0/0/0/1|Joop/ppppp/0/0/0/0|Jan/r/0/0/0/0|Jaap/ccccc/0/0/0/0|0|0");
         player1.Hand.Add(new Eggplant());
-        player1.Hand[1].Play(player1, Array.Empty<string>());
+        player1.Hand[1].Play(player1, string.Empty);
 
         Assert.Equal(2,player1.Hand.Count);
         Assert.Equal(2,player1.GetPlayerByName("Jan").Hand.Count);

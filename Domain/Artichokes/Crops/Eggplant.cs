@@ -11,19 +11,19 @@ public class Eggplant : ICard
 
     public string CardName => "Eggplant";
 
-    public string[] GetOptions(Player player)
+    public string GetOption(Player player)
     {
-        return Array.Empty<string>();
+        return string.Empty;
     }
 
-    public bool MayBePlayed(Player player)
+    public bool MayBePlayedBy(Player player)
     {
         return player.Hand.OfType<Artichoke>().Any();
     }
 
-    public void Play(Player player, string[] selectedOptions)
+    public void Play(Player player, string selectedOption)
     {
-        if (MayBePlayed(player))
+        if (MayBePlayedBy(player))
         {
             ICard artichoke = player.Hand.OfType<Artichoke>().First();
             player.Hand.Remove(artichoke);

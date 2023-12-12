@@ -49,15 +49,15 @@ public class ArtichokeGameTests
         ArtichokeGame game = new ArtichokeGame("Piet","Joop", "Jan",  "Jaap");
         Player player1 = game.getPlayerByNumber(1);
 
-        Player firstActivePlayer = game.getActivePlayer();
+        Player firstActivePlayer = game.getPlayerByNumber(game.getNumberOfActivePlayer());
         game.endTurnOfPlayer(1);
-        Player secondActivePlayer = game.getActivePlayer();
+        Player secondActivePlayer = game.getPlayerByNumber(game.getNumberOfActivePlayer());
         game.endTurnOfPlayer(2);
-        Player thirdActivePlayer = game.getActivePlayer();
+        Player thirdActivePlayer = game.getPlayerByNumber(game.getNumberOfActivePlayer());
         game.endTurnOfPlayer(3);
-        Player fourthActivePlayer = game.getActivePlayer();
+        Player fourthActivePlayer = game.getPlayerByNumber(game.getNumberOfActivePlayer());
         game.endTurnOfPlayer(4);
-        Player fifthActivePlayer = game.getActivePlayer();
+        Player fifthActivePlayer = game.getPlayerByNumber(game.getNumberOfActivePlayer());
 
         Assert.Equal(player1, firstActivePlayer);
         Assert.Equal(player1.PlayerToRight, secondActivePlayer);

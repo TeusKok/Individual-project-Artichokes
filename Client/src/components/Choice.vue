@@ -6,14 +6,14 @@
 </script>
 
 <template>
-    <div v-for="m in props.card.options.length" class = "container">
-        <button  v-for="n in props.card.options[m-1].answers.length"
+    <div class = "container">
+        <button  v-for="n in props.card.option.answers.length"
             v-b-tooltip.hover  
-            :title="props.card.options[m-1].question"  
+            :title="props.card.option.question"  
             class = "choice" 
-            @click ="emit('choice',props.card.options[m-1].answers[n-1])" 
+            @click ="emit('choice',props.card.option.answers[n-1])" 
         >
-            {{ props.card.options[m-1].answers[n-1] }}
+            {{ props.card.option.answers[n-1] }}
         </button>
     </div>
 </template>

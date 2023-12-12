@@ -5,7 +5,7 @@ public class Broccoli : ICard
 
     public string CardName => "Broccoli";
 
-    public bool MayBePlayed(Player player)
+    public bool MayBePlayedBy(Player player)
     {
         return player.Hand.OfType<Artichoke>().Count() >= 3;
     }
@@ -15,14 +15,14 @@ public class Broccoli : ICard
         return "i";
     }
 
-    public string[] GetOptions(Player player)
+    public string GetOption(Player player)
     {
-        return Array.Empty<string>();
+        return string.Empty;
     }
 
-    public void Play(Player player, string[] selectedOptions)
+    public void Play(Player player, string selectedOption)
     {
-        if (MayBePlayed(player))
+        if (MayBePlayedBy(player))
         {
             IEnumerable<Artichoke> artichoke = player.Hand.OfType<Artichoke>().Take(1);
             player.Hand.Remove(artichoke.First());

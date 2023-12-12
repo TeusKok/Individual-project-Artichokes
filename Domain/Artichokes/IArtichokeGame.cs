@@ -34,9 +34,10 @@ public interface IArtichokeGame
 
     public int getPlayerNumberByName(string name);
     void endTurnOfPlayer(int numberOfPlayer);
-    public void playCardFromHand(int numberOfPlayer, int numberOfCard, string[] selectedOptions);
+    public void playCardFromHand(int numberOfPlayer, int numberOfCard, string selectedOption);
+    public void HarvestCardFromGardenSupply (int numberOfPlayer, int numberOfCard);
 
-    public Player getActivePlayer();
+    public int getNumberOfActivePlayer();
     public Winner GetWinner();
 
     public string AsString();

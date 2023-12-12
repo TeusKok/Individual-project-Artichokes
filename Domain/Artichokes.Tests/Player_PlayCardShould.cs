@@ -6,7 +6,7 @@ public class Player_PlayCardShould{
     {
         Player player1 = new Player();
         player1.Hand.Add(new Potato());
-        player1.PlayCardFromHandByNumber(6,Array.Empty<string>());
+        player1.PlayCardFromHandByNumber(6, string.Empty);
         Assert.True(player1.Hand.Count==5);
     }
 
@@ -18,7 +18,7 @@ public class Player_PlayCardShould{
         player1.FillHand();
         player1.DiscardPile.EmptyDiscardPile();
         player1.Hand.Add(new Potato());
-        player1.PlayCardFromHandByNumber(6,Array.Empty<string>());
+        player1.PlayCardFromHandByNumber(6, string.Empty);
         Assert.True(player1.Hand.Count==6);
         
     }
@@ -27,7 +27,7 @@ public class Player_PlayCardShould{
     {
         Player player1 = new Player();
         player1.Hand.Add(new Potato());
-        player1.PlayCardFromHandByNumber(6,Array.Empty<string>());
+        player1.PlayCardFromHandByNumber(6, string.Empty);
         Assert.True(player1.PlayedCard);
     }
 }

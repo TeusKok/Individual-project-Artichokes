@@ -15,7 +15,11 @@ public class DiscardPileDTO
                 CardName = topCard.CardName,
                 CardDescription = topCard.CardDescription,
                 MayBePlayed = false,
-                Options = Array.Empty<OptionDTO>(),
+                Option = new OptionDTO
+                {
+                    Question = "",
+                    Answers = Array.Empty<string>(),
+                },
             };
         }
         else
@@ -25,7 +29,11 @@ public class DiscardPileDTO
                 CardName = "Empty",
                 CardDescription = "",
                 MayBePlayed = false,
-                Options = Array.Empty<OptionDTO>(),
+                Option = new OptionDTO
+                {
+                    Question = "",
+                    Answers = Array.Empty<string>(),
+                },
             };
         }
     }

@@ -180,14 +180,14 @@ public class Player
         }
     }
 
-    public void PlayCardFromHandByNumber(int numberOfCard, string[] selectedOptions)
+    public void PlayCardFromHandByNumber(int numberOfCard, string selectedOption)
     {
         if (numberOfCard > 0 && numberOfCard <= Hand.Count && IsActivePlayer)
         {
             ICard card = Hand[numberOfCard - 1];
-            if (card.MayBePlayed(this))
+            if (card.MayBePlayedBy(this))
             {
-                card.Play(this, selectedOptions);
+                card.Play(this, selectedOption);
                 MoveCardToDiscardPileIfStillInHand(card);
                 this.PlayedCard = true;
             }

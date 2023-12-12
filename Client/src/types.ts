@@ -2,7 +2,7 @@ export type Card = {
     cardName: string;
     cardDescription: string;
     mayBePlayed: boolean;
-    options: Option[];
+    option: Option;
 }
 
 export type Player = {

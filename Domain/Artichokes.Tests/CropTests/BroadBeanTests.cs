@@ -7,15 +7,15 @@ public class BroadBeanTests
     {
         Player player1 = new Player();
         player1.Hand.Add(new BroadBean());
-        Assert.True(player1.Hand[5].MayBePlayed(player1));
+        Assert.True(player1.Hand[5].MayBePlayedBy(player1));
     }
     [Fact]
     public void GetOptionsShouldGiveStringWithTopTwoCardsFromGardenStockForEachOtherPlayer()
     {
         Player player1 = new Player("Piet/aaaaab/0/0/0/1|Joop/ppppp/0/0/0/0|Jan/aaaaa/0/0/0/0|Jaap/aaaaa/0/0/0/0|pCc|0");
 
-        string[] options = player1.Hand[5].GetOptions(player1);
-        string[] Answers = options[0].Split("|")[1].Split("/");
+        string option = player1.Hand[5].GetOption(player1);
+        string[] Answers = option.Split("|")[1].Split("/");
 
         Assert.Equal("Potato", Answers[0].Split(">")[0].Trim());
         Assert.Equal("Joop", Answers[0].Split(">")[1].Trim());
@@ -29,9 +29,9 @@ public class BroadBeanTests
     {
         Player player1 = new Player("Piet/aaaaab/0/0/0/1|Joop/ppppp/0/0/0/0|Jan/aaaaa/0/0/0/0|Jaap/aaaaa/0/0/0/0|pCc|0");
 
-        string[] options = player1.Hand[5].GetOptions(player1);
-        string[] Answers = options[0].Split("|")[1].Split("/");
-        player1.Hand[5].Play(player1,new string[]{Answers[0]});
+        string option = player1.Hand[5].GetOption(player1);
+        string[] Answers = option.Split("|")[1].Split("/");
+        player1.Hand[5].Play(player1, Answers[0]);
 
         Assert.Equal(2,player1.DiscardPile.GetNumberOfCards());
         Assert.Equal(1,player1.PlayerToRight.DiscardPile.GetNumberOfCards());
@@ -45,9 +45,9 @@ public class BroadBeanTests
     {
         Player player1 = new Player("Piet/aaaaab/0/0/0/1|Joop/ppppp/0/0/0/0|Jan/aaaaa/0/0/0/0|Jaap/aaaaa/0/0/0/0|pCc|0");
 
-        string[] options = player1.Hand[5].GetOptions(player1);
-        string[] Answers = options[0].Split("|")[1].Split("/");
-        player1.Hand[5].Play(player1,new string[]{Answers[0]});
+        string option = player1.Hand[5].GetOption(player1);
+        string[] Answers = option.Split("|")[1].Split("/");
+        player1.Hand[5].Play(player1, Answers[0]);
 
         Assert.Equal(1,player1.SharedGardenSupply.gardenStock.GetNumberOfCards());
     }

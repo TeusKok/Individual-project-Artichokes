@@ -8,7 +8,7 @@ public class BeetTests
         Player player1 = new Player();
         player1.Hand.Add(new Beet());
 
-        Assert.True(player1.Hand[5].MayBePlayed(player1));
+        Assert.True(player1.Hand[5].MayBePlayedBy(player1));
     }
     [Fact]
     public void AsStringGivesTheLetterT()
@@ -23,8 +23,8 @@ public class BeetTests
     {
         Player player1 = new Player();
         player1.Hand.Add(new Beet());
-        string[] options = player1.Hand[5].GetOptions(player1);
-        string[] Answers = options[0].Split("|")[1].Split("/");
+        string option = player1.Hand[5].GetOption(player1);
+        string[] Answers = option.Split("|")[1].Split("/");
 
 
         Assert.Equal("Joop", Answers[0]);
@@ -37,7 +37,7 @@ public class BeetTests
         Player player1 = new Player();
         ICard beet = new Beet();
         player1.Hand.Add(beet);
-        player1.Hand[5].Play(player1, Array.Empty<string>());
+        player1.Hand[5].Play(player1, "");
         Assert.Contains(beet, player1.Hand);
     }
     [Fact]
@@ -46,7 +46,7 @@ public class BeetTests
         Player player1 = new Player();
         ICard beet = new Beet();
         player1.Hand.Add(beet);
-        player1.Hand[5].Play(player1, new string[] { "Joop" });
+        player1.Hand[5].Play(player1, "Joop");
         Assert.DoesNotContain(beet, player1.Hand);
     }
     [Fact]
@@ -56,7 +56,7 @@ public class BeetTests
         Player player1 = new Player();
         ICard beet = new Beet();
         player1.Hand.Add(beet);
-        player1.Hand[5].Play(player1, new string[] { "Joop" });
+        player1.Hand[5].Play(player1, "Joop");
         Assert.Contains(beet, player1.DiscardPile.GetCards());
     }
     [Fact]
@@ -65,7 +65,7 @@ public class BeetTests
         Player player1 = new Player();
         ICard beet = new Beet();
         player1.Hand.Add(beet);
-        player1.Hand[5].Play(player1, new string[] { "Joop" });
+        player1.Hand[5].Play(player1, "Joop");
 
         Assert.True(player1.Hand.Count == 4);
         Assert.True(player1.PlayerToRight.Hand.Count == 4);
@@ -77,7 +77,7 @@ public class BeetTests
         player1.Hand.Clear();
         ICard[] cards = { new Carrot(), new Carrot(), new Carrot(), new Carrot(), new Carrot(), new Beet() };
         player1.Hand.AddRange(new List<ICard>(cards));
-        player1.Hand[5].Play(player1, new string[] { "Joop" });
+        player1.Hand[5].Play(player1, "Joop");
 
         Assert.True(player1.Hand.Count == 5);
         Assert.True(player1.PlayerToRight.Hand.Count == 5);
@@ -89,7 +89,7 @@ public class BeetTests
         player1.Hand.Clear();
         ICard[] cards = { new Carrot(), new Carrot(), new Carrot(), new Carrot(), new Carrot(), new Beet() };
         player1.Hand.AddRange(new List<ICard>(cards));
-        player1.Hand[5].Play(player1, new string[] { "Joop" });
+        player1.Hand[5].Play(player1, "Joop");
 
         Assert.True(player1.Hand.OfType<Artichoke>().Count() == 1);
         Assert.True(player1.Hand.OfType<Carrot>().Count() == 4);

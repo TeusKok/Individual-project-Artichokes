@@ -11,14 +11,22 @@ public class HandDTO
         Cards = new CardDTO[player.Hand.Count];
         for (int i = 0; i < player.Hand.Count; i++)
         {
-            string[] optionStrings = player.Hand[i].GetOptions(player);
-            OptionDTO[] optionArray = new OptionDTO[optionStrings.Length];
-            for (int j = 0; j < optionStrings.Length; j++)
+            string optionString = player.Hand[i].GetOption(player);
+            OptionDTO option;
+            if (optionString.Length > 0)
             {
-                optionArray[j] = new OptionDTO
+                option = new OptionDTO
                 {
-                    Question = optionStrings[j].Split("|")[0],
-                    Answers = optionStrings[j].Split("|")[1].Split("/")
+                    Question = optionString.Split("|")[0],
+                    Answers = optionString.Split("|")[1].Split("/")
+                };
+            }
+            else
+            {
+                option = new OptionDTO
+                {
+                    Question = "",
+                    Answers = Array.Empty<string>(),
                 };
             }
 
@@ -26,8 +34,8 @@ public class HandDTO
             {
                 CardName = player.Hand[i].CardName,
                 CardDescription = player.Hand[i].CardDescription,
-                MayBePlayed = player.Hand[i].MayBePlayed(player),
-                Options = optionArray,
+                MayBePlayed = player.Hand[i].MayBePlayedBy(player),
+                Option = option,
             };
         }
 

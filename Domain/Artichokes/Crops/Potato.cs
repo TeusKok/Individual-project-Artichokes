@@ -2,13 +2,15 @@ namespace Artichokes;
 
 public class Potato : ICard
 {
-    public string CardDescription => "Reveals the top card of your draw pile. If this card is an Artichoke, it is removed. Otherwise it will be added to your discard pile.";
+    public string CardDescription => "Reveals the top card of your draw pile. " +
+        "If this card is an Artichoke, it is removed. " +
+        "Otherwise it will be added to your discard pile.";
 
     public string CardName => "Potato";
 
-    public bool MayBePlayed(Player player)
+    public bool MayBePlayedBy(Player player)
     {
-        return player.DiscardPile.GetNumberOfCards() > 0 || player.DrawPile.GetNumberOfCards() > 0;
+        return player.DiscardPile.GetNumberOfCards() + player.DrawPile.GetNumberOfCards() > 0;
     }
 
     public String EncodeAsString()
@@ -16,22 +18,22 @@ public class Potato : ICard
         return "p";
     }
 
-    public void Play(Player player, string[] selectedOptions)
+    public void Play(Player player, string selectedOption)
     {
-        player.RefillDrawPileIfNeededAndPossible();
-        if (player.DrawPile.GetNumberOfCards() > 0)
+        if (this.MayBePlayedBy(player))
         {
-            ICard card = player.DrawPile.GetTopCard();
+            player.RefillDrawPileIfNeededAndPossible();
+            ICard topCard = player.DrawPile.GetTopCard();
             player.DrawPile.RemoveTopCard();
-            if (card.GetType() != typeof(Artichoke))
+            if (topCard.GetType() != typeof(Artichoke))
             {
-                player.DiscardPile.Add(card);
+                player.DiscardPile.Add(topCard);
             }
         }
     }
 
-    public string[] GetOptions(Player player)
+    public string GetOption(Player player)
     {
-        return Array.Empty<string>();
+        return string.Empty;
     }
 }

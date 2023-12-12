@@ -1,11 +1,12 @@
 namespace Artichokes;
 public class Carrot : ICard
 {
-    public string CardDescription => "Playing the carrot will remove it and two Artichokes from your end. This card has to be the first card you play on a turn, and also ends your turn";
+    public string CardDescription => "Playing the carrot will remove it and two Artichokes from your end. "
+        + "This card has to be the first card you play on a turn, and also ends your turn";
 
     public string CardName => "Carrot";
 
-    public bool MayBePlayed(Player player)
+    public bool MayBePlayedBy(Player player)
     {
         return player.Hand.OfType<Artichoke>().Count() >= 2 && !player.PlayedCard;
 
@@ -16,14 +17,14 @@ public class Carrot : ICard
         return "c";
     }
 
-    public string[] GetOptions(Player player)
+    public string GetOption(Player player)
     {
-        return Array.Empty<string>();
+        return string.Empty;
     }
 
-    public void Play(Player player, string[] selectedOptions)
+    public void Play(Player player, string selectedOption)
     {
-        if (this.MayBePlayed(player))
+        if (this.MayBePlayedBy(player))
         {
             List<ICard> cardsToRemove = new List<ICard>();
             IEnumerable<Artichoke> artichokes = player.Hand.OfType<Artichoke>().Take(2);

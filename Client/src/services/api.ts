@@ -51,7 +51,7 @@ export async function playCard (oldGame: ArtichokesGame, cardNumber:number, sele
         body: JSON.stringify({
             cardToPlay:cardNumber+"",
             Id:Id,
-            selectedOptions:[selectedOption],
+            selectedOption:selectedOption,
         }),
     })
     

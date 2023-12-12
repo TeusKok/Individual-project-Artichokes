@@ -13,7 +13,7 @@ const emit = defineEmits(['endTurn','playCard']);
 const choiceNeeded = ref(false);
 const cardNumber = ref(1);
 const handlePlayCard = (value:number) => {
-    if(props.player.hand.cards[value-1].options.length>0){
+    if(props.player.hand.cards[value-1].option.answers.length>0){
         choiceNeeded.value = true;
         cardNumber.value = value;
     }
@@ -70,9 +70,6 @@ const handlePlayCardWithOptions =(choice:string) =>{
 .active{
     color: green;
     font-size: x-large;
-    
-
-
 }
 .piles{
     display: grid;

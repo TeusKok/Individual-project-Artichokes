@@ -6,7 +6,7 @@ public class RubarbTests
     {
         Player player1 = new Player();
         player1.Hand.Add(new Rubarb());
-        Assert.True(player1.Hand[5].MayBePlayed(player1));
+        Assert.True(player1.Hand[5].MayBePlayedBy(player1));
     }
     [Fact]
     public void PlayShouldDiscardAndRefreshGardenSupply()
@@ -16,7 +16,7 @@ public class RubarbTests
         Int32 oldNumberOfCardsInStock = player1.SharedGardenSupply.gardenStock.GetNumberOfCards();
         ICard oldFirstCardInSupply = player1.SharedGardenSupply.GetCardByNumber(1);
 
-        player1.Hand[5].Play(player1, Array.Empty<string>());
+        player1.Hand[5].Play(player1, string.Empty);
 
         Assert.NotEqual(oldFirstCardInSupply,player1.SharedGardenSupply.GetCardByNumber(1));
         Assert.True(oldNumberOfCardsInStock -5 == player1.SharedGardenSupply.gardenStock.GetNumberOfCards());
@@ -30,7 +30,7 @@ public class RubarbTests
 
         Assert.True(player1.Hand[6].GetType() == typeof(Rubarb));
 
-        player1.Hand[6].Play(player1, Array.Empty<string>());
+        player1.Hand[6].Play(player1, string.Empty);
         Assert.False(player1.HarvestedCard);
     }
 }

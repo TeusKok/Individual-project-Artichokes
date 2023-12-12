@@ -88,10 +88,10 @@ public class ArtichokeGame : IArtichokeGame
         getPlayerByNumber(numberOfPlayer).EndTurn();
     }
 
-    public void playCardFromHand(int numberOfPlayer, int numberOfCard, string[] selectedOptions)
+    public void playCardFromHand(int numberOfPlayer, int numberOfCard, string selectedOption)
     {
         Player player = getPlayerByNumber(numberOfPlayer);
-        player.PlayCardFromHandByNumber(numberOfCard, selectedOptions);
+        player.PlayCardFromHandByNumber(numberOfCard, selectedOption);
     }
 
     public void HarvestCardFromGardenSupply(int numberOfPlayer, int numberOfCard)
@@ -100,19 +100,14 @@ public class ArtichokeGame : IArtichokeGame
         player.HarvestCardFromGardenSupply(numberOfCard);
     }
 
-    public Player getActivePlayer()
+    public int getNumberOfActivePlayer()
     {
         Player player1 = getPlayerByNumber(1);
-        Player player = player1;
-        while (!player.IsActivePlayer)
-        {
-            player = player.PlayerToRight;
-            if (player == player1)
-            {
-                throw new Exception("There is no active player");
-            }
-        }
-        return player;
+        if (player1.IsActivePlayer) return 1;
+        if (player1.PlayerToRight.IsActivePlayer) return 2;
+        if (player1.PlayerToRight.PlayerToRight.IsActivePlayer) return 3;
+        if (player1.PlayerToRight.PlayerToRight.PlayerToRight.IsActivePlayer) return 4;
+        else throw new Exception("there is no active player");
     }
 
     public IArtichokeGame.Winner GetWinner()

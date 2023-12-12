@@ -16,7 +16,11 @@ public class GardenSupplyDTO
                 CardName = card.CardName,
                 CardDescription = card.CardDescription,
                 MayBePlayed =false,
-                Options = Array.Empty<OptionDTO>(),
+                Option = new OptionDTO
+                {
+                    Question = "",
+                    Answers = Array.Empty<string>(),
+                },
             };
         }
     }

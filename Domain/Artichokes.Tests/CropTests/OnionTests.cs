@@ -9,7 +9,7 @@ public class OnionTests{
         player1.Hand.Add(new Onion());
 
         Assert.True(player1.Hand[0].GetType() == typeof(Onion));
-        Assert.False(player1.Hand[0].MayBePlayed(player1));
+        Assert.False(player1.Hand[0].MayBePlayedBy(player1));
     }
     [Fact]
     public void MaybePlayedReturnsTrueIfOneArtichokeInHand()
@@ -19,7 +19,7 @@ public class OnionTests{
         player1.Hand.Add(new Onion());
 
         Assert.True(player1.Hand[1].GetType() == typeof(Onion));
-        Assert.True(player1.Hand[1].MayBePlayed(player1));
+        Assert.True(player1.Hand[1].MayBePlayedBy(player1));
     }
     [Fact]
     public void MaybePlayedReturnsTrueIfMoreThanOneArtichokeInHand()
@@ -28,7 +28,7 @@ public class OnionTests{
         player1.Hand.Add(new Onion());
 
         Assert.True(player1.Hand[5].GetType() == typeof(Onion));
-        Assert.True(player1.Hand[5].MayBePlayed(player1));
+        Assert.True(player1.Hand[5].MayBePlayedBy(player1));
     }
     [Fact]
     public void PlayShouldRemoveOnionFromHand()
@@ -36,7 +36,7 @@ public class OnionTests{
         Player player1 = new Player();
         ICard onion = new Onion();
         player1.Hand.Add(onion);
-        player1.Hand[5].Play(player1,new string[1]{"Joop"});
+        player1.Hand[5].Play(player1, "Joop");
         Assert.DoesNotContain(onion, player1.Hand);
         
     }
@@ -46,7 +46,7 @@ public class OnionTests{
         Player player1 = new Player();
         ICard onion = new Onion();
         player1.Hand.Add(onion);
-        player1.Hand[5].Play(player1,new string[1]{"Joop"});
+        player1.Hand[5].Play(player1, "Joop");
         Assert.True(player1.Hand.OfType<Artichoke>().Count()==4);
     }
     [Fact]
@@ -56,7 +56,7 @@ public class OnionTests{
         Player player1 = new Player();
         ICard onion = new Onion();
         player1.Hand.Add(onion);
-        player1.Hand[5].Play(player1,new string[1]{"Joop"});
+        player1.Hand[5].Play(player1, "Joop");
         Assert.Contains(onion, player1.PlayerToRight.DiscardPile.GetCards());
     }
 }

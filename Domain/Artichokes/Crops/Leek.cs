@@ -12,7 +12,7 @@ public class Leek : ICard
 
     public string CardName => "Leek";
 
-    public string[] GetOptions(Player player)
+    public string GetOption(Player player)
     {
         string s = "Pick a player, if the top card of their drawpile"
             +" is an Artichoke it gets put on their discard pile."
@@ -22,25 +22,25 @@ public class Leek : ICard
         {
             if (targetPlayer.DiscardPile.GetNumberOfCards() > 0 || targetPlayer.DrawPile.GetNumberOfCards() > 0)
             {
-                s = s + targetPlayer.Name + "/";
-
+                s = $"{s}{targetPlayer.Name}/";
+                
             }
             targetPlayer = targetPlayer.PlayerToRight;
         }
-        return new string[1] { s.Remove(s.Length - 1, 1) };
-
+        if (s.Last().Equals('/')) s = s.Remove(s.Length - 1, 1);
+        return s;
     }
 
-    public bool MayBePlayed(Player player)
+    public bool MayBePlayedBy(Player player)
     {
         return true;
     }
 
-    public void Play(Player player, string[] selectedOptions)
+    public void Play(Player player, string selectedOption)
     {
-        if (selectedOptions.Length == 1)
+        if (selectedOption.Length > 0)
         {
-            Player targetPlayer = player.GetPlayerByName(selectedOptions[0]);
+            Player targetPlayer = player.GetPlayerByName(selectedOption);
             targetPlayer.RefillDrawPileIfNeededAndPossible();
             ICard targetCard = targetPlayer.DrawPile.GetTopCard();
             if(targetCard.GetType().Equals(typeof(Artichoke))){
