@@ -3,22 +3,16 @@ using System.Reflection.Metadata;
 namespace Artichokes;
 public class BroadBean : ICard
 {
-    public string AsString()
+    public string EncodeAsString()
     {
         return "b";
     }
 
-    public string GetCardDescription()
-    {
-        return "Playing this card will reveal the top two cards of the Garden Stock."
+    public string CardDescription => "Playing this card will reveal the top two cards of the Garden Stock."
             + " You may choose which card goes to the discard pile of one other player,"
             + " the other card goes to your discard pile.";
-    }
 
-    public string GetCardName()
-    {
-        return "Broad Bean";
-    }
+    public string CardName => "Broad Bean";
 
     public string[] GetOptions(Player player)
     {
@@ -27,8 +21,8 @@ public class BroadBean : ICard
             ,player.PlayerToRight.PlayerToRight.Name
             ,player.PlayerToRight.PlayerToRight.PlayerToRight.Name};
         string[] cardNames = new string[]{
-            player.SharedGardenSupply.gardenStock.GetTopCard().GetCardName()
-            ,player.SharedGardenSupply.gardenStock.GetSecondCard().GetCardName()};
+            player.SharedGardenSupply.gardenStock.GetTopCard().            CardName
+            ,player.SharedGardenSupply.gardenStock.GetSecondCard().CardName};
         string s = "Pick One of these cards, it will be placed on the discard pile of the specified player. The other card gets placed on your discard pile|";
         
         s=s+cardNames[0]+" > "+playerNames[0]+"/"+cardNames[0]+" > "+playerNames[1]+"/"+cardNames[0]+" > "+playerNames[2]+"/"
@@ -55,7 +49,7 @@ public class BroadBean : ICard
             
             ICard topCard = player.SharedGardenSupply.gardenStock.GetTopCard();
             ICard secondCard = player.SharedGardenSupply.gardenStock.GetSecondCard();
-            if(selectedCardName.Equals(topCard.GetCardName())){
+            if(selectedCardName.Equals(topCard.CardName)){
                 player.DiscardPile.Add(secondCard);
                 targetPlayer.DiscardPile.Add(topCard);
             }

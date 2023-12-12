@@ -1,22 +1,16 @@
 namespace Artichokes;
 public class Broccoli : ICard
 {
-    public string GetCardDescription()
-    {
-        return "If you have three or more Artichokes in your hand, one will be removed";
-    }
+    public string CardDescription => "If you have three or more Artichokes in your hand, one will be removed";
 
-    public string GetCardName()
-    {
-        return "Broccoli";
-    }
+    public string CardName => "Broccoli";
 
     public bool MayBePlayed(Player player)
     {
         return player.Hand.OfType<Artichoke>().Count() >= 3;
     }
 
-    public String AsString()
+    public String EncodeAsString()
     {
         return "i";
     }

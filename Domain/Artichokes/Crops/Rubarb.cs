@@ -1,20 +1,14 @@
 namespace Artichokes;
 public class Rubarb : ICard
 {
-    public string AsString()
+    public string EncodeAsString()
     {
         return "r";
     }
 
-    public string GetCardDescription()
-    {
-        return "refreshes the Garden Supply, you may then harvest a card from the new Supply";
-    }
+    public string CardDescription => "refreshes the Garden Supply, you may then harvest a card from the new Supply";
 
-    public string GetCardName()
-    {
-        return "Rubarb";
-    }
+    public string CardName => "Rubarb";
 
     public string[] GetOptions(Player player)
     {

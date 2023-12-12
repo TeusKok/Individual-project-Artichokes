@@ -33,8 +33,8 @@ public class CornTests
         player1.Hand.Add(new Corn());
         string[] options = player1.Hand[5].GetOptions(player1);
         string[] Answers = options[0].Split("|")[1].Split("/");
-        Assert.Equal(Answers[0].Split(":")[1].Trim(), player1.SharedGardenSupply.GetCardByNumber(1).GetCardName());
-        Assert.Equal(Answers[1].Split(":")[1].Trim(), player1.SharedGardenSupply.GetCardByNumber(2).GetCardName());
+        Assert.Equal(Answers[0].Split(":")[1].Trim(), player1.SharedGardenSupply.GetCardByNumber(1).CardName);
+        Assert.Equal(Answers[1].Split(":")[1].Trim(), player1.SharedGardenSupply.GetCardByNumber(2).CardName);
 
         Assert.Equal("1", Answers[0].Split(":")[0].Trim());
         Assert.Equal("2", Answers[1].Split(":")[0].Trim());

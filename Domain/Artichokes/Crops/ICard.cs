@@ -26,13 +26,13 @@ public interface ICard
 
     void Play(Player player, String[] selectedOptions);
 
-    String GetCardName();
+    String CardName { get; }
 
-    String GetCardDescription();
+    String CardDescription { get; }
 
     Boolean MayBePlayed(Player player);
 
-    String AsString();
+    String EncodeAsString();
 
     String[] GetOptions(Player player);
 

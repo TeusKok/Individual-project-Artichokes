@@ -1,27 +1,21 @@
 namespace Artichokes;
 public class Bellpepper : ICard
 {
-    public string AsString()
+    public string EncodeAsString()
     {
         return "B";
     }
 
-    public string GetCardDescription()
-    {
-        return "Choose a card from the cards in your Discard pile, this card is moved to the top of your Draw pile";
-    }
+    public string CardDescription => "Choose a card from the cards in your Discard pile, this card is moved to the top of your Draw pile";
 
-    public string GetCardName()
-    {
-        return "Bellpepper";
-    }
+    public string CardName => "Bellpepper";
 
     public string[] GetOptions(Player player)
     {
         string s = "Pick One of these cards, it will be placed on top of your Draw Pile.|";
         for (int i = 0; i < player.DiscardPile.GetNumberOfCards(); i++)
         {
-            s = s + (i + 1) + ": " + player.DiscardPile.GetCards()[i].GetCardName();
+            s = s + (i + 1) + ": " + player.DiscardPile.GetCards()[i].CardName;
             if (i < player.DiscardPile.GetNumberOfCards() - 1)
             {
                 s += "/";

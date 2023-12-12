@@ -1,22 +1,16 @@
 namespace Artichokes;
 public class Leek : ICard
 {
-    public string AsString()
+    public string EncodeAsString()
     {
         return "l";
     }
 
-    public string GetCardDescription()
-    {
-        return "Pick a player, if the top card of their drawpile"
-            +" is an Artichoke it gets put on their discard pile."
-            +" Otherwise the card goes to your Hand";
-    }
+    public string CardDescription => "Pick a player, if the top card of their drawpile"
+            + " is an Artichoke it gets put on their discard pile."
+            + " Otherwise the card goes to your Hand";
 
-    public string GetCardName()
-    {
-        return "Leek";
-    }
+    public string CardName => "Leek";
 
     public string[] GetOptions(Player player)
     {

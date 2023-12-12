@@ -75,7 +75,7 @@ public class GardenSupply
         {
             foreach (ICard card in Cards)
             {
-                s += card.AsString();
+                s += card.EncodeAsString();
             }
         }
         else

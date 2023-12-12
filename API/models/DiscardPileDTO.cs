@@ -12,8 +12,8 @@ public class DiscardPileDTO
             ICard topCard = cards[cards.Count - 1];
             this.TopCard = new CardDTO
             {
-                CardName = topCard.GetCardName(),
-                CardDescription = topCard.GetCardDescription(),
+                CardName = topCard.CardName,
+                CardDescription = topCard.CardDescription,
                 MayBePlayed = false,
                 Options = Array.Empty<OptionDTO>(),
             };

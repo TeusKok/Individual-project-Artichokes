@@ -1,16 +1,10 @@
 namespace Artichokes;
 public class Beet : ICard
 {
-    public string GetCardDescription()
-    {
-        return "Pick a player, one card from your hand and one card from their hand gets picked at random," +
+    public string CardDescription => "Pick a player, one card from your hand and one card from their hand gets picked at random," +
             " these cards are removed if both are artichokes or swapped if at least one is not";
-    }
 
-    public string GetCardName()
-    {
-        return "Beet";
-    }
+    public string CardName => "Beet";
 
     public string[] GetOptions(Player player)
     {
@@ -46,7 +40,7 @@ public class Beet : ICard
             targetPlayer.Hand.Remove(targetCard);
         }
     }
-    public string AsString()
+    public string EncodeAsString()
     {
         return "t";
     }

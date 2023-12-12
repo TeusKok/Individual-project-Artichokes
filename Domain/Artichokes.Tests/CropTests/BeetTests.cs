@@ -16,7 +16,7 @@ public class BeetTests
         Player player1 = new Player();
         player1.Hand.Add(new Beet());
 
-        Assert.True(player1.Hand[5].AsString() == "t");
+        Assert.True(player1.Hand[5].EncodeAsString() == "t");
     }
     [Fact]
     public void GetOptionsGivesTheNamesOfTheOtherPlayers()

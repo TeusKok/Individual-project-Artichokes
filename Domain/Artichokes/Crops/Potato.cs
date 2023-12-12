@@ -2,22 +2,16 @@ namespace Artichokes;
 
 public class Potato : ICard
 {
-    public string GetCardDescription()
-    {
-        return "Reveals the top card of your draw pile. If this card is an Artichoke, it is removed. Otherwise it will be added to your discard pile.";
-    }
+    public string CardDescription => "Reveals the top card of your draw pile. If this card is an Artichoke, it is removed. Otherwise it will be added to your discard pile.";
 
-    public string GetCardName()
-    {
-        return "Potato";
-    }
+    public string CardName => "Potato";
 
     public bool MayBePlayed(Player player)
     {
         return player.DiscardPile.GetNumberOfCards() > 0 || player.DrawPile.GetNumberOfCards() > 0;
     }
 
-    public String AsString()
+    public String EncodeAsString()
     {
         return "p";
     }

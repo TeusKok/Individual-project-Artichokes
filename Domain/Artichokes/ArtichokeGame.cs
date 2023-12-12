@@ -26,12 +26,12 @@ public class ArtichokeGame : IArtichokeGame
 
     public string getDescriptionFromCardFromHand(int numberOfPlayer, int numberOfCard)
     {
-        return getPlayerByNumber(numberOfPlayer).Hand[numberOfCard - 1].GetCardDescription();
+        return getPlayerByNumber(numberOfPlayer).Hand[numberOfCard - 1].CardDescription;
     }
 
     public string getNameFromCardFromHand(int numberOfPlayer, int numberOfCard)
     {
-        return getPlayerByNumber(numberOfPlayer).Hand[numberOfCard - 1].GetCardName();
+        return getPlayerByNumber(numberOfPlayer).Hand[numberOfCard - 1].CardName;
     }
 
     public string getNameOfPlayer(int numberOfPlayer)

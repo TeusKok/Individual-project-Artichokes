@@ -59,7 +59,7 @@ public class DrawPile
         {
             foreach (ICard card in Cards)
             {
-                s += card.AsString();
+                s += card.EncodeAsString();
             }
         }
         else

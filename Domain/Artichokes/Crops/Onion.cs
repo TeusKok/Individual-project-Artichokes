@@ -2,20 +2,14 @@ namespace Artichokes;
 
 public class Onion : ICard
 {
-    public string AsString()
+    public string EncodeAsString()
     {
         return "o";
     }
 
-    public string GetCardDescription()
-    {
-        return "Removes an Artichoke from your hand. Then choose a player, the Onion will be put on their discardPile";
-    }
+    public string CardDescription => "Removes an Artichoke from your hand. Then choose a player, the Onion will be put on their discardPile";
 
-    public string GetCardName()
-    {
-        return "Onion";
-    }
+    public string CardName => "Onion";
 
     public string[] GetOptions(Player player)
     {

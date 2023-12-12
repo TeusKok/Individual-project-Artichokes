@@ -1,15 +1,9 @@
 namespace Artichokes;
 public class Carrot : ICard
 {
-    public string GetCardDescription()
-    {
-        return "Playing the carrot will remove it and two Artichokes from your end. This card has to be the first card you play on a turn, and also ends your turn";
-    }
+    public string CardDescription => "Playing the carrot will remove it and two Artichokes from your end. This card has to be the first card you play on a turn, and also ends your turn";
 
-    public string GetCardName()
-    {
-        return "Carrot";
-    }
+    public string CardName => "Carrot";
 
     public bool MayBePlayed(Player player)
     {
@@ -17,7 +11,7 @@ public class Carrot : ICard
 
     }
 
-    public String AsString()
+    public String EncodeAsString()
     {
         return "c";
     }

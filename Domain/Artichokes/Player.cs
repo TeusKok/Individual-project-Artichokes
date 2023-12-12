@@ -281,7 +281,7 @@ public class Player
         {
             foreach (ICard card in Hand)
             {
-                s += card.AsString();
+                s += card.EncodeAsString();
             }
         }
         else

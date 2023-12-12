@@ -1,21 +1,15 @@
 namespace Artichokes;
 public class Eggplant : ICard
 {
-    public string AsString()
+    public string EncodeAsString()
     {
         return "e";
     }
 
-    public string GetCardDescription()
-    {
-        return "Both the Eggplant and one artichoke from your hand are removed from the game. "
+    public string CardDescription => "Both the Eggplant and one artichoke from your hand are removed from the game. "
             + "Then two random cards of each player are passed to the player to their left";
-    }
 
-    public string GetCardName()
-    {
-        return "Eggplant";
-    }
+    public string CardName => "Eggplant";
 
     public string[] GetOptions(Player player)
     {

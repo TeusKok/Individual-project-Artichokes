@@ -24,8 +24,8 @@ public class HandDTO
 
             Cards[i] = new CardDTO
             {
-                CardName = player.Hand[i].GetCardName(),
-                CardDescription = player.Hand[i].GetCardDescription(),
+                CardName = player.Hand[i].CardName,
+                CardDescription = player.Hand[i].CardDescription,
                 MayBePlayed = player.Hand[i].MayBePlayed(player),
                 Options = optionArray,
             };
