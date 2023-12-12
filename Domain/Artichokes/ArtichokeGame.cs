@@ -8,7 +8,7 @@ public class ArtichokeGame : IArtichokeGame
     {
         string[] playerNames = new string[4] { name1, name2, name3, name4 };
 
-        player1 = new Player(4, playerNames);
+        player1 = new Player(playerNames);
     }
 
     public ArtichokeGame(string gameStateString)

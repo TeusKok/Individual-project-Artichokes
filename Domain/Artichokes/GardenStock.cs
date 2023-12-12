@@ -11,6 +11,7 @@ public class GardenStock
     {
         for (int i = 0; i < 6; i++)
         {
+            
             Cards.Add(new Potato());
             Cards.Add(new Broccoli());
             Cards.Add(new Carrot());
@@ -22,7 +23,7 @@ public class GardenStock
             Cards.Add(new BroadBean());
             Cards.Add(new Leek());
             Cards.Add(new Eggplant());
-            Shuffle();
+            this.Shuffle();
         }
     }
 

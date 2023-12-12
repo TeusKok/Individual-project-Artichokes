@@ -7,7 +7,7 @@ namespace Artichokes.UnitTests.PlayerTests
         [Fact]
         public void PlayerConstructorConstructsADifferentPlayerToTheRight()
         {
-            Player player1 = new Player(4, new string[4] { "Piet", "Jan", "Joop", "Jaap" });
+            Player player1 = new Player(new string[4] { "Piet", "Jan", "Joop", "Jaap" });
             Player player2 = player1.PlayerToRight;
             bool result = player1 != player2;
 
@@ -115,7 +115,7 @@ namespace Artichokes.UnitTests.PlayerTests
         public void CreatePlayerWithNamesThatWereSupplied()
         {
             string[] playerNames = new string[4] { "Jim", "Paul", "David", "Schmebulock" };
-            Player player1 = new Player(4, playerNames);
+            Player player1 = new Player(playerNames);
 
             Assert.True(player1.Name.Equals(playerNames[0]));
             Assert.True(player1.PlayerToRight.Name.Equals(playerNames[1]));

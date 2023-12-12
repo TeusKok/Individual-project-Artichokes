@@ -20,44 +20,46 @@ public class Player
 
     private Random rng = new Random();
 
-    public Player() : this(4, new string[4] { "Piet", "Joop", "Jan", "Jaap" })
+    public Player() : this(new string[4] { "Piet", "Joop", "Jan", "Jaap" })
     {
 
     }
 
-    public Player(int numberOfPlayers, string[] playerNames)
+    public Player(string[] playerNames)
     {
-        if (numberOfPlayers < 2 || numberOfPlayers > 4)
+        if (playerNames.Length < 2 || playerNames.Length > 4)
         {
             throw new InvalidOperationException("invalid number of Players, must be 2,3 or 4");
         }
         SharedGardenSupply = new GardenSupply();
         this.IsActivePlayer = true;
-        this.DrawPile = new DrawPile();
-        this.DiscardPile = new DiscardPile();
-        this.Name = playerNames[0];
-        FillHand();
-        this.PlayerToRight = new Player(this, 2, numberOfPlayers, SharedGardenSupply, playerNames[1..4]);
+        InitializeDrawAndDiscardPilesAndSetName(playerNames[0]);
+        this.PlayerToRight = new Player(this, SharedGardenSupply, playerNames[1..4]);
     }
 
-    private Player(Player firstPlayer, int count, int numberOfPlayers, GardenSupply gardenSupply, string[] playerNames)
+    private Player(Player firstPlayer, GardenSupply gardenSupply, string[] playerNames)
     {
         SharedGardenSupply = gardenSupply;
         this.IsActivePlayer = true;
-        this.DrawPile = new DrawPile();
-        this.DiscardPile = new DiscardPile();
-        this.Name = playerNames[0];
-        int numberOfPlayersLeft = playerNames.Length;
-        FillHand();
+        InitializeDrawAndDiscardPilesAndSetName(playerNames[0]);
         this.IsActivePlayer = false;
-        if (count < numberOfPlayers)
+        int numberOfPlayersLeft = playerNames.Length;
+        if (numberOfPlayersLeft > 1)
         {
-            this.PlayerToRight = new Player(firstPlayer, count + 1, numberOfPlayers, gardenSupply, playerNames[1..numberOfPlayersLeft]);
+            this.PlayerToRight = new Player(firstPlayer, gardenSupply, playerNames[1..numberOfPlayersLeft]);
         }
         else
         {
             this.PlayerToRight = firstPlayer;
         }
+    }
+
+    private void InitializeDrawAndDiscardPilesAndSetName(string playerName)
+    {
+        this.DrawPile = new DrawPile();
+        this.DiscardPile = new DiscardPile();
+        this.Name = playerName;
+        FillHand();
     }
 
     public Player(string gameStateString)
@@ -114,7 +116,7 @@ public class Player
 
     private Player GetWinner(Player player)
     {
-        if (PlayerHasWon())
+        if (this.PlayerHasWon())
         {
             return this;
         }
@@ -143,7 +145,7 @@ public class Player
     {
         if (this.IsActivePlayer)
         {
-            int cardsInHandAfterRefill = Math.Min(5, DrawPile.GetNumberOfCards() + DiscardPile.GetNumberOfCards());
+            int cardsInHandAfterRefill = Math.Min(5, DrawPile.GetNumberOfCards() + DiscardPile.GetNumberOfCards() + this.Hand.Count);
             while (Hand.Count < cardsInHandAfterRefill)
             {
                 RefillDrawPileIfNeededAndPossible();
@@ -170,13 +172,13 @@ public class Player
     {
         if (this.IsActivePlayer)
         {
-            this.HarvestedCard = false;
             this.DiscardHand();
             this.FillHand();
             this.SharedGardenSupply.refillGardenSupply();
+            this.HarvestedCard = false;
             this.PlayedCard = false;
-            IsActivePlayer = !IsActivePlayer;
-            PlayerToRight.IsActivePlayer = !PlayerToRight.IsActivePlayer;
+            IsActivePlayer = false;
+            PlayerToRight.IsActivePlayer = true;
         }
     }
 
@@ -254,22 +256,25 @@ public class Player
         this.HarvestedCard = false;
     }
 
-    public void MakeAllPlayersGiveTwoCardsToTheLeft(){
-        int numberOfCards = Math.Min(Hand.Count,2);
-        
-        List<ICard> cardsToSend = Hand.OrderBy(x => rng.Next()).Take(numberOfCards).ToList();
-        this.Hand.RemoveAll(card =>cardsToSend.Contains(card));
+    public void MakeAllPlayersGiveTwoCardsToTheLeft()
+    {
+        int numberOfCards = Math.Min(Hand.Count, 2);
 
-        this.PlayerToRight.PlayerToRight.PlayerToRight.GiveTwoCardsToTheLeft(cardsToSend,1);
+        List<ICard> cardsToSend = Hand.OrderBy(x => rng.Next()).Take(numberOfCards).ToList();
+        this.Hand.RemoveAll(card => cardsToSend.Contains(card));
+
+        this.PlayerToRight.PlayerToRight.PlayerToRight.GiveTwoCardsToTheLeft(cardsToSend, 1);
     }
-    public void GiveTwoCardsToTheLeft(List<ICard> cards, int counter){
-        int numberOfCards = Math.Min(Hand.Count,2);
-        
-        
-        if(counter<4){
+    public void GiveTwoCardsToTheLeft(List<ICard> cards, int counter)
+    {
+        int numberOfCards = Math.Min(Hand.Count, 2);
+
+
+        if (counter < 4)
+        {
             List<ICard> cardsToSend = Hand.OrderBy(x => rng.Next()).Take(numberOfCards).ToList();
-            this.Hand.RemoveAll(card =>cardsToSend.Contains(card));
-            this.PlayerToRight.PlayerToRight.PlayerToRight.GiveTwoCardsToTheLeft(cardsToSend,counter+1);
+            this.Hand.RemoveAll(card => cardsToSend.Contains(card));
+            this.PlayerToRight.PlayerToRight.PlayerToRight.GiveTwoCardsToTheLeft(cardsToSend, counter + 1);
         }
         Hand.AddRange(cards);
     }
