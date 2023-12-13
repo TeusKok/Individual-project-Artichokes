@@ -1,16 +1,17 @@
 namespace Artichokes.UnitTests.Garden;
 using Artichokes;
-public class GardenSupplyTests{
+public class GardenSupplyTests
+{
     [Fact]
     public void WhenMadeIsFilledWithFiveCards()
     {
         GardenSupply gardenSupply = new GardenSupply();
         Assert.True(gardenSupply.GetNumberOfCards() == 5);
-        Assert.True(gardenSupply.GetCardByNumber(1)!=null);
-        Assert.True(gardenSupply.GetCardByNumber(2)!=null);
-        Assert.True(gardenSupply.GetCardByNumber(3)!=null);
-        Assert.True(gardenSupply.GetCardByNumber(4)!=null);
-        Assert.True(gardenSupply.GetCardByNumber(5)!=null);
+        Assert.True(gardenSupply.GetCardByNumber(1) != null);
+        Assert.True(gardenSupply.GetCardByNumber(2) != null);
+        Assert.True(gardenSupply.GetCardByNumber(3) != null);
+        Assert.True(gardenSupply.GetCardByNumber(4) != null);
+        Assert.True(gardenSupply.GetCardByNumber(5) != null);
     }
     [Fact]
     public void RemoveCardRemovesACard()
@@ -26,7 +27,7 @@ public class GardenSupplyTests{
     {
         GardenSupply gardenSupply = new GardenSupply();
         gardenSupply.RemoveCardByNumber(3);
-        gardenSupply.refillGardenSupply();
+        gardenSupply.RefillGardenSupply();
 
         Assert.True(gardenSupply.GetNumberOfCards() == 5);
 
@@ -37,8 +38,8 @@ public class GardenSupplyTests{
         GardenSupply gardenSupply = new GardenSupply();
         int numberOfCardsInGardenSupply = gardenSupply.gardenStock.GetNumberOfCards();
         gardenSupply.RemoveCardByNumber(3);
-        gardenSupply.refillGardenSupply();
-        
-        Assert.True(gardenSupply.gardenStock.GetNumberOfCards()==numberOfCardsInGardenSupply-1);
+        gardenSupply.RefillGardenSupply();
+
+        Assert.True(gardenSupply.gardenStock.GetNumberOfCards() == numberOfCardsInGardenSupply - 1);
     }
 }

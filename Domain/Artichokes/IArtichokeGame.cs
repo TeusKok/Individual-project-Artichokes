@@ -35,11 +35,15 @@ public interface IArtichokeGame
     public int getPlayerNumberByName(string name);
     void endTurnOfPlayer(int numberOfPlayer);
     public void playCardFromHand(int numberOfPlayer, int numberOfCard, string selectedOption);
-    public void HarvestCardFromGardenSupply (int numberOfPlayer, int numberOfCard);
+    public void HarvestCardFromGardenSupply(int numberOfPlayer, int numberOfCard);
 
     public int getNumberOfActivePlayer();
     public Winner GetWinner();
 
-    public string AsString();
+    /// <summary>
+    /// Encodes gamestate as string
+    /// </summary>
+    /// <returns>String in format: player1|player2|player3|player4|gardenstock|gardensupply</returns>
+    public string EncodeAsString();
 
 }

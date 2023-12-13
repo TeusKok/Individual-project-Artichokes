@@ -27,7 +27,7 @@ public class Rubarb : ICard
         {
             player.SharedGardenSupply.RemoveCardByNumber(1);
         }
-        player.SharedGardenSupply.refillGardenSupply();
+        player.SharedGardenSupply.RefillGardenSupply();
         player.SetHarvestedCardToFalse();
     }
 }
