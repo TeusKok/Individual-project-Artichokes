@@ -6,9 +6,9 @@ public class ArtichokeGameTests
     public void GameObjectedCreatedFromGameStringGivesSameStringWithAsStringMethod()
     {
         ArtichokeGame game = new ArtichokeGame("Piet", "Joop", "Jan", "Jaap");
-        String gameAsString = game.AsString();
+        String gameAsString = game.EncodeAsString();
         ArtichokeGame gameCopy = new ArtichokeGame(gameAsString);
-        string gameCopyString = gameCopy.AsString();
+        string gameCopyString = gameCopy.EncodeAsString();
         Assert.Equal(gameAsString, gameCopyString);
 
     }
@@ -27,7 +27,7 @@ public class ArtichokeGameTests
     [Fact]
     public void GetPlayerByNumberGivesCorrectPlayer()
     {
-        ArtichokeGame game = new ArtichokeGame("Piet","Joop", "Jan", "Jaap");
+        ArtichokeGame game = new ArtichokeGame("Piet", "Joop", "Jan", "Jaap");
 
 
         Assert.Equal("Piet", game.getPlayerByNumber(1).Name);
@@ -46,7 +46,7 @@ public class ArtichokeGameTests
     [Fact]
     public void GetActivePlayerGivesCorrectPlayer()
     {
-        ArtichokeGame game = new ArtichokeGame("Piet","Joop", "Jan",  "Jaap");
+        ArtichokeGame game = new ArtichokeGame("Piet", "Joop", "Jan", "Jaap");
         Player player1 = game.getPlayerByNumber(1);
 
         Player firstActivePlayer = game.getPlayerByNumber(game.getNumberOfActivePlayer());
@@ -68,15 +68,15 @@ public class ArtichokeGameTests
     [Fact]
     public void GetWinnerReturnsNoOneYetIfGameNotOver()
     {
-        ArtichokeGame game = new ArtichokeGame("Piet", "Joop","Jan",  "Jaap");
+        ArtichokeGame game = new ArtichokeGame("Piet", "Joop", "Jan", "Jaap");
 
-        Assert.Equal(IArtichokeGame.Winner.NoOneYet,game.GetWinner());
+        Assert.Equal(IArtichokeGame.Winner.NoOneYet, game.GetWinner());
     }
     [Fact]
     public void GetWinnerReturnsCorrectPlayerIfThatPlayerHasWon()
     {
         ArtichokeGame game = new ArtichokeGame("Piet/aaaaa/0/0/0/1|Joop/ppppp/0/0/0/0|Jan/aaaaa/0/0/0/0|Jaap/aaaaa/0/0/0/0|0|0");
 
-        Assert.Equal(IArtichokeGame.Winner.PlayerTwo,game.GetWinner());
+        Assert.Equal(IArtichokeGame.Winner.PlayerTwo, game.GetWinner());
     }
 }

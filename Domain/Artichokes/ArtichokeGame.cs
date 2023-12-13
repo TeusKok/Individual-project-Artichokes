@@ -140,16 +140,20 @@ public class ArtichokeGame : IArtichokeGame
 
     }
 
-    public string AsString()
+    /// <summary>
+    /// Encodes gamestate as string
+    /// </summary>
+    /// <returns>String in format: player1|player2|player3|player4|gardenstock|gardensupply</returns>
+    public string EncodeAsString()
     {
         string s = "";
         for (int i = 0; i < 4; i++)
         {
             Player player = getPlayerByNumber(i + 1);
-            s = s + player.AsString() + "|";
+            s = $"{s}{player.EncodeAsString()}|";
         }
         GardenSupply gardenSupply = player1.SharedGardenSupply;
-        s = s + gardenSupply.gardenStock.AsString() + "|" + gardenSupply.AsString();
+        s = $"{s}{gardenSupply.gardenStock.EncodeAsString()}|{gardenSupply.AsString()}";
 
         return s;
     }

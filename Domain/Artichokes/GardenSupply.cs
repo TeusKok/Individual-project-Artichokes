@@ -8,7 +8,7 @@ public class GardenSupply
     public GardenSupply()
     {
         gardenStock = new GardenStock();
-        refillGardenSupply();
+        RefillGardenSupply();
 
     }
 
@@ -55,7 +55,7 @@ public class GardenSupply
         return Cards.Count;
     }
 
-    public void refillGardenSupply()
+    public void RefillGardenSupply()
     {
         while (Cards.Count < 5)
         {
@@ -68,6 +68,10 @@ public class GardenSupply
         }
     }
 
+    /// <summary>
+    /// Encodes GardenSupply  contents as string
+    /// </summary>
+    /// <returns>String with one character for each card in order</returns>
     public string AsString()
     {
         string s = "";

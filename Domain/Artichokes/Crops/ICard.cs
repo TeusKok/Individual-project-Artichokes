@@ -17,6 +17,10 @@ public interface ICard
 
     Boolean MayBePlayedBy(Player player);
 
+    /// <summary>
+    /// Encodes cardType as string
+    /// </summary>
+    /// <returns>Single character string</returns>
     String EncodeAsString();
 
     String GetOption(Player player);

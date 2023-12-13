@@ -174,7 +174,7 @@ public class Player
         {
             this.DiscardHand();
             this.FillHand();
-            this.SharedGardenSupply.refillGardenSupply();
+            this.SharedGardenSupply.RefillGardenSupply();
             this.HarvestedCard = false;
             this.PlayedCard = false;
             IsActivePlayer = false;
@@ -184,7 +184,7 @@ public class Player
 
     public void PlayCardFromHandByNumber(int numberOfCard, string selectedOption)
     {
-        if (numberOfCard > 0 && numberOfCard <= Hand.Count && IsActivePlayer)
+        if (numberOfCard > 0 && numberOfCard <= Hand.Count && this.IsActivePlayer)
         {
             ICard card = Hand[numberOfCard - 1];
             if (card.MayBePlayedBy(this))
@@ -230,25 +230,21 @@ public class Player
 
     public Player GetPlayerByName(string name)
     {
+        return this.GetPlayerByName(name, this);
+    }
+    private Player GetPlayerByName(string name, Player player)
+    {
         if (this.Name.Equals(name))
         {
             return this;
         }
-        else
+
+        if (this.PlayerToRight.Equals(player))
         {
-            return this.PlayerToRight.GetPlayerByName(name, this);
+            throw new InvalidOperationException("No player was found with the given name");
         }
-    }
-    public Player GetPlayerByName(string name, Player player)
-    {
-        if (this.Name.Equals(name) || this.Equals(player))
-        {
-            return this;
-        }
-        else
-        {
-            return this.PlayerToRight.GetPlayerByName(name, player);
-        }
+        
+        return this.PlayerToRight.GetPlayerByName(name, player);
     }
 
     public void SetHarvestedCardToFalse()
@@ -279,7 +275,11 @@ public class Player
         Hand.AddRange(cards);
     }
 
-    public string AsString()
+    /// <summary>
+    /// Encodes playerState as string
+    /// </summary>
+    /// <returns>String in format: name/CardsInHand/DrawPile/DiscardPile/hasHarvested/isPlayerActive</returns>
+    public string EncodeAsString()
     {
         string s = Name + "/";
         if (Hand.Count > 0)
@@ -293,10 +293,10 @@ public class Player
         {
             s += "0";
         }
-        s = s + "/" + DrawPile.AsString() + "/" + DiscardPile.AsString();
+        s = $"{s}/{DrawPile.EncodeAsString()}/{DiscardPile.EncodeAsString()}";
         string hasHarvested = HarvestedCard ? "1" : "0";
         string playerIsActive = IsActivePlayer ? "1" : "0";
-        s = s + "/" + hasHarvested + "/" + playerIsActive;
+        s = $"{s}/{hasHarvested}/{playerIsActive}";
         return s;
     }
 

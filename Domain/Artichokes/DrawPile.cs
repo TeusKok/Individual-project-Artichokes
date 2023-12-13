@@ -52,7 +52,11 @@ public class DrawPile
         Cards = Cards.Prepend(card).ToList<ICard>();
     }
 
-    public string AsString()
+    /// <summary>
+    /// Encodes DrawPile contents as string
+    /// </summary>
+    /// <returns>String with one character for each card in order</returns>
+    public string EncodeAsString()
     {
         string s = "";
         if (Cards.Count > 0)

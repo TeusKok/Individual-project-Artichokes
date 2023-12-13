@@ -11,7 +11,7 @@ public class GardenStock
     {
         for (int i = 0; i < 6; i++)
         {
-            
+
             Cards.Add(new Potato());
             Cards.Add(new Broccoli());
             Cards.Add(new Carrot());
@@ -23,8 +23,8 @@ public class GardenStock
             Cards.Add(new BroadBean());
             Cards.Add(new Leek());
             Cards.Add(new Eggplant());
-            this.Shuffle();
         }
+        this.Shuffle();
     }
 
     public GardenStock(string gardenStockString)
@@ -64,7 +64,11 @@ public class GardenStock
         this.Cards = this.Cards.OrderBy(a => Rng.Next()).ToList();
     }
 
-    public string AsString()
+    /// <summary>
+    /// Encodes GardenStock contents as string
+    /// </summary>
+    /// <returns>String with one character for each card in order</returns>
+    public string EncodeAsString()
     {
         string s = "";
         if (Cards.Count > 0)

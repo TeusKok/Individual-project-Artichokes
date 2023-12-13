@@ -111,7 +111,7 @@ public class ArtichokesController : ControllerBase
 
     private IActionResult SaveGameAndConvertToDTO(string Id, IArtichokeGame game)
     {
-        string gameString = game.AsString();
+        string gameString = game.EncodeAsString();
 
         HttpContext.Session.SetString(SessionGameState, gameString);
         _repository.Save(Id, gameString);
